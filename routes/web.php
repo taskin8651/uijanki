@@ -33,6 +33,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('about-page/update', 'AboutPageController@update')->name('about-page.update');
     Route::delete('about-page/remove-image', 'AboutPageController@removeImage')->name('about-page.removeImage');
 
+    // Founder Leaders
+Route::delete('founder-leaders/destroy', 'FounderLeadersController@massDestroy')->name('founder-leaders.massDestroy');
+Route::delete('founder-leaders/{founderLeader}/remove-image', 'FounderLeadersController@removeImage')->name('founder-leaders.removeImage');
+Route::resource('founder-leaders', 'FounderLeadersController');
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -45,3 +50,6 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 });
 
+
+// frontend routes
+Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about');

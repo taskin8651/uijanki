@@ -3,101 +3,107 @@
 
 
   <!-- ================= NGO BACKGROUND SECTION START ================= -->
-  <section class="ngo-background-section">
+  @if($aboutPage)
+<section class="ngo-background-section">
     <div class="ngo-bg-shape ngo-bg-shape-1"></div>
     <div class="ngo-bg-shape ngo-bg-shape-2"></div>
 
     <div class="container">
-      <div class="ngo-background-wrapper">
+        <div class="ngo-background-wrapper">
 
-        <!-- LEFT IMAGE -->
-        <div class="ngo-background-visual">
-          <div class="ngo-background-image">
-            <img src="assets/img/ngo-background.png" alt="Janki Social Foundation community background">
-          </div>
+            <!-- LEFT IMAGE -->
+            <div class="ngo-background-visual">
+                <div class="ngo-background-image">
+                    <img src="{{ $aboutPage->background_image }}" alt="{{ $aboutPage->heading ?? 'NGO Background' }}">
+                </div>
 
-          <div class="ngo-background-floating-card">
-            <div class="ngo-floating-icon">
-              <i class="bi bi-heart-fill"></i>
+                <div class="ngo-background-floating-card">
+                    <div class="ngo-floating-icon">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+                    <div>
+                        <strong>{{ $aboutPage->floating_title ?? 'Social Impact' }}</strong>
+                        <span>{{ $aboutPage->floating_subtitle ?? 'Education • Skills • Welfare' }}</span>
+                    </div>
+                </div>
+
+                <div class="ngo-background-badge">
+                    <i class="bi bi-patch-check-fill"></i>
+                    {{ $aboutPage->image_badge ?? 'Community Development Focus' }}
+                </div>
             </div>
-            <div>
-              <strong>Social Impact</strong>
-              <span>Education • Skills • Welfare</span>
-            </div>
-          </div>
 
-          <div class="ngo-background-badge">
-            <i class="bi bi-patch-check-fill"></i>
-            Community Development Focus
-          </div>
+            <!-- RIGHT CONTENT -->
+            <div class="ngo-background-content">
+                <div class="section-badge">
+                    <span><i class="bi bi-building-heart"></i></span>
+                    {{ $aboutPage->section_badge ?? 'NGO Background' }}
+                </div>
+
+                <h2>
+                    {{ $aboutPage->heading ?? 'Building an aware, skilled and' }}
+                    <span>{{ $aboutPage->highlight_heading ?? 'empowered society.' }}</span>
+                </h2>
+
+                @if($aboutPage->description_one)
+                    <p>{{ $aboutPage->description_one }}</p>
+                @endif
+
+                @if($aboutPage->description_two)
+                    <p>{{ $aboutPage->description_two }}</p>
+                @endif
+
+                <div class="ngo-background-points">
+
+                    <div class="ngo-point-item">
+                        <i class="bi bi-book-half"></i>
+                        <div>
+                            <h4>{{ $aboutPage->point_one_title ?? 'Education Awareness' }}</h4>
+                            <span>{{ $aboutPage->point_one_text ?? 'Learning support, student motivation and outreach programs.' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="ngo-point-item">
+                        <i class="bi bi-tools"></i>
+                        <div>
+                            <h4>{{ $aboutPage->point_two_title ?? 'Skill & Vocational Training' }}</h4>
+                            <span>{{ $aboutPage->point_two_text ?? 'Practical training for livelihood and self-reliance.' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="ngo-point-item">
+                        <i class="bi bi-people-fill"></i>
+                        <div>
+                            <h4>{{ $aboutPage->point_three_title ?? 'Community Welfare' }}</h4>
+                            <span>{{ $aboutPage->point_three_text ?? 'Public participation, social awareness and welfare campaigns.' }}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="ngo-background-actions">
+
+                    @if($aboutPage->button_one_text)
+                        <a href="{{ url($aboutPage->button_one_link ?? '#') }}" class="btn ngo-btn-main">
+                            {{ $aboutPage->button_one_text }}
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    @endif
+
+                    @if($aboutPage->button_two_text)
+                        <a href="{{ url($aboutPage->button_two_link ?? '#') }}" class="btn ngo-btn-soft">
+                            <i class="bi bi-person-heart"></i>
+                            {{ $aboutPage->button_two_text }}
+                        </a>
+                    @endif
+
+                </div>
+            </div>
+
         </div>
-
-        <!-- RIGHT CONTENT -->
-        <div class="ngo-background-content">
-          <div class="section-badge">
-            <span><i class="bi bi-building-heart"></i></span>
-            NGO Background
-          </div>
-
-          <h2>
-            Building an aware, skilled and
-            <span>empowered society.</span>
-          </h2>
-
-          <p>
-            Janki Social Foundation is committed to creating positive social change through education awareness,
-            skill development, vocational training, career guidance, women empowerment, youth empowerment and
-            community welfare activities.
-          </p>
-
-          <p>
-            The foundation works to connect people, resources and opportunities with communities that need support.
-            Through meaningful programs, volunteer participation, donation campaigns and CSR collaboration, the NGO
-            focuses on long-term social development and transparent impact.
-          </p>
-
-          <div class="ngo-background-points">
-            <div class="ngo-point-item">
-              <i class="bi bi-book-half"></i>
-              <div>
-                <h4>Education Awareness</h4>
-                <span>Learning support, student motivation and outreach programs.</span>
-              </div>
-            </div>
-
-            <div class="ngo-point-item">
-              <i class="bi bi-tools"></i>
-              <div>
-                <h4>Skill & Vocational Training</h4>
-                <span>Practical training for livelihood and self-reliance.</span>
-              </div>
-            </div>
-
-            <div class="ngo-point-item">
-              <i class="bi bi-people-fill"></i>
-              <div>
-                <h4>Community Welfare</h4>
-                <span>Public participation, social awareness and welfare campaigns.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="ngo-background-actions">
-            <a href="about.html" class="btn ngo-btn-main">
-              Know More About Us
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
-            <a href="volunter.html" class="btn ngo-btn-soft">
-              <i class="bi bi-person-heart"></i>
-              Join As Volunteer
-            </a>
-          </div>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
+@endif
   <!-- ================= NGO BACKGROUND SECTION END ================= -->
 
 
@@ -262,81 +268,101 @@
       </div>
 
       <!-- MAIN CARDS -->
-      <div class="mvv-main-grid">
+      @if($aboutPage)
+<div class="mvv-main-grid">
 
-        <!-- Mission -->
-        <div class="mvv-feature-card mission-card">
-          <div class="mvv-card-glow"></div>
+    <!-- Mission -->
+    <div class="mvv-feature-card mission-card">
+        <div class="mvv-card-glow"></div>
 
-          <div class="mvv-icon">
+        <div class="mvv-icon">
             <i class="bi bi-rocket-takeoff-fill"></i>
-          </div>
-
-          <span class="mvv-number">01</span>
-
-          <h3>Our Mission</h3>
-
-          <p>
-            To support communities through education awareness, skill development, vocational training,
-            career guidance, women empowerment, youth empowerment and community welfare programs.
-          </p>
-
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Education and learning support</li>
-            <li><i class="bi bi-check-circle-fill"></i> Skill-based empowerment programs</li>
-            <li><i class="bi bi-check-circle-fill"></i> Welfare activities for community growth</li>
-          </ul>
         </div>
 
-        <!-- Vision -->
-        <div class="mvv-feature-card vision-card featured">
-          <div class="mvv-card-glow"></div>
+        <span class="mvv-number">01</span>
 
-          <div class="mvv-icon white">
+        <h3>{{ $aboutPage->mission_title ?? 'Our Mission' }}</h3>
+
+        @if($aboutPage->mission_description)
+            <p>{{ $aboutPage->mission_description }}</p>
+        @endif
+
+        @if(!empty($aboutPage->mission_points))
+            <ul>
+                @foreach($aboutPage->mission_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+    <!-- Vision -->
+    <div class="mvv-feature-card vision-card featured">
+        <div class="mvv-card-glow"></div>
+
+        <div class="mvv-icon white">
             <i class="bi bi-eye-fill"></i>
-          </div>
-
-          <span class="mvv-number">02</span>
-
-          <h3>Our Vision</h3>
-
-          <p>
-            To build an aware, skilled, educated and empowered society where every individual gets access
-            to dignity, opportunity, guidance and social support.
-          </p>
-
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Empowered and confident communities</li>
-            <li><i class="bi bi-check-circle-fill"></i> Equal opportunity for social development</li>
-            <li><i class="bi bi-check-circle-fill"></i> Long-term sustainable impact</li>
-          </ul>
         </div>
 
-        <!-- Purpose -->
-        <div class="mvv-feature-card purpose-card">
-          <div class="mvv-card-glow"></div>
+        <span class="mvv-number">02</span>
 
-          <div class="mvv-icon green">
+        <h3>{{ $aboutPage->vision_title ?? 'Our Vision' }}</h3>
+
+        @if($aboutPage->vision_description)
+            <p>{{ $aboutPage->vision_description }}</p>
+        @endif
+
+        @if(!empty($aboutPage->vision_points))
+            <ul>
+                @foreach($aboutPage->vision_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+    <!-- Purpose -->
+    <div class="mvv-feature-card purpose-card">
+        <div class="mvv-card-glow"></div>
+
+        <div class="mvv-icon green">
             <i class="bi bi-heart-fill"></i>
-          </div>
-
-          <span class="mvv-number">03</span>
-
-          <h3>Our Purpose</h3>
-
-          <p>
-            To connect people, resources and opportunities with those who need support through transparent
-            campaigns, meaningful events, volunteer participation and CSR collaboration.
-          </p>
-
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Volunteer and donor participation</li>
-            <li><i class="bi bi-check-circle-fill"></i> CSR and partner collaboration</li>
-            <li><i class="bi bi-check-circle-fill"></i> Transparent social impact reporting</li>
-          </ul>
         </div>
 
-      </div>
+        <span class="mvv-number">03</span>
+
+        <h3>{{ $aboutPage->purpose_title ?? 'Our Purpose' }}</h3>
+
+        @if($aboutPage->purpose_description)
+            <p>{{ $aboutPage->purpose_description }}</p>
+        @endif
+
+        @if(!empty($aboutPage->purpose_points))
+            <ul>
+                @foreach($aboutPage->purpose_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+</div>
+@endif
 
       <!-- CORE VALUES -->
       <div class="core-values-wrapper">
@@ -424,67 +450,50 @@
       </div>
 
       <!-- FOUNDER GRID -->
-      <div class="founder-leader-grid">
+      @if(isset($founderLeaders) && $founderLeaders->count())
+    <div class="founder-leader-grid">
 
-        <!-- FOUNDER CARD -->
-        <div class="founder-leader-card">
-          <div class="founder-card-pattern"></div>
+        @foreach($founderLeaders as $leader)
+            <div class="founder-leader-card {{ $leader->is_featured ? 'featured' : '' }}">
+                <div class="founder-card-pattern"></div>
 
-          <div class="founder-leader-image">
-            <img src="assets/img/founder-pankaj-kumar.png" alt="Mr. Pankaj Kumar Founder Janki Social Foundation">
-          </div>
+                <div class="founder-leader-image">
+                    <img src="{{ $leader->leader_image }}" alt="{{ $leader->name }}">
+                </div>
 
-          <div class="founder-leader-content">
-            <div class="founder-role-badge">
-              <i class="bi bi-patch-check-fill"></i>
-              Founder
+                <div class="founder-leader-content">
+                    <div class="founder-role-badge">
+                        @if($leader->is_featured)
+                            <i class="bi bi-heart-fill"></i>
+                        @else
+                            <i class="bi bi-patch-check-fill"></i>
+                        @endif
+
+                        {{ $leader->role_badge }}
+                    </div>
+
+                    <h3>{{ $leader->name }}</h3>
+
+                    <p>{{ $leader->description }}</p>
+
+                    @if(!empty($leader->focus_points))
+                        <div class="founder-focus-list">
+                            @foreach($leader->focus_points as $point)
+                                @if($point)
+                                    <span>
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        {{ $point }}
+                                    </span>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
+        @endforeach
 
-            <h3>Mr. Pankaj Kumar</h3>
-
-            <p>
-              Leading the foundation with a vision to connect people, resources and opportunities
-              for education, skill development and long-term social welfare.
-            </p>
-
-            <div class="founder-focus-list">
-              <span><i class="bi bi-check-circle-fill"></i> Education Support</span>
-              <span><i class="bi bi-check-circle-fill"></i> Community Welfare</span>
-              <span><i class="bi bi-check-circle-fill"></i> Youth Development</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CO-FOUNDER CARD -->
-        <div class="founder-leader-card featured">
-          <div class="founder-card-pattern"></div>
-
-          <div class="founder-leader-image">
-            <img src="assets/img/founder-payal-kumari.png" alt="Ms. Payal Kumari Co-Founder Janki Social Foundation">
-          </div>
-
-          <div class="founder-leader-content">
-            <div class="founder-role-badge">
-              <i class="bi bi-heart-fill"></i>
-              Co-Founder
-            </div>
-
-            <h3>Ms. Payal Kumari</h3>
-
-            <p>
-              Supporting initiatives for women empowerment, awareness, dignity, self-reliance,
-              skill-based growth and meaningful community participation.
-            </p>
-
-            <div class="founder-focus-list">
-              <span><i class="bi bi-check-circle-fill"></i> Women Empowerment</span>
-              <span><i class="bi bi-check-circle-fill"></i> Social Awareness</span>
-              <span><i class="bi bi-check-circle-fill"></i> Skill Development</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    </div>
+@endif
 
       <!-- MESSAGE STRIP -->
       <div class="founder-message-strip">
