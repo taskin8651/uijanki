@@ -161,6 +161,15 @@
     </div>
 @endif
 
+@can('event_access')
+    <a href="{{ route('admin.events.index') }}"
+       class="nav-link {{ request()->is('admin/events*') ? 'active' : '' }}"
+       data-tooltip="Events">
+        <i class="fas fa-calendar-alt nav-icon"></i>
+        <span class="nav-label">Events</span>
+    </a>
+@endcan
+
         <div class="nav-divider"></div>
 
         <p class="sidebar-section-title compact nav-label">Account</p>

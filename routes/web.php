@@ -42,6 +42,14 @@ Route::delete('website-services/destroy', 'WebsiteServicesController@massDestroy
 Route::delete('website-services/{websiteService}/remove-image', 'WebsiteServicesController@removeImage')->name('website-services.removeImage');
 Route::resource('website-services', 'WebsiteServicesController');
 
+Route::delete('events/destroy', 'EventsController@massDestroy')->name('events.massDestroy');
+Route::delete('events/{event}/remove-image', 'EventsController@removeImage')->name('events.removeImage');
+
+Route::resource('events', 'EventsController')->parameters([
+    'events' => 'event',
+]);
+
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -59,4 +67,5 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about');
 
 Route::get('initiatives', [App\Http\Controllers\Frontend\ServiceController::class, 'index'])->name('initiatives');
-Route::get('initiatives/{id}', [App\Http\Controllers\Frontend\ServiceController::class, 'show'])->name('initiatives.show');
+
+Route::get('/events', [App\Http\Controllers\Frontend\EventController::class, 'index'])->name('frontend.events.index');
