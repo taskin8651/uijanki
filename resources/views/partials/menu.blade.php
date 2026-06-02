@@ -170,6 +170,16 @@
     </a>
 @endcan
 
+@can('campaign_access')
+    <li>
+        <a href="{{ route('admin.campaigns.index') }}"
+           class="{{ request()->is('admin/campaigns*') ? 'active' : '' }}">
+            <i class="fas fa-bullhorn"></i>
+            <span>Campaigns</span>
+        </a>
+    </li>
+@endcan
+
         <div class="nav-divider"></div>
 
         <p class="sidebar-section-title compact nav-label">Account</p>

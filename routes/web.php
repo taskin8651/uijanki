@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CampaignsController;
+
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -49,6 +51,13 @@ Route::resource('events', 'EventsController')->parameters([
     'events' => 'event',
 ]);
 
+ Route::delete('campaigns/destroy', [CampaignsController::class, 'massDestroy'])
+    ->name('campaigns.massDestroy');
+
+Route::delete('campaigns/{campaign}/remove-image', [CampaignsController::class, 'removeImage'])
+    ->name('campaigns.removeImage');
+
+Route::resource('campaigns', CampaignsController::class);
 
     
 });
@@ -69,3 +78,6 @@ Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'ind
 Route::get('initiatives', [App\Http\Controllers\Frontend\ServiceController::class, 'index'])->name('initiatives');
 
 Route::get('/events', [App\Http\Controllers\Frontend\EventController::class, 'index'])->name('frontend.events.index');
+
+Route::get('campaigns', [App\Http\Controllers\Frontend\CampaignController::class, 'index'])->name('frontend.campaigns.index');
+Route::get('campaigns/{campaign}', [App\Http\Controllers\Frontend\CampaignController::class, 'show'])->name('frontend.campaigns.show');

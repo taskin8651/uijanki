@@ -27,209 +27,168 @@
       </p>
     </div>
 
-    <!-- FILTER STRIP -->
-    <div class="campaign-filter-strip">
-      <a href="#" class="active">
-        <i class="bi bi-grid-fill"></i>
-        All Campaigns
-      </a>
-
-      <a href="#">
-        <i class="bi bi-mortarboard-fill"></i>
-        Education
-      </a>
-
-      <a href="#">
-        <i class="bi bi-tools"></i>
-        Skill Development
-      </a>
-
-      <a href="#">
-        <i class="bi bi-gender-female"></i>
-        Women Empowerment
-      </a>
-
-      <a href="#">
-        <i class="bi bi-people-fill"></i>
-        Community Welfare
-      </a>
-    </div>
-
-    <!-- CAMPAIGN GRID -->
-    <div class="campaign-listing-grid">
-
-      <!-- CAMPAIGN CARD -->
-      <div class="campaign-card">
-        <div class="campaign-image">
-          <img src="assets/img/campaign-education.png" alt="Education Support Campaign">
-
-          <span class="campaign-status">
-            <i class="bi bi-broadcast-pin"></i>
-            Active
-          </span>
-
-          <span class="campaign-category">
-            Education
-          </span>
-        </div>
-
-        <div class="campaign-content">
-          <div class="campaign-meta">
-            <span><i class="bi bi-calendar2-week"></i> 30 Days Left</span>
-            <span><i class="bi bi-geo-alt"></i> Patna</span>
-          </div>
-
-          <h3>Education Support Campaign for Students</h3>
-
-          <p>
-            Help children and students access learning support, awareness programs
-            and basic educational resources for a better future.
-          </p>
-
-          <div class="campaign-progress-box">
-            <div class="campaign-progress-top">
-              <span>Raised ₹45,000</span>
-              <strong>75%</strong>
-            </div>
-
-            <div class="campaign-progress-line">
-              <span style="width: 75%;"></span>
-            </div>
-
-            <div class="campaign-progress-bottom">
-              <span>Goal ₹60,000</span>
-              <span>120 Supporters</span>
-            </div>
-          </div>
-
-          <div class="campaign-actions">
-            <a href="donate.html" class="campaign-btn-main">
-              Donate Now
-              <i class="bi bi-arrow-right"></i>
+   <!-- FILTER STRIP -->
+        <div class="campaign-filter-strip">
+            <a href="#" class="active" data-filter="all">
+                <i class="bi bi-grid-fill"></i>
+                All Campaigns
             </a>
 
-            <a href="contact.html" class="campaign-btn-soft">
-              Details
-            </a>
-          </div>
-        </div>
-      </div>
+            @foreach($campaignCategories as $category)
+                @php
+                    $catLower = strtolower($category->category);
+                    $icon = 'bi-grid-fill';
 
-      <!-- CAMPAIGN CARD -->
-      <div class="campaign-card">
-        <div class="campaign-image">
-          <img src="assets/img/campaign-skill.png" alt="Skill Development Campaign">
+                    if(str_contains($catLower, 'education')) {
+                        $icon = 'bi-mortarboard-fill';
+                    } elseif(str_contains($catLower, 'skill')) {
+                        $icon = 'bi-tools';
+                    } elseif(str_contains($catLower, 'women')) {
+                        $icon = 'bi-gender-female';
+                    } elseif(str_contains($catLower, 'community') || str_contains($catLower, 'welfare')) {
+                        $icon = 'bi-people-fill';
+                    }
+                @endphp
 
-          <span class="campaign-status">
-            <i class="bi bi-broadcast-pin"></i>
-            Active
-          </span>
-
-          <span class="campaign-category green">
-            Skill
-          </span>
-        </div>
-
-        <div class="campaign-content">
-          <div class="campaign-meta">
-            <span><i class="bi bi-calendar2-week"></i> 22 Days Left</span>
-            <span><i class="bi bi-geo-alt"></i> Bihar</span>
-          </div>
-
-          <h3>Skill Development & Training Campaign</h3>
-
-          <p>
-            Support practical training, vocational learning and career-focused
-            guidance for youth and underprivileged communities.
-          </p>
-
-          <div class="campaign-progress-box">
-            <div class="campaign-progress-top">
-              <span>Raised ₹32,000</span>
-              <strong>64%</strong>
-            </div>
-
-            <div class="campaign-progress-line green">
-              <span style="width: 64%;"></span>
-            </div>
-
-            <div class="campaign-progress-bottom">
-              <span>Goal ₹50,000</span>
-              <span>84 Supporters</span>
-            </div>
-          </div>
-
-          <div class="campaign-actions">
-            <a href="donate.html" class="campaign-btn-main">
-              Donate Now
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
-            <a href="contact.html" class="campaign-btn-soft">
-              Details
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- CAMPAIGN CARD -->
-      <div class="campaign-card">
-        <div class="campaign-image">
-          <img src="assets/img/campaign-women.png" alt="Women Empowerment Campaign">
-
-          <span class="campaign-status">
-            <i class="bi bi-broadcast-pin"></i>
-            Active
-          </span>
-
-          <span class="campaign-category sky">
-            Women
-          </span>
+                <a href="#" data-filter="{{ Str::slug($category->category) }}">
+                    <i class="bi {{ $icon }}"></i>
+                    {{ $category->category }}
+                </a>
+            @endforeach
         </div>
 
-        <div class="campaign-content">
-          <div class="campaign-meta">
-            <span><i class="bi bi-calendar2-week"></i> 18 Days Left</span>
-            <span><i class="bi bi-geo-alt"></i> Community</span>
-          </div>
+        <!-- CAMPAIGN GRID -->
+        <div class="campaign-listing-grid">
 
-          <h3>Women Empowerment Awareness Campaign</h3>
+            @forelse($campaigns as $campaign)
+                @php
+                    $categorySlug = Str::slug($campaign->category);
+                    $catLower = strtolower($campaign->category ?? '');
+                    $colorClass = '';
 
-          <p>
-            Help women build confidence, awareness, dignity, self-reliance and
-            meaningful participation in community growth.
-          </p>
+                    if(str_contains($catLower, 'skill')) {
+                        $colorClass = 'green';
+                    } elseif(str_contains($catLower, 'women')) {
+                        $colorClass = 'sky';
+                    }
 
-          <div class="campaign-progress-box">
-            <div class="campaign-progress-top">
-              <span>Raised ₹28,000</span>
-              <strong>56%</strong>
-            </div>
+                    $detailsUrl = $campaign->button_two_link
+                        ? url($campaign->button_two_link)
+                        : route('frontend.campaigns.show', $campaign->id);
 
-            <div class="campaign-progress-line sky">
-              <span style="width: 56%;"></span>
-            </div>
+                    $donateUrl = $campaign->button_one_link
+                        ? url($campaign->button_one_link)
+                        : url('donate');
+                @endphp
 
-            <div class="campaign-progress-bottom">
-              <span>Goal ₹50,000</span>
-              <span>67 Supporters</span>
-            </div>
-          </div>
+                <div class="campaign-card" data-category="{{ $categorySlug }}">
+                    <div class="campaign-image">
+                        <img src="{{ $campaign->campaign_image }}" alt="{{ $campaign->title }}">
 
-          <div class="campaign-actions">
-            <a href="donate.html" class="campaign-btn-main">
-              Donate Now
-              <i class="bi bi-arrow-right"></i>
-            </a>
+                        <span class="campaign-status">
+                            <i class="bi bi-broadcast-pin"></i>
+                            {{ $campaign->status_badge ?? 'Active' }}
+                        </span>
 
-            <a href="contact.html" class="campaign-btn-soft">
-              Details
-            </a>
-          </div>
+                        @if($campaign->category)
+                            <span class="campaign-category {{ $colorClass }}">
+                                {{ $campaign->category }}
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="campaign-content">
+                        <div class="campaign-meta">
+                            @if($campaign->days_left)
+                                <span>
+                                    <i class="bi bi-calendar2-week"></i>
+                                    {{ $campaign->days_left }}
+                                </span>
+                            @endif
+
+                            @if($campaign->location)
+                                <span>
+                                    <i class="bi bi-geo-alt"></i>
+                                    {{ $campaign->location }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <h3>{{ $campaign->title }}</h3>
+
+                        <div class="campaign-short-description">
+                            {!! Str::limit(strip_tags($campaign->short_description), 145) !!}
+                        </div>
+
+                        <div class="campaign-progress-box">
+                            <div class="campaign-progress-top">
+                                <span>Raised ₹{{ number_format($campaign->raised_amount, 0) }}</span>
+                                <strong>{{ $campaign->progress_percentage }}%</strong>
+                            </div>
+
+                            <div class="campaign-progress-line {{ $colorClass }}">
+                                <span style="width: {{ $campaign->progress_percentage }}%;"></span>
+                            </div>
+
+                            <div class="campaign-progress-bottom">
+                                <span>Goal ₹{{ number_format($campaign->goal_amount, 0) }}</span>
+                                <span>{{ $campaign->supporters ?? 0 }} Supporters</span>
+                            </div>
+                        </div>
+
+                        <div class="campaign-actions">
+                            <a href="{{ $donateUrl }}" class="campaign-btn-main">
+                                {{ $campaign->button_one_text ?? 'Donate Now' }}
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+
+                            <a href="{{ $detailsUrl }}" class="campaign-btn-soft">
+                                {{ $campaign->button_two_text ?? 'Details' }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="campaign-empty-box">
+                    <h3>No Campaigns Found</h3>
+                    <p>No active campaigns are available right now.</p>
+                </div>
+            @endforelse
+
         </div>
-      </div>
 
-    </div>
+  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filterLinks = document.querySelectorAll('.campaign-filter-strip a');
+        const cards = document.querySelectorAll('.campaign-card');
+
+        filterLinks.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                filterLinks.forEach(function (item) {
+                    item.classList.remove('active');
+                });
+
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                cards.forEach(function (card) {
+                    const category = card.getAttribute('data-category');
+
+                    if (filter === 'all' || filter === category) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
 
     <!-- BOTTOM CTA -->
     <div class="campaign-listing-cta">
@@ -261,82 +220,113 @@
   <div class="container">
 
     <!-- DETAIL HERO -->
-    <div class="campaign-detail-hero">
+    @if($activeCampaign)
+@php
+    $campaign = $activeCampaign;
+    $progress = $campaign->progress_percentage ?? 0;
 
-      <div class="campaign-detail-image">
-        <img src="assets/img/campaign-detail-main.png" alt="Education Support Campaign">
+    $donateUrl = $campaign->button_one_link
+        ? url($campaign->button_one_link)
+        : url('donate');
+
+    $shareUrl = $campaign->button_two_link
+        ? url($campaign->button_two_link)
+        : url('contact');
+@endphp
+
+<div class="campaign-detail-hero">
+
+    <div class="campaign-detail-image">
+        <img src="{{ $campaign->campaign_image }}" alt="{{ $campaign->title }}">
 
         <div class="campaign-detail-status">
-          <i class="bi bi-broadcast-pin"></i>
-          Active Campaign
+            <i class="bi bi-broadcast-pin"></i>
+            {{ $campaign->status_badge ?? 'Active Campaign' }}
         </div>
 
         <div class="campaign-detail-category">
-          Education Support
+            {{ $campaign->category ?? 'Campaign' }}
         </div>
-      </div>
+    </div>
 
-      <div class="campaign-detail-content">
+    <div class="campaign-detail-content">
         <div class="section-badge">
-          <span><i class="bi bi-heart-fill"></i></span>
-          Campaign Detail
+            <span><i class="bi bi-heart-fill"></i></span>
+            Campaign Detail
         </div>
 
         <h1>
-          Education Support Campaign
-          <span>for underprivileged students.</span>
+            {{ $campaign->title }}
+            @if($campaign->category)
+                <span>{{ $campaign->category }}</span>
+            @endif
         </h1>
 
-        <p>
-          Help children and students access learning materials, awareness programs,
-          guidance support and basic educational resources for a brighter future.
-        </p>
+        <div class="campaign-detail-short-text">
+            {!! $campaign->short_description !!}
+        </div>
 
         <div class="campaign-detail-meta">
-          <span><i class="bi bi-calendar2-week"></i> 30 Days Left</span>
-          <span><i class="bi bi-geo-alt-fill"></i> Patna, Bihar</span>
-          <span><i class="bi bi-people-fill"></i> 120 Supporters</span>
+            @if($campaign->days_left)
+                <span>
+                    <i class="bi bi-calendar2-week"></i>
+                    {{ $campaign->days_left }}
+                </span>
+            @endif
+
+            @if($campaign->location)
+                <span>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    {{ $campaign->location }}
+                </span>
+            @endif
+
+            <span>
+                <i class="bi bi-people-fill"></i>
+                {{ $campaign->supporters ?? 0 }} Supporters
+            </span>
         </div>
 
         <div class="campaign-donation-box">
-          <div class="campaign-donation-top">
-            <div>
-              <span>Raised Amount</span>
-              <strong>₹45,000</strong>
+            <div class="campaign-donation-top">
+                <div>
+                    <span>Raised Amount</span>
+                    <strong>₹{{ number_format($campaign->raised_amount, 0) }}</strong>
+                </div>
+
+                <div>
+                    <span>Goal Amount</span>
+                    <strong>₹{{ number_format($campaign->goal_amount, 0) }}</strong>
+                </div>
             </div>
 
-            <div>
-              <span>Goal Amount</span>
-              <strong>₹60,000</strong>
+            <div class="campaign-progress-main">
+                <div class="campaign-progress-info">
+                    <span>Campaign Progress</span>
+                    <strong>{{ $progress }}%</strong>
+                </div>
+
+                <div class="campaign-progress-track">
+                    <span style="width: {{ $progress }}%;"></span>
+                </div>
             </div>
-          </div>
 
-          <div class="campaign-progress-main">
-            <div class="campaign-progress-info">
-              <span>Campaign Progress</span>
-              <strong>75%</strong>
+            <div class="campaign-detail-actions">
+                <a href="{{ $donateUrl }}" class="campaign-detail-btn-main">
+                    {{ $campaign->button_one_text ?? 'Donate Now' }}
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{{ $shareUrl }}" class="campaign-detail-btn-soft">
+                    <i class="bi bi-share-fill"></i>
+                    {{ $campaign->button_two_text ?? 'Share Campaign' }}
+                </a>
             </div>
-
-            <div class="campaign-progress-track">
-              <span style="width: 75%;"></span>
-            </div>
-          </div>
-
-          <div class="campaign-detail-actions">
-            <a href="donate.html" class="campaign-detail-btn-main">
-              Donate Now
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
-            <a href="contact.html" class="campaign-detail-btn-soft">
-              <i class="bi bi-share-fill"></i>
-              Share Campaign
-            </a>
-          </div>
         </div>
-      </div>
-
     </div>
+
+</div>
+@endif
 
     <!-- DETAIL BODY -->
     <div class="campaign-detail-body">
