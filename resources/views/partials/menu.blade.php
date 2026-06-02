@@ -108,77 +108,135 @@
             </div>
         @endcan
 
-       @if(auth()->user()->can('about_page_access') || auth()->user()->can('website_service_access') || auth()->user()->can('founder_leader_access'))
-    @php
-        $cmsActive = request()->is('admin/about-page*')
-            || request()->is('admin/founder-leaders*')
-            || request()->is('admin/website-services*');
-    @endphp
+        {{-- WEBSITE CMS GROUP --}}
+        @if(
+            auth()->user()->can('about_page_access') ||
+            auth()->user()->can('website_service_access') ||
+            auth()->user()->can('founder_leader_access')
+        )
+            @php
+                $cmsActive = request()->is('admin/about-page*')
+                    || request()->is('admin/founder-leaders*')
+                    || request()->is('admin/website-services*');
+            @endphp
 
-    <div x-data="{ open: {{ $cmsActive ? 'true' : 'false' }} }">
+            <div x-data="{ open: {{ $cmsActive ? 'true' : 'false' }} }">
 
-        <button type="button"
-                @click="open = !open"
-                data-tooltip="Website CMS"
-                class="nav-link nav-group-btn {{ $cmsActive ? 'active' : '' }}">
+                <button type="button"
+                        @click="open = !open"
+                        data-tooltip="Website CMS"
+                        class="nav-link nav-group-btn {{ $cmsActive ? 'active' : '' }}">
 
-            <div class="nav-group-left">
-                <i class="fas fa-globe nav-icon"></i>
-                <span class="nav-label">Website CMS</span>
+                    <div class="nav-group-left">
+                        <i class="fas fa-globe nav-icon"></i>
+                        <span class="nav-label">Website CMS</span>
+                    </div>
+
+                    <i class="fas fa-chevron-right chevron"
+                       :style="open ? 'transform:rotate(90deg)' : ''"></i>
+                </button>
+
+                <div class="submenu"
+                     x-show="open"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1">
+
+                    @can('about_page_access')
+                        <a href="{{ route('admin.about-page.index') }}"
+                           class="sub-link {{ request()->is('admin/about-page*') ? 'active' : '' }}">
+                            <i class="fas fa-info-circle"></i>
+                            About Page
+                        </a>
+                    @endcan
+
+                    @can('founder_leader_access')
+                        <a href="{{ route('admin.founder-leaders.index') }}"
+                           class="sub-link {{ request()->is('admin/founder-leaders*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tie"></i>
+                            Founder Leaders
+                        </a>
+                    @endcan
+
+                    @can('website_service_access')
+                        <a href="{{ route('admin.website-services.index') }}"
+                           class="sub-link {{ request()->is('admin/website-services*') ? 'active' : '' }}">
+                            <i class="fas fa-hands-helping"></i>
+                            Website Services
+                        </a>
+                    @endcan
+
+                </div>
             </div>
+        @endif
 
-            <i class="fas fa-chevron-right chevron"
-               :style="open ? 'transform:rotate(90deg)' : ''"></i>
-        </button>
+        {{-- ACTIVITY MANAGEMENT GROUP --}}
+        @if(
+            auth()->user()->can('event_access') ||
+            auth()->user()->can('campaign_access') ||
+            auth()->user()->can('gallery_access')
+        )
+            @php
+                $activityActive = request()->is('admin/events*')
+                    || request()->is('admin/campaigns*')
+                    || request()->is('admin/event-galleries*');
+            @endphp
 
-        <div class="submenu" x-show="open">
+            <div x-data="{ open: {{ $activityActive ? 'true' : 'false' }} }">
 
-            @can('about_page_access')
-                <a href="{{ route('admin.about-page.index') }}"
-                   class="sub-link {{ request()->is('admin/about-page*') ? 'active' : '' }}">
-                    <i class="fas fa-info-circle"></i>
-                    About Page
-                </a>
-            @endcan
+                <button type="button"
+                        @click="open = !open"
+                        data-tooltip="Activities"
+                        class="nav-link nav-group-btn {{ $activityActive ? 'active' : '' }}">
 
-            @can('founder_leader_access')
-                <a href="{{ route('admin.founder-leaders.index') }}"
-                   class="sub-link {{ request()->is('admin/founder-leaders*') ? 'active' : '' }}">
-                    <i class="fas fa-user-tie"></i>
-                    Founder Leaders
-                </a>
-            @endcan
+                    <div class="nav-group-left">
+                        <i class="fas fa-calendar-check nav-icon"></i>
+                        <span class="nav-label">Activities</span>
+                    </div>
 
-            @can('website_service_access')
-                <a href="{{ route('admin.website-services.index') }}"
-                   class="sub-link {{ request()->is('admin/website-services*') ? 'active' : '' }}">
-                    <i class="fas fa-hands-helping"></i>
-                    Website Services
-                </a>
-            @endcan
+                    <i class="fas fa-chevron-right chevron"
+                       :style="open ? 'transform:rotate(90deg)' : ''"></i>
+                </button>
 
-        </div>
-    </div>
-@endif
+                <div class="submenu"
+                     x-show="open"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1">
 
-@can('event_access')
-    <a href="{{ route('admin.events.index') }}"
-       class="nav-link {{ request()->is('admin/events*') ? 'active' : '' }}"
-       data-tooltip="Events">
-        <i class="fas fa-calendar-alt nav-icon"></i>
-        <span class="nav-label">Events</span>
-    </a>
-@endcan
+                    @can('event_access')
+                        <a href="{{ route('admin.events.index') }}"
+                           class="sub-link {{ request()->is('admin/events*') ? 'active' : '' }}">
+                            <i class="fas fa-calendar-alt"></i>
+                            Events
+                        </a>
+                    @endcan
 
-@can('campaign_access')
-    <li>
-        <a href="{{ route('admin.campaigns.index') }}"
-           class="{{ request()->is('admin/campaigns*') ? 'active' : '' }}">
-            <i class="fas fa-bullhorn"></i>
-            <span>Campaigns</span>
-        </a>
-    </li>
-@endcan
+                    @can('campaign_access')
+                        <a href="{{ route('admin.campaigns.index') }}"
+                           class="sub-link {{ request()->is('admin/campaigns*') ? 'active' : '' }}">
+                            <i class="fas fa-bullhorn"></i>
+                            Campaigns
+                        </a>
+                    @endcan
+
+                    @can('gallery_access')
+                        <a href="{{ route('admin.event-galleries.index') }}"
+                           class="sub-link {{ request()->is('admin/event-galleries*') ? 'active' : '' }}">
+                            <i class="fas fa-images"></i>
+                            Event Gallery
+                        </a>
+                    @endcan
+
+                </div>
+            </div>
+        @endif
 
         <div class="nav-divider"></div>
 

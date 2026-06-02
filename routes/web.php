@@ -59,6 +59,14 @@ Route::delete('campaigns/{campaign}/remove-image', [CampaignsController::class, 
 
 Route::resource('campaigns', CampaignsController::class);
 
+
+Route::delete('event-galleries/destroy', [EventGalleriesController::class, 'massDestroy'])
+    ->name('event-galleries.massDestroy');
+
+Route::delete('event-galleries/{eventGallery}/remove-image/{mediaId}', [EventGalleriesController::class, 'removeImage'])
+    ->name('event-galleries.removeImage');
+
+Route::resource('event-galleries', EventGalleriesController::class);
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -81,3 +89,8 @@ Route::get('/events', [App\Http\Controllers\Frontend\EventController::class, 'in
 
 Route::get('campaigns', [App\Http\Controllers\Frontend\CampaignController::class, 'index'])->name('frontend.campaigns.index');
 Route::get('campaigns/{campaign}', [App\Http\Controllers\Frontend\CampaignController::class, 'show'])->name('frontend.campaigns.show');
+
+
+Route::get('gallery', [App\Http\Controllers\Frontend\GalleryController::class, 'index'])->name('frontend.gallery.index');
+
+Route::get('gallery/{eventGallery}', [App\Http\Controllers\Frontend\GalleryController::class, 'show'])->name('frontend.gallery.show');

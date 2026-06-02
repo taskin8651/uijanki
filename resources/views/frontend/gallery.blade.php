@@ -3,6 +3,7 @@
 
 
 <!-- ================= EVENT WISE ALBUM SECTION START ================= -->
+
 <section class="event-wise-album-section">
   <div class="event-wise-shape event-wise-shape-1"></div>
   <div class="event-wise-shape event-wise-shape-2"></div>
@@ -27,19 +28,22 @@
     </div>
 
     <div class="event-wise-filter">
-      <a href="#" class="active">
+      <a href="#" class="active" data-filter="all">
         <i class="bi bi-grid-fill"></i>
         All Events
       </a>
-      <a href="#">
+
+      <a href="#" data-filter="photos">
         <i class="bi bi-camera-fill"></i>
         Photos
       </a>
-      <a href="#">
+
+      <a href="#" data-filter="videos">
         <i class="bi bi-play-circle-fill"></i>
         Videos
       </a>
-      <a href="#">
+
+      <a href="#" data-filter="completed">
         <i class="bi bi-calendar-check-fill"></i>
         Completed Events
       </a>
@@ -47,148 +51,125 @@
 
     <div class="event-wise-grid">
 
-      <div class="event-wise-card">
-        <div class="event-wise-img">
-          <img src="assets/img/event-album-1.png" alt="Education Awareness Event Album">
+      @forelse($galleries as $gallery)
+        @php
+            $event = $gallery->event;
+            $category = $event?->category ?? 'Event';
+            $categoryLower = strtolower($category);
+            $colorClass = '';
 
-          <span class="event-wise-tag">Education</span>
+            if(str_contains($categoryLower, 'skill')) {
+                $colorClass = 'green';
+            } elseif(str_contains($categoryLower, 'women')) {
+                $colorClass = 'sky';
+            }
 
-          <div class="event-wise-media-count">
-            <span><i class="bi bi-camera-fill"></i> 24 Photos</span>
-            <span><i class="bi bi-play-circle-fill"></i> 03 Videos</span>
-          </div>
+            $filterTypes = [];
 
-          <div class="event-wise-overlay">
-            <a href="#"><i class="bi bi-images"></i></a>
-            <a href="#"><i class="bi bi-play-fill"></i></a>
-          </div>
-        </div>
+            if($gallery->photo_count > 0) {
+                $filterTypes[] = 'photos';
+            }
 
-        <div class="event-wise-content">
-          <div class="event-wise-meta">
-            <span><i class="bi bi-calendar2-check"></i> 12 May 2026</span>
-            <span><i class="bi bi-geo-alt-fill"></i> Patna</span>
-          </div>
+            if($gallery->video_count > 0) {
+                $filterTypes[] = 'videos';
+            }
 
-          <h3>Education Awareness & Student Support Drive</h3>
+            if($event?->event_type === 'completed') {
+                $filterTypes[] = 'completed';
+            }
+        @endphp
 
-          <p>
-            Event-wise photo and video album from education awareness and
-            student support activity.
-          </p>
+        <div class="event-wise-card" data-filter-types="{{ implode(',', $filterTypes) }}">
+          <div class="event-wise-img">
+            <img src="{{ $gallery->cover_image }}" alt="{{ $event?->title }}">
 
-          <div class="event-wise-footer">
-            <div>
-              <strong>27</strong>
-              <span>Total Media</span>
+            <span class="event-wise-tag {{ $colorClass }}">
+                {{ $category }}
+            </span>
+
+            <div class="event-wise-media-count">
+              <span><i class="bi bi-camera-fill"></i> {{ $gallery->photo_count }} Photos</span>
+              <span><i class="bi bi-play-circle-fill"></i> {{ $gallery->video_count }} Videos</span>
             </div>
 
-            <a href="gallery.html">
-              View Album
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+            <div class="event-wise-overlay">
+              <a href="{{ route('frontend.gallery.show', $gallery->id) }}">
+                <i class="bi bi-images"></i>
+              </a>
 
-      <div class="event-wise-card">
-        <div class="event-wise-img">
-          <img src="assets/img/event-album-2.png" alt="Skill Development Event Album">
-
-          <span class="event-wise-tag green">Skill Training</span>
-
-          <div class="event-wise-media-count">
-            <span><i class="bi bi-camera-fill"></i> 18 Photos</span>
-            <span><i class="bi bi-play-circle-fill"></i> 02 Videos</span>
+              <a href="{{ route('frontend.gallery.show', $gallery->id) }}">
+                <i class="bi bi-play-fill"></i>
+              </a>
+            </div>
           </div>
 
-          <div class="event-wise-overlay">
-            <a href="#"><i class="bi bi-images"></i></a>
-            <a href="#"><i class="bi bi-play-fill"></i></a>
-          </div>
-        </div>
+          <div class="event-wise-content">
+            <div class="event-wise-meta">
+              @if($event?->start_date)
+                <span>
+                  <i class="bi bi-calendar2-check"></i>
+                  {{ $event->start_date->format('d M Y') }}
+                </span>
+              @endif
 
-        <div class="event-wise-content">
-          <div class="event-wise-meta">
-            <span><i class="bi bi-calendar2-check"></i> 20 April 2026</span>
-            <span><i class="bi bi-geo-alt-fill"></i> Bihar</span>
-          </div>
-
-          <h3>Skill Development Training Session</h3>
-
-          <p>
-            Photos and videos from practical skill development and training
-            session for youth and women.
-          </p>
-
-          <div class="event-wise-footer">
-            <div>
-              <strong>20</strong>
-              <span>Total Media</span>
+              @if($event?->location)
+                <span>
+                  <i class="bi bi-geo-alt-fill"></i>
+                  {{ $event->location }}
+                </span>
+              @endif
             </div>
 
-            <a href="gallery.html">
-              View Album
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+            <h3>{{ $event?->title }}</h3>
 
-      <div class="event-wise-card">
-        <div class="event-wise-img">
-          <img src="assets/img/event-album-3.png" alt="Women Empowerment Event Album">
+            <p>
+              {{ \Illuminate\Support\Str::limit(strip_tags($event?->short_description), 135) }}
+            </p>
 
-          <span class="event-wise-tag sky">Women</span>
+            <div class="event-wise-footer">
+              <div>
+                <strong>{{ $gallery->total_media }}</strong>
+                <span>Total Media</span>
+              </div>
 
-          <div class="event-wise-media-count">
-            <span><i class="bi bi-camera-fill"></i> 30 Photos</span>
-            <span><i class="bi bi-play-circle-fill"></i> 04 Videos</span>
-          </div>
-
-          <div class="event-wise-overlay">
-            <a href="#"><i class="bi bi-images"></i></a>
-            <a href="#"><i class="bi bi-play-fill"></i></a>
-          </div>
-        </div>
-
-        <div class="event-wise-content">
-          <div class="event-wise-meta">
-            <span><i class="bi bi-calendar2-check"></i> 05 April 2026</span>
-            <span><i class="bi bi-geo-alt-fill"></i> Community</span>
-          </div>
-
-          <h3>Women Awareness & Dignity Program</h3>
-
-          <p>
-            Event memories from women awareness, dignity, self-reliance and
-            community participation program.
-          </p>
-
-          <div class="event-wise-footer">
-            <div>
-              <strong>34</strong>
-              <span>Total Media</span>
+              <a href="{{ route('frontend.gallery.show', $gallery->id) }}">
+                View Album
+                <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
-
-            <a href="gallery.html">
-              View Album
-              <i class="bi bi-arrow-right"></i>
-            </a>
           </div>
         </div>
-      </div>
+      @empty
+        <div class="gallery-empty-box">
+            <h3>No Albums Found</h3>
+            <p>No event-wise photo or video albums are available right now.</p>
+        </div>
+      @endforelse
 
     </div>
 
   </div>
 </section>
+
 <!-- ================= EVENT WISE ALBUM SECTION END ================= -->
 
 
 
 
 <!-- ================= ALBUM COVER IMAGE SECTION START ================= -->
+@if($latestGallery)
+@php
+    $event = $latestGallery->event;
+    $images = $latestGallery->getMedia('gallery_images');
+    $videoUrls = $latestGallery->video_urls ?? [];
+
+    $firstThumb = $images->get(0)?->getUrl() ?? $latestGallery->cover_image;
+    $secondThumb = $images->get(1)?->getUrl() ?? $latestGallery->cover_image;
+    $thirdThumb = $images->get(2)?->getUrl() ?? $latestGallery->cover_image;
+
+    $moreCount = max($latestGallery->total_media - 3, 0);
+@endphp
+
 <section class="album-cover-section">
   <div class="album-cover-shape album-cover-shape-1"></div>
   <div class="album-cover-shape album-cover-shape-2"></div>
@@ -201,14 +182,14 @@
       <div class="album-cover-image-card">
 
         <div class="album-cover-image">
-          <img src="assets/img/album-cover-main.png" alt="Education Awareness Event Album Cover">
+          <img src="{{ $latestGallery->cover_image }}" alt="{{ $event?->title }}">
 
           <div class="album-cover-overlay"></div>
 
           <div class="album-cover-top">
             <span class="album-cover-category">
               <i class="bi bi-images"></i>
-              Event Album
+              {{ $event?->category ?? 'Event Album' }}
             </span>
 
             <span class="album-cover-status">
@@ -219,30 +200,40 @@
 
           <div class="album-cover-content">
             <div class="album-cover-meta">
-              <span><i class="bi bi-calendar2-check"></i> 12 May 2026</span>
-              <span><i class="bi bi-geo-alt-fill"></i> Patna, Bihar</span>
+              @if($event?->start_date)
+                <span>
+                  <i class="bi bi-calendar2-check"></i>
+                  {{ $event->start_date->format('d M Y') }}
+                </span>
+              @endif
+
+              @if($event?->location)
+                <span>
+                  <i class="bi bi-geo-alt-fill"></i>
+                  {{ $event->location }}
+                </span>
+              @endif
             </div>
 
-            <h2>Education Awareness & Student Support Drive</h2>
+            <h2>{{ $event?->title }}</h2>
 
             <p>
-              A premium album cover for event-wise photo and video gallery showcasing
-              community participation, education awareness and student support activities.
+              {{ \Illuminate\Support\Str::limit(strip_tags($event?->short_description), 160) }}
             </p>
 
             <div class="album-cover-counts">
               <div>
-                <strong>24</strong>
+                <strong>{{ str_pad($latestGallery->photo_count, 2, '0', STR_PAD_LEFT) }}</strong>
                 <span>Photos</span>
               </div>
 
               <div>
-                <strong>03</strong>
+                <strong>{{ str_pad($latestGallery->video_count, 2, '0', STR_PAD_LEFT) }}</strong>
                 <span>Videos</span>
               </div>
 
               <div>
-                <strong>27</strong>
+                <strong>{{ str_pad($latestGallery->total_media, 2, '0', STR_PAD_LEFT) }}</strong>
                 <span>Total Media</span>
               </div>
             </div>
@@ -257,7 +248,7 @@
 
         <div class="section-badge">
           <span><i class="bi bi-camera-fill"></i></span>
-          Album Cover Image
+          Latest Album Cover
         </div>
 
         <h2>
@@ -266,8 +257,8 @@
         </h2>
 
         <p>
-          Use a strong cover image to represent each event album clearly. It helps visitors
-          quickly understand the event type, location, date and available photo/video media.
+          Latest event album is displayed here with event title, short description,
+          date, location, photo count and video count.
         </p>
 
         <div class="album-cover-feature-list">
@@ -305,26 +296,34 @@
         </div>
 
         <div class="album-cover-preview-row">
-          <img src="assets/img/album-thumb-1.png" alt="Album Preview">
-          <img src="assets/img/album-thumb-2.png" alt="Album Preview">
-          <img src="assets/img/album-thumb-3.png" alt="Album Preview">
+          <img src="{{ $firstThumb }}" alt="{{ $event?->title }}">
+          <img src="{{ $secondThumb }}" alt="{{ $event?->title }}">
+          <img src="{{ $thirdThumb }}" alt="{{ $event?->title }}">
 
-          <a href="#" class="album-more-box">
-            <strong>+24</strong>
+          <a href="{{ route('frontend.gallery.show', $latestGallery->id) }}" class="album-more-box">
+            <strong>+{{ $moreCount }}</strong>
             <span>More</span>
           </a>
         </div>
 
         <div class="album-cover-actions">
-          <a href="gallery.html" class="album-cover-btn-main">
+          <a href="{{ route('frontend.gallery.show', $latestGallery->id) }}" class="album-cover-btn-main">
             View Full Album
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="contact.html" class="album-cover-btn-soft">
-            <i class="bi bi-share-fill"></i>
-            Share
-          </a>
+         @php
+    $shareText = 'Check this event album: ' . ($event?->title ?? 'Event Album');
+    $shareLink = route('frontend.gallery.show', $latestGallery->id);
+    $whatsappShareUrl = 'https://wa.me/?text=' . urlencode($shareText . ' ' . $shareLink);
+@endphp
+
+<a href="{{ $whatsappShareUrl }}"
+   target="_blank"
+   class="album-cover-btn-soft">
+    <i class="bi bi-whatsapp"></i>
+    Share on WhatsApp
+</a>
         </div>
 
       </div>
@@ -333,6 +332,7 @@
 
   </div>
 </section>
+@endif
 <!-- ================= ALBUM COVER IMAGE SECTION END ================= -->
 
 
@@ -426,30 +426,48 @@
           </div>
         </div>
 
-        <div class="video-embed-box">
-          <!-- YouTube Embed Example -->          
-          <iframe
-            src="https://player.vimeo.com/video/76979871"
-            title="Vimeo video player"
+        @if($latestVideoGallery)
+@php
+    $videoEvent = $latestVideoGallery->event;
+    $videoUrls = array_values(array_filter($latestVideoGallery->video_urls ?? []));
+    $latestVideoUrl = $videoUrls[0] ?? null;
+@endphp
+
+@if($latestVideoUrl)
+    <div class="video-embed-box">
+        <iframe
+            src="{{ $latestVideoUrl }}"
+            title="{{ $videoEvent?->title ?? 'Event Video' }}"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen>
-          </iframe>
-         
+        </iframe>
+    </div>
+
+    <div class="video-info-box">
+        <div class="video-info-meta">
+            @if($videoEvent?->start_date)
+                <span>
+                    <i class="bi bi-calendar2-check"></i>
+                    {{ $videoEvent->start_date->format('d M Y') }}
+                </span>
+            @endif
+
+            @if($videoEvent?->location)
+                <span>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    {{ $videoEvent->location }}
+                </span>
+            @endif
         </div>
 
-        <div class="video-info-box">
-          <div class="video-info-meta">
-            <span><i class="bi bi-calendar2-check"></i> 12 May 2026</span>
-            <span><i class="bi bi-geo-alt-fill"></i> Patna</span>
-          </div>
+        <h4>{{ $videoEvent?->title }}</h4>
 
-          <h4>Education Awareness & Student Support Drive</h4>
-
-          <p>
-            Video highlight from education awareness program, student support activity
-            and community participation event.
-          </p>
-        </div>
+        <p>
+            {{ \Illuminate\Support\Str::limit(strip_tags($videoEvent?->short_description), 150) }}
+        </p>
+    </div>
+@endif
+@endif
 
         <div class="video-platform-grid">
 
@@ -522,35 +540,42 @@
         </div>
 
         <div class="category-filter-list">
-          <a href="#" class="active">
-            <span><i class="bi bi-grid-fill"></i> All Categories</span>
-            <strong>48</strong>
+          <a href="#" class="active" data-category="all">
+            <span>
+              <i class="bi bi-grid-fill"></i>
+              All Categories
+            </span>
+            <strong>{{ $galleries->count() }}</strong>
           </a>
 
-          <a href="#">
-            <span><i class="bi bi-mortarboard-fill"></i> Education Awareness</span>
-            <strong>14</strong>
-          </a>
+          @foreach($galleryCategories as $category)
+            @php
+                $categoryLower = strtolower($category->category);
+                $categorySlug = \Illuminate\Support\Str::slug($category->category);
 
-          <a href="#">
-            <span><i class="bi bi-tools"></i> Skill Development</span>
-            <strong>09</strong>
-          </a>
+                $icon = 'bi-grid-fill';
 
-          <a href="#">
-            <span><i class="bi bi-gender-female"></i> Women Empowerment</span>
-            <strong>11</strong>
-          </a>
+                if(str_contains($categoryLower, 'education')) {
+                    $icon = 'bi-mortarboard-fill';
+                } elseif(str_contains($categoryLower, 'skill')) {
+                    $icon = 'bi-tools';
+                } elseif(str_contains($categoryLower, 'women')) {
+                    $icon = 'bi-gender-female';
+                } elseif(str_contains($categoryLower, 'youth')) {
+                    $icon = 'bi-people-fill';
+                } elseif(str_contains($categoryLower, 'welfare') || str_contains($categoryLower, 'community')) {
+                    $icon = 'bi-heart-fill';
+                }
+            @endphp
 
-          <a href="#">
-            <span><i class="bi bi-people-fill"></i> Youth Empowerment</span>
-            <strong>07</strong>
-          </a>
-
-          <a href="#">
-            <span><i class="bi bi-heart-fill"></i> Community Welfare</span>
-            <strong>07</strong>
-          </a>
+            <a href="#" data-category="{{ $categorySlug }}">
+              <span>
+                <i class="bi {{ $icon }}"></i>
+                {{ $category->category }}
+              </span>
+              <strong>{{ str_pad($category->total, 2, '0', STR_PAD_LEFT) }}</strong>
+            </a>
+          @endforeach
         </div>
 
       </div>
@@ -561,129 +586,111 @@
         <div class="category-filter-topbar">
           <div>
             <span>Showing Results</span>
-            <h3>All Category Items</h3>
+            <h3 id="categoryResultTitle">All Category Items</h3>
           </div>
 
           <div class="category-sort-box">
             <i class="bi bi-sort-down"></i>
-            <select>
-              <option>Latest First</option>
-              <option>Oldest First</option>
-              <option>Most Viewed</option>
-              <option>Most Photos</option>
+            <select id="categorySort">
+              <option value="latest">Latest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="photos">Most Photos</option>
+              <option value="media">Most Media</option>
             </select>
           </div>
         </div>
 
         <div class="category-filter-tabs">
-          <a href="#" class="active">All</a>
-          <a href="#">Photos</a>
-          <a href="#">Videos</a>
-          <a href="#">Campaigns</a>
-          <a href="#">Events</a>
+          <a href="#" class="active" data-type="all">All</a>
+          <a href="#" data-type="photos">Photos</a>
+          <a href="#" data-type="videos">Videos</a>
+          <a href="#" data-type="completed">Completed Events</a>
         </div>
 
-        <div class="category-result-grid">
+        <div class="category-result-grid" id="categoryResultGrid">
 
-          <div class="category-result-card">
-            <div class="category-result-img">
-              <img src="assets/img/category-filter-1.png" alt="Education Awareness">
-              <span>Education</span>
-            </div>
+          @forelse($galleries as $gallery)
+            @php
+                $event = $gallery->event;
+                $category = $event?->category ?? 'Event';
+                $categorySlug = \Illuminate\Support\Str::slug($category);
+                $categoryLower = strtolower($category);
 
-            <div class="category-result-info">
-              <div class="category-result-meta">
-                <span><i class="bi bi-calendar2-check"></i> 12 May 2026</span>
-                <span><i class="bi bi-images"></i> 27 Media</span>
+                $colorClass = '';
+
+                if(str_contains($categoryLower, 'skill')) {
+                    $colorClass = 'green';
+                } elseif(str_contains($categoryLower, 'women')) {
+                    $colorClass = 'sky';
+                } elseif(str_contains($categoryLower, 'welfare') || str_contains($categoryLower, 'community')) {
+                    $colorClass = 'green';
+                }
+
+                $mediaType = 'all';
+
+                if($gallery->photo_count > 0 && $gallery->video_count > 0) {
+                    $mediaType = 'all photos videos';
+                } elseif($gallery->photo_count > 0) {
+                    $mediaType = 'photos';
+                } elseif($gallery->video_count > 0) {
+                    $mediaType = 'videos';
+                }
+
+                if($event?->event_type === 'completed') {
+                    $mediaType .= ' completed';
+                }
+
+                $dateValue = $event?->start_date ? $event->start_date->format('Y-m-d') : '';
+            @endphp
+
+            <div class="category-result-card"
+                 data-category="{{ $categorySlug }}"
+                 data-type="{{ $mediaType }}"
+                 data-date="{{ $dateValue }}"
+                 data-photos="{{ $gallery->photo_count }}"
+                 data-media="{{ $gallery->total_media }}">
+
+              <div class="category-result-img">
+                <img src="{{ $gallery->cover_image }}" alt="{{ $event?->title }}">
+
+                <span class="{{ $colorClass }}">
+                  {{ $category }}
+                </span>
               </div>
 
-              <h4>Education Awareness & Student Support Drive</h4>
+              <div class="category-result-info">
+                <div class="category-result-meta">
+                  @if($event?->start_date)
+                    <span>
+                      <i class="bi bi-calendar2-check"></i>
+                      {{ $event->start_date->format('d M Y') }}
+                    </span>
+                  @endif
 
-              <p>
-                Photo and video album from education awareness and student support activity.
-              </p>
+                  <span>
+                    <i class="bi bi-images"></i>
+                    {{ $gallery->total_media }} Media
+                  </span>
+                </div>
 
-              <a href="gallery.html">
-                View Details
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+                <h4>{{ $event?->title }}</h4>
 
-          <div class="category-result-card">
-            <div class="category-result-img">
-              <img src="assets/img/category-filter-2.png" alt="Skill Development">
-              <span class="green">Skill</span>
-            </div>
+                <p>
+                  {{ \Illuminate\Support\Str::limit(strip_tags($event?->short_description), 120) }}
+                </p>
 
-            <div class="category-result-info">
-              <div class="category-result-meta">
-                <span><i class="bi bi-calendar2-check"></i> 20 April 2026</span>
-                <span><i class="bi bi-play-circle"></i> 20 Media</span>
+                <a href="{{ route('frontend.gallery.show', $gallery->id) }}">
+                  View Details
+                  <i class="bi bi-arrow-right"></i>
+                </a>
               </div>
-
-              <h4>Skill Development Training Session</h4>
-
-              <p>
-                Practical skill development and vocational training event for youth and women.
-              </p>
-
-              <a href="gallery.html">
-                View Details
-                <i class="bi bi-arrow-right"></i>
-              </a>
             </div>
-          </div>
-
-          <div class="category-result-card">
-            <div class="category-result-img">
-              <img src="assets/img/category-filter-3.png" alt="Women Empowerment">
-              <span class="sky">Women</span>
+          @empty
+            <div class="gallery-empty-box">
+              <h3>No Category Items Found</h3>
+              <p>No albums are available right now.</p>
             </div>
-
-            <div class="category-result-info">
-              <div class="category-result-meta">
-                <span><i class="bi bi-calendar2-check"></i> 05 April 2026</span>
-                <span><i class="bi bi-images"></i> 34 Media</span>
-              </div>
-
-              <h4>Women Awareness & Dignity Program</h4>
-
-              <p>
-                Event memories from women awareness, dignity and self-reliance program.
-              </p>
-
-              <a href="gallery.html">
-                View Details
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="category-result-card">
-            <div class="category-result-img">
-              <img src="assets/img/category-filter-4.png" alt="Community Welfare">
-              <span class="green">Welfare</span>
-            </div>
-
-            <div class="category-result-info">
-              <div class="category-result-meta">
-                <span><i class="bi bi-calendar2-check"></i> 28 March 2026</span>
-                <span><i class="bi bi-heart"></i> Campaign</span>
-              </div>
-
-              <h4>Community Welfare Support Campaign</h4>
-
-              <p>
-                Campaign focused on awareness, public participation and welfare support.
-              </p>
-
-              <a href="gallery.html">
-                View Details
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+          @endforelse
 
         </div>
 
@@ -698,6 +705,7 @@
 
 
 <!-- ================= MOBILE FRIENDLY LIGHTBOX SECTION START ================= -->
+@if($galleries->count())
 <section class="mobile-lightbox-section">
   <div class="mobile-lightbox-shape mobile-lightbox-shape-1"></div>
   <div class="mobile-lightbox-shape mobile-lightbox-shape-2"></div>
@@ -711,87 +719,102 @@
       </div>
 
       <h2>
-        View photos and videos in a
+        View event albums in a
         <span>smooth mobile lightbox.</span>
       </h2>
 
       <p>
-        A clean responsive lightbox layout for event albums, campaign gallery,
-        photo collections and video highlights with touch-friendly controls.
+        Click any event album card to view that event’s photos and videos in popup.
       </p>
     </div>
 
-    <div class="mobile-lightbox-grid">
+    {{-- ONLY EVENT ALBUM CARDS --}}
+    <div class="event-album-select-grid">
 
-      <div class="mobile-lightbox-card" data-lightbox-src="assets/img/lightbox-gallery-1.png" data-lightbox-type="image">
-        <div class="mobile-lightbox-img">
-          <img src="assets/img/lightbox-gallery-1.png" alt="Education Awareness Event">
-          <span class="lightbox-type-badge"><i class="bi bi-image-fill"></i> Photo</span>
+      @foreach($galleries as $gallery)
+        @php
+            $event = $gallery->event;
+            $images = $gallery->getMedia('gallery_images');
+            $videoUrls = array_values(array_filter($gallery->video_urls ?? []));
+        @endphp
 
-          <div class="lightbox-hover-layer">
-            <span><i class="bi bi-zoom-in"></i></span>
+        <div class="event-album-select-card"
+             data-gallery-id="{{ $gallery->id }}"
+             data-cover-src="{{ $gallery->cover_image }}">
+
+          <div class="event-album-select-img">
+            <img src="{{ $gallery->cover_image }}" alt="{{ $event?->title ?? 'Event Album' }}">
+
+            <span>
+              <i class="bi bi-images"></i>
+              {{ $gallery->total_media }} Media
+            </span>
+
+            <div class="event-album-play">
+              <i class="bi bi-arrows-fullscreen"></i>
+            </div>
           </div>
-        </div>
 
-        <div class="mobile-lightbox-content">
-          <h3>Education Awareness Event</h3>
-          <p>Photo from student support and education awareness program.</p>
-        </div>
-      </div>
+          <div class="event-album-select-content">
+            <div class="event-album-meta">
+              @if($event?->start_date)
+                <small>
+                  <i class="bi bi-calendar2-check"></i>
+                  {{ $event->start_date->format('d M Y') }}
+                </small>
+              @endif
 
-      <div class="mobile-lightbox-card" data-lightbox-src="assets/img/lightbox-gallery-2.png" data-lightbox-type="image">
-        <div class="mobile-lightbox-img">
-          <img src="assets/img/lightbox-gallery-2.png" alt="Skill Development Training">
-          <span class="lightbox-type-badge green"><i class="bi bi-image-fill"></i> Photo</span>
+              @if($event?->location)
+                <small>
+                  <i class="bi bi-geo-alt-fill"></i>
+                  {{ $event->location }}
+                </small>
+              @endif
+            </div>
 
-          <div class="lightbox-hover-layer">
-            <span><i class="bi bi-zoom-in"></i></span>
+            <h3>{{ $event?->title ?? 'Event Album' }}</h3>
+
+            <p>
+              {{ \Illuminate\Support\Str::limit(strip_tags($event?->short_description), 90) }}
+            </p>
+
+            <div class="event-album-select-meta">
+              <small>
+                <i class="bi bi-camera-fill"></i>
+                {{ $gallery->photo_count }} Photos
+              </small>
+
+              <small>
+                <i class="bi bi-play-circle-fill"></i>
+                {{ $gallery->video_count }} Videos
+              </small>
+            </div>
           </div>
-        </div>
 
-        <div class="mobile-lightbox-content">
-          <h3>Skill Development Training</h3>
-          <p>Training session photo for youth and women empowerment.</p>
-        </div>
-      </div>
+          {{-- HIDDEN MEDIA DATA --}}
+          <div class="gallery-hidden-media" style="display:none;">
+            @foreach($images as $image)
+              <span class="gallery-media-source"
+                    data-src="{{ $image->getUrl() }}"
+                    data-type="image"></span>
+            @endforeach
 
-      <div class="mobile-lightbox-card" data-lightbox-src="assets/img/lightbox-gallery-3.png" data-lightbox-type="image">
-        <div class="mobile-lightbox-img">
-          <img src="assets/img/lightbox-gallery-3.png" alt="Women Empowerment Program">
-          <span class="lightbox-type-badge sky"><i class="bi bi-image-fill"></i> Photo</span>
-
-          <div class="lightbox-hover-layer">
-            <span><i class="bi bi-zoom-in"></i></span>
+            @foreach($videoUrls as $videoUrl)
+              <span class="gallery-media-source"
+                    data-src="{{ $videoUrl }}"
+                    data-type="video"></span>
+            @endforeach
           </div>
-        </div>
 
-        <div class="mobile-lightbox-content">
-          <h3>Women Empowerment Program</h3>
-          <p>Community awareness and dignity support event photo.</p>
         </div>
-      </div>
-
-      <div class="mobile-lightbox-card" data-lightbox-src="https://www.youtube.com/embed/dQw4w9WgXcQ" data-lightbox-type="video">
-        <div class="mobile-lightbox-img">
-          <img src="assets/img/lightbox-video-thumb.png" alt="Event Video Highlight">
-          <span class="lightbox-type-badge video"><i class="bi bi-play-circle-fill"></i> Video</span>
-
-          <div class="lightbox-hover-layer">
-            <span><i class="bi bi-play-fill"></i></span>
-          </div>
-        </div>
-
-        <div class="mobile-lightbox-content">
-          <h3>Event Video Highlight</h3>
-          <p>YouTube / Vimeo supported responsive video lightbox.</p>
-        </div>
-      </div>
+      @endforeach
 
     </div>
 
   </div>
 </section>
-<!-- LIGHTBOX POPUP -->
+
+{{-- LIGHTBOX POPUP --}}
 <div class="premium-lightbox" id="premiumLightbox">
   <button type="button" class="lightbox-close" id="lightboxClose">
     <i class="bi bi-x-lg"></i>
@@ -809,243 +832,11 @@
     <i class="bi bi-chevron-right"></i>
   </button>
 </div>
+@endif
+
 <!-- ================= MOBILE FRIENDLY LIGHTBOX SECTION END ================= -->
 
 
-
-<!-- ================= ADMIN MEDIA MANAGE SECTION START ================= -->
-<section class="admin-media-manage-section">
-  <div class="admin-media-shape admin-media-shape-1"></div>
-  <div class="admin-media-shape admin-media-shape-2"></div>
-
-  <div class="container">
-
-    <div class="admin-media-head">
-      <div class="section-badge">
-        <span><i class="bi bi-folder2-open"></i></span>
-        Admin Media Options
-      </div>
-
-      <h2>
-        Upload, reorder and delete
-        <span>album media easily.</span>
-      </h2>
-
-      <p>
-        Manage event-wise photos and videos from admin panel with drag reorder,
-        upload media, delete option, featured image control and clean responsive layout.
-      </p>
-    </div>
-
-    <div class="admin-media-wrapper">
-
-      <!-- LEFT CONTROL PANEL -->
-      <div class="admin-media-control-card">
-
-        <div class="media-control-top">
-          <div>
-            <span>Media Manager</span>
-            <h3>Album Controls</h3>
-          </div>
-
-          <div class="media-control-icon">
-            <i class="bi bi-sliders2"></i>
-          </div>
-        </div>
-
-        <div class="media-upload-box">
-          <div class="media-upload-icon">
-            <i class="bi bi-cloud-arrow-up-fill"></i>
-          </div>
-
-          <h4>Upload Photos / Videos</h4>
-          <p>
-            Drag media here or click upload button to add new photos and videos
-            in selected event album.
-          </p>
-
-          <a href="#" class="media-upload-btn">
-            <i class="bi bi-plus-circle-fill"></i>
-            Upload Media
-          </a>
-        </div>
-
-        <div class="media-option-list">
-
-          <div class="media-option-item">
-            <div class="media-option-icon">
-              <i class="bi bi-arrows-move"></i>
-            </div>
-            <div>
-              <h4>Reorder Media</h4>
-              <p>Drag and drop images/videos to change display order.</p>
-            </div>
-          </div>
-
-          <div class="media-option-item">
-            <div class="media-option-icon green">
-              <i class="bi bi-star-fill"></i>
-            </div>
-            <div>
-              <h4>Set Cover Image</h4>
-              <p>Select any image as album cover or featured media.</p>
-            </div>
-          </div>
-
-          <div class="media-option-item">
-            <div class="media-option-icon red">
-              <i class="bi bi-trash3-fill"></i>
-            </div>
-            <div>
-              <h4>Delete Media</h4>
-              <p>Remove unwanted photos or videos from album safely.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- RIGHT MEDIA GRID PANEL -->
-      <div class="admin-media-grid-card">
-
-        <div class="media-grid-toolbar">
-          <div>
-            <span>Selected Album</span>
-            <h3>Education Awareness Event</h3>
-          </div>
-
-          <div class="media-toolbar-actions">
-            <a href="#" class="media-toolbar-btn">
-              <i class="bi bi-arrow-repeat"></i>
-              Reorder
-            </a>
-
-            <a href="#" class="media-toolbar-btn active">
-              <i class="bi bi-upload"></i>
-              Upload
-            </a>
-          </div>
-        </div>
-
-        <div class="admin-media-grid">
-
-          <!-- MEDIA ITEM -->
-          <div class="admin-media-item">
-            <div class="media-order-badge">01</div>
-
-            <div class="media-thumb">
-              <img src="assets/img/admin-media-1.png" alt="Album Media">
-              <span class="media-type photo"><i class="bi bi-image-fill"></i> Photo</span>
-            </div>
-
-            <div class="media-item-info">
-              <h4>Student Support Activity</h4>
-              <p>Uploaded: 12 May 2026</p>
-            </div>
-
-            <div class="media-item-actions">
-              <button type="button" class="media-action-btn move">
-                <i class="bi bi-grip-vertical"></i>
-              </button>
-
-              <button type="button" class="media-action-btn cover">
-                <i class="bi bi-star-fill"></i>
-              </button>
-
-              <button type="button" class="media-action-btn delete">
-                <i class="bi bi-trash3-fill"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- MEDIA ITEM -->
-          <div class="admin-media-item">
-            <div class="media-order-badge">02</div>
-
-            <div class="media-thumb">
-              <img src="assets/img/admin-media-2.png" alt="Album Media">
-              <span class="media-type photo"><i class="bi bi-image-fill"></i> Photo</span>
-            </div>
-
-            <div class="media-item-info">
-              <h4>Awareness Session</h4>
-              <p>Uploaded: 12 May 2026</p>
-            </div>
-
-            <div class="media-item-actions">
-              <button type="button" class="media-action-btn move">
-                <i class="bi bi-grip-vertical"></i>
-              </button>
-
-              <button type="button" class="media-action-btn cover active">
-                <i class="bi bi-star-fill"></i>
-              </button>
-
-              <button type="button" class="media-action-btn delete">
-                <i class="bi bi-trash3-fill"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- MEDIA ITEM -->
-          <div class="admin-media-item">
-            <div class="media-order-badge">03</div>
-
-            <div class="media-thumb">
-              <img src="assets/img/admin-media-3.png" alt="Album Video">
-              <span class="media-type video"><i class="bi bi-play-circle-fill"></i> Video</span>
-            </div>
-
-            <div class="media-item-info">
-              <h4>Event Highlight Video</h4>
-              <p>YouTube / Vimeo Embed</p>
-            </div>
-
-            <div class="media-item-actions">
-              <button type="button" class="media-action-btn move">
-                <i class="bi bi-grip-vertical"></i>
-              </button>
-
-              <button type="button" class="media-action-btn cover">
-                <i class="bi bi-star-fill"></i>
-              </button>
-
-              <button type="button" class="media-action-btn delete">
-                <i class="bi bi-trash3-fill"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- MEDIA ITEM -->
-          <div class="admin-media-item add-new-media">
-            <a href="#">
-              <i class="bi bi-plus-lg"></i>
-              <span>Add New Media</span>
-            </a>
-          </div>
-
-        </div>
-
-        <div class="media-save-strip">
-          <div>
-            <i class="bi bi-info-circle-fill"></i>
-            Drag media to reorder. Click save after changes.
-          </div>
-
-          <a href="#" class="media-save-btn">
-            Save Changes
-            <i class="bi bi-check2-circle"></i>
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-<!-- ================= ADMIN MEDIA MANAGE SECTION END ================= -->
 
 
 @endsection
