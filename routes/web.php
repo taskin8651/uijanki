@@ -28,6 +28,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
+     // About Page
+    Route::get('about-page', 'AboutPageController@index')->name('about-page.index');
+    Route::post('about-page/update', 'AboutPageController@update')->name('about-page.update');
+    Route::delete('about-page/remove-image', 'AboutPageController@removeImage')->name('about-page.removeImage');
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
