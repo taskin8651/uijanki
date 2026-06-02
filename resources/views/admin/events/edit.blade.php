@@ -39,6 +39,7 @@
 
     <div class="admin-form-grid">
 
+        {{-- Event Information --}}
         <div class="form-card">
             <div class="form-card-header">
                 <div class="form-card-icon">
@@ -54,7 +55,9 @@
             <div class="form-card-body">
 
                 <div class="field-group">
-                    <label class="field-label" for="event_type">Event Type <span class="req">*</span></label>
+                    <label class="field-label" for="event_type">
+                        Event Type <span class="req">*</span>
+                    </label>
 
                     <div class="input-icon-wrap">
                         <i class="fas fa-layer-group icon"></i>
@@ -64,37 +67,61 @@
                                 required
                                 class="field-input {{ $errors->has('event_type') ? 'error' : '' }}">
                             <option value="">Select Type</option>
-                            <option value="upcoming" {{ old('event_type', $event->event_type) == 'upcoming' ? 'selected' : '' }}>Upcoming</option>
-                            <option value="ongoing" {{ old('event_type', $event->event_type) == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
-                            <option value="completed" {{ old('event_type', $event->event_type) == 'completed' ? 'selected' : '' }}>Completed</option>
+                            <option value="upcoming" {{ old('event_type', $event->event_type) == 'upcoming' ? 'selected' : '' }}>
+                                Upcoming
+                            </option>
+                            <option value="ongoing" {{ old('event_type', $event->event_type) == 'ongoing' ? 'selected' : '' }}>
+                                Ongoing
+                            </option>
+                            <option value="completed" {{ old('event_type', $event->event_type) == 'completed' ? 'selected' : '' }}>
+                                Completed
+                            </option>
                         </select>
                     </div>
                 </div>
 
                 <div class="field-group">
                     <label class="field-label" for="category">Category</label>
+
                     <div class="input-icon-wrap">
                         <i class="fas fa-tag icon"></i>
-                        <input type="text" name="category" id="category" value="{{ old('category', $event->category) }}" class="field-input">
+                        <input type="text"
+                               name="category"
+                               id="category"
+                               value="{{ old('category', $event->category) }}"
+                               class="field-input {{ $errors->has('category') ? 'error' : '' }}"
+                               placeholder="Education Awareness">
                     </div>
                 </div>
 
                 <div class="field-group">
                     <label class="field-label" for="title">Title</label>
+
                     <div class="input-icon-wrap">
                         <i class="fas fa-heading icon"></i>
-                        <input type="text" name="title" id="title" value="{{ old('title', $event->title) }}" class="field-input">
+                        <input type="text"
+                               name="title"
+                               id="title"
+                               value="{{ old('title', $event->title) }}"
+                               class="field-input {{ $errors->has('title') ? 'error' : '' }}"
+                               placeholder="Event title">
                     </div>
                 </div>
 
                 <div class="field-group">
                     <label class="field-label" for="short_description">Description</label>
-                    <textarea name="short_description" id="short_description" rows="6" class="field-input">{{ old('short_description', $event->short_description) }}</textarea>
+
+                    <textarea name="short_description"
+                              id="short_description"
+                              rows="6"
+                              class="field-input {{ $errors->has('short_description') ? 'error' : '' }}"
+                              placeholder="Write short event description">{{ old('short_description', $event->short_description) }}</textarea>
                 </div>
 
             </div>
         </div>
 
+        {{-- Image & Settings --}}
         <div class="form-card">
             <div class="form-card-header">
                 <div class="form-card-icon">
@@ -112,7 +139,11 @@
                 <div class="field-group">
                     <label class="field-label" for="event_image">Event Image</label>
 
-                    <input type="file" name="event_image" id="event_image" class="field-input">
+                    <input type="file"
+                           name="event_image"
+                           id="event_image"
+                           accept="image/*"
+                           class="field-input {{ $errors->has('event_image') ? 'error' : '' }}">
 
                     <p class="field-hint">Leave empty if you do not want to change image.</p>
 
@@ -127,9 +158,15 @@
 
                 <div class="field-group">
                     <label class="field-label" for="sort_order">Sort Order</label>
+
                     <div class="input-icon-wrap">
                         <i class="fas fa-sort-numeric-up icon"></i>
-                        <input type="number" name="sort_order" id="sort_order" value="{{ old('sort_order', $event->sort_order) }}" class="field-input">
+                        <input type="number"
+                               name="sort_order"
+                               id="sort_order"
+                               value="{{ old('sort_order', $event->sort_order) }}"
+                               class="field-input {{ $errors->has('sort_order') ? 'error' : '' }}"
+                               placeholder="1">
                     </div>
                 </div>
 
@@ -164,18 +201,13 @@
                 </div>
 
                 @if($event->getFirstMedia('event_image'))
-                    <form method="POST"
-                          action="{{ route('admin.events.removeImage', $event->id) }}"
-                          class="mt-3"
-                          onsubmit="return confirm('{{ trans('global.areYouSure') }}')">
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class="btn-ghost">
-                            <i class="fas fa-trash"></i>
-                            Remove Current Image
-                        </button>
-                    </form>
+                    <button type="submit"
+                            form="remove-event-image-form"
+                            class="btn-ghost mt-3"
+                            onclick="return confirm('{{ trans('global.areYouSure') }}')">
+                        <i class="fas fa-trash"></i>
+                        Remove Current Image
+                    </button>
                 @endif
 
             </div>
@@ -183,6 +215,7 @@
 
     </div>
 
+    {{-- Date Time Location --}}
     <div class="form-card mt-4">
         <div class="form-card-header">
             <div class="form-card-icon">
@@ -199,39 +232,68 @@
             <div class="admin-form-grid">
 
                 <div class="field-group">
-                    <label class="field-label">Start Date</label>
-                    <input type="date" name="start_date" value="{{ old('start_date', optional($event->start_date)->format('Y-m-d')) }}" class="field-input">
+                    <label class="field-label" for="start_date">Start Date</label>
+                    <input type="date"
+                           name="start_date"
+                           id="start_date"
+                           value="{{ old('start_date', optional($event->start_date)->format('Y-m-d')) }}"
+                           class="field-input {{ $errors->has('start_date') ? 'error' : '' }}">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">End Date</label>
-                    <input type="date" name="end_date" value="{{ old('end_date', optional($event->end_date)->format('Y-m-d')) }}" class="field-input">
+                    <label class="field-label" for="end_date">End Date</label>
+                    <input type="date"
+                           name="end_date"
+                           id="end_date"
+                           value="{{ old('end_date', optional($event->end_date)->format('Y-m-d')) }}"
+                           class="field-input {{ $errors->has('end_date') ? 'error' : '' }}">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Start Time</label>
-                    <input type="text" name="start_time" value="{{ old('start_time', $event->start_time) }}" placeholder="10:00 AM" class="field-input">
+                    <label class="field-label" for="start_time">Start Time</label>
+                    <input type="text"
+                           name="start_time"
+                           id="start_time"
+                           value="{{ old('start_time', $event->start_time) }}"
+                           placeholder="10:00 AM"
+                           class="field-input {{ $errors->has('start_time') ? 'error' : '' }}">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">End Time</label>
-                    <input type="text" name="end_time" value="{{ old('end_time', $event->end_time) }}" placeholder="02:00 PM" class="field-input">
+                    <label class="field-label" for="end_time">End Time</label>
+                    <input type="text"
+                           name="end_time"
+                           id="end_time"
+                           value="{{ old('end_time', $event->end_time) }}"
+                           placeholder="02:00 PM"
+                           class="field-input {{ $errors->has('end_time') ? 'error' : '' }}">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Location</label>
-                    <input type="text" name="location" value="{{ old('location', $event->location) }}" class="field-input">
+                    <label class="field-label" for="location">Location</label>
+                    <input type="text"
+                           name="location"
+                           id="location"
+                           value="{{ old('location', $event->location) }}"
+                           placeholder="Patna, Bihar"
+                           class="field-input {{ $errors->has('location') ? 'error' : '' }}">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Status Badge</label>
-                    <input type="text" name="status_badge" value="{{ old('status_badge', $event->status_badge) }}" class="field-input">
+                    <label class="field-label" for="status_badge">Status Badge</label>
+                    <input type="text"
+                           name="status_badge"
+                           id="status_badge"
+                           value="{{ old('status_badge', $event->status_badge) }}"
+                           placeholder="Upcoming / Live Now / Completed"
+                           class="field-input {{ $errors->has('status_badge') ? 'error' : '' }}">
                 </div>
 
             </div>
         </div>
     </div>
 
+    {{-- Info Items --}}
     <div class="form-card mt-4">
         <div class="form-card-header">
             <div class="form-card-icon">
@@ -248,29 +310,50 @@
             <div class="admin-form-grid">
 
                 <div class="field-group">
-                    <label class="field-label">Info One Title</label>
-                    <input type="text" name="info_one_title" value="{{ old('info_one_title', $event->info_one_title) }}" class="field-input">
+                    <label class="field-label" for="info_one_title">Info One Title</label>
+                    <input type="text"
+                           name="info_one_title"
+                           id="info_one_title"
+                           value="{{ old('info_one_title', $event->info_one_title) }}"
+                           class="field-input {{ $errors->has('info_one_title') ? 'error' : '' }}"
+                           placeholder="Open For All">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Info One Text</label>
-                    <input type="text" name="info_one_text" value="{{ old('info_one_text', $event->info_one_text) }}" class="field-input">
+                    <label class="field-label" for="info_one_text">Info One Text</label>
+                    <input type="text"
+                           name="info_one_text"
+                           id="info_one_text"
+                           value="{{ old('info_one_text', $event->info_one_text) }}"
+                           class="field-input {{ $errors->has('info_one_text') ? 'error' : '' }}"
+                           placeholder="Community participation">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Info Two Title</label>
-                    <input type="text" name="info_two_title" value="{{ old('info_two_title', $event->info_two_title) }}" class="field-input">
+                    <label class="field-label" for="info_two_title">Info Two Title</label>
+                    <input type="text"
+                           name="info_two_title"
+                           id="info_two_title"
+                           value="{{ old('info_two_title', $event->info_two_title) }}"
+                           class="field-input {{ $errors->has('info_two_title') ? 'error' : '' }}"
+                           placeholder="Social Impact">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Info Two Text</label>
-                    <input type="text" name="info_two_text" value="{{ old('info_two_text', $event->info_two_text) }}" class="field-input">
+                    <label class="field-label" for="info_two_text">Info Two Text</label>
+                    <input type="text"
+                           name="info_two_text"
+                           id="info_two_text"
+                           value="{{ old('info_two_text', $event->info_two_text) }}"
+                           class="field-input {{ $errors->has('info_two_text') ? 'error' : '' }}"
+                           placeholder="Awareness & welfare">
                 </div>
 
             </div>
         </div>
     </div>
 
+    {{-- Progress & Impact --}}
     <div class="form-card mt-4">
         <div class="form-card-header">
             <div class="form-card-icon">
@@ -287,29 +370,52 @@
             <div class="admin-form-grid">
 
                 <div class="field-group">
-                    <label class="field-label">Progress %</label>
-                    <input type="number" name="progress" value="{{ old('progress', $event->progress) }}" min="0" max="100" class="field-input">
+                    <label class="field-label" for="progress">Progress %</label>
+                    <input type="number"
+                           name="progress"
+                           id="progress"
+                           value="{{ old('progress', $event->progress) }}"
+                           min="0"
+                           max="100"
+                           class="field-input {{ $errors->has('progress') ? 'error' : '' }}"
+                           placeholder="68">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">People Reached</label>
-                    <input type="number" name="people_reached" value="{{ old('people_reached', $event->people_reached) }}" class="field-input">
+                    <label class="field-label" for="people_reached">People Reached</label>
+                    <input type="number"
+                           name="people_reached"
+                           id="people_reached"
+                           value="{{ old('people_reached', $event->people_reached) }}"
+                           class="field-input {{ $errors->has('people_reached') ? 'error' : '' }}"
+                           placeholder="250">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Families Supported</label>
-                    <input type="number" name="families_supported" value="{{ old('families_supported', $event->families_supported) }}" class="field-input">
+                    <label class="field-label" for="families_supported">Families Supported</label>
+                    <input type="number"
+                           name="families_supported"
+                           id="families_supported"
+                           value="{{ old('families_supported', $event->families_supported) }}"
+                           class="field-input {{ $errors->has('families_supported') ? 'error' : '' }}"
+                           placeholder="120">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Youth Guided</label>
-                    <input type="number" name="youth_guided" value="{{ old('youth_guided', $event->youth_guided) }}" class="field-input">
+                    <label class="field-label" for="youth_guided">Youth Guided</label>
+                    <input type="number"
+                           name="youth_guided"
+                           id="youth_guided"
+                           value="{{ old('youth_guided', $event->youth_guided) }}"
+                           class="field-input {{ $errors->has('youth_guided') ? 'error' : '' }}"
+                           placeholder="80">
                 </div>
 
             </div>
         </div>
     </div>
 
+    {{-- Buttons --}}
     <div class="form-card mt-4">
         <div class="form-card-header">
             <div class="form-card-icon">
@@ -326,29 +432,50 @@
             <div class="admin-form-grid">
 
                 <div class="field-group">
-                    <label class="field-label">Button One Text</label>
-                    <input type="text" name="button_one_text" value="{{ old('button_one_text', $event->button_one_text) }}" class="field-input">
+                    <label class="field-label" for="button_one_text">Button One Text</label>
+                    <input type="text"
+                           name="button_one_text"
+                           id="button_one_text"
+                           value="{{ old('button_one_text', $event->button_one_text) }}"
+                           class="field-input {{ $errors->has('button_one_text') ? 'error' : '' }}"
+                           placeholder="View Details">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Button One Link</label>
-                    <input type="text" name="button_one_link" value="{{ old('button_one_link', $event->button_one_link) }}" class="field-input">
+                    <label class="field-label" for="button_one_link">Button One Link</label>
+                    <input type="text"
+                           name="button_one_link"
+                           id="button_one_link"
+                           value="{{ old('button_one_link', $event->button_one_link) }}"
+                           class="field-input {{ $errors->has('button_one_link') ? 'error' : '' }}"
+                           placeholder="events">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Button Two Text</label>
-                    <input type="text" name="button_two_text" value="{{ old('button_two_text', $event->button_two_text) }}" class="field-input">
+                    <label class="field-label" for="button_two_text">Button Two Text</label>
+                    <input type="text"
+                           name="button_two_text"
+                           id="button_two_text"
+                           value="{{ old('button_two_text', $event->button_two_text) }}"
+                           class="field-input {{ $errors->has('button_two_text') ? 'error' : '' }}"
+                           placeholder="Join Event">
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Button Two Link</label>
-                    <input type="text" name="button_two_link" value="{{ old('button_two_link', $event->button_two_link) }}" class="field-input">
+                    <label class="field-label" for="button_two_link">Button Two Link</label>
+                    <input type="text"
+                           name="button_two_link"
+                           id="button_two_link"
+                           value="{{ old('button_two_link', $event->button_two_link) }}"
+                           class="field-input {{ $errors->has('button_two_link') ? 'error' : '' }}"
+                           placeholder="contact">
                 </div>
 
             </div>
         </div>
     </div>
 
+    {{-- Form Actions --}}
     <div class="form-actions">
         <button type="submit" class="btn-primary">
             <i class="fas fa-check"></i>
@@ -361,5 +488,15 @@
     </div>
 
 </form>
+
+@if($event->getFirstMedia('event_image'))
+<form id="remove-event-image-form"
+      method="POST"
+      action="{{ route('admin.events.removeImage', $event->id) }}"
+      style="display: none;">
+    @csrf
+    @method('DELETE')
+</form>
+@endif
 
 @endsection
