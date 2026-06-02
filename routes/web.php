@@ -38,6 +38,10 @@ Route::delete('founder-leaders/destroy', 'FounderLeadersController@massDestroy')
 Route::delete('founder-leaders/{founderLeader}/remove-image', 'FounderLeadersController@removeImage')->name('founder-leaders.removeImage');
 Route::resource('founder-leaders', 'FounderLeadersController');
 
+Route::delete('website-services/destroy', 'WebsiteServicesController@massDestroy')->name('website-services.massDestroy');
+Route::delete('website-services/{websiteService}/remove-image', 'WebsiteServicesController@removeImage')->name('website-services.removeImage');
+Route::resource('website-services', 'WebsiteServicesController');
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -53,3 +57,6 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 
 // frontend routes
 Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about');
+
+Route::get('initiatives', [App\Http\Controllers\Frontend\ServiceController::class, 'index'])->name('initiatives');
+Route::get('initiatives/{id}', [App\Http\Controllers\Frontend\ServiceController::class, 'show'])->name('initiatives.show');

@@ -108,11 +108,11 @@
             </div>
         @endcan
 
-        {{-- WEBSITE CMS GROUP --}}
-@can('about_page_access')
+       @if(auth()->user()->can('about_page_access') || auth()->user()->can('website_service_access') || auth()->user()->can('founder_leader_access'))
     @php
         $cmsActive = request()->is('admin/about-page*')
-            || request()->is('admin/founder-leaders*');
+            || request()->is('admin/founder-leaders*')
+            || request()->is('admin/website-services*');
     @endphp
 
     <div x-data="{ open: {{ $cmsActive ? 'true' : 'false' }} }">
@@ -131,14 +131,7 @@
                :style="open ? 'transform:rotate(90deg)' : ''"></i>
         </button>
 
-        <div class="submenu"
-             x-show="open"
-             x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0"
-             x-transition:leave="transition ease-in duration-100"
-             x-transition:leave-start="opacity-100 translate-y-0"
-             x-transition:leave-end="opacity-0 -translate-y-1">
+        <div class="submenu" x-show="open">
 
             @can('about_page_access')
                 <a href="{{ route('admin.about-page.index') }}"
@@ -156,9 +149,17 @@
                 </a>
             @endcan
 
+            @can('website_service_access')
+                <a href="{{ route('admin.website-services.index') }}"
+                   class="sub-link {{ request()->is('admin/website-services*') ? 'active' : '' }}">
+                    <i class="fas fa-hands-helping"></i>
+                    Website Services
+                </a>
+            @endcan
+
         </div>
     </div>
-@endcan
+@endif
 
         <div class="nav-divider"></div>
 
