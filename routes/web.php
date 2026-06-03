@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CampaignsController;
+use App\Http\Controllers\Admin\CsrPartnersController;
+use App\Http\Controllers\Admin\EventGalleriesController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -34,6 +36,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('about-page', 'AboutPageController@index')->name('about-page.index');
     Route::post('about-page/update', 'AboutPageController@update')->name('about-page.update');
     Route::delete('about-page/remove-image', 'AboutPageController@removeImage')->name('about-page.removeImage');
+
+    // Website Settings
+    Route::get('website-settings', 'WebsiteSettingsController@index')->name('website-settings.index');
+    Route::post('website-settings/update', 'WebsiteSettingsController@update')->name('website-settings.update');
+    Route::delete('website-settings/remove-logo', 'WebsiteSettingsController@removeLogo')->name('website-settings.removeLogo');
+    Route::delete('website-settings/remove-favicon', 'WebsiteSettingsController@removeFavicon')->name('website-settings.removeFavicon');
 
     // Founder Leaders
 Route::delete('founder-leaders/destroy', 'FounderLeadersController@massDestroy')->name('founder-leaders.massDestroy');
@@ -77,6 +85,24 @@ Route::delete('csr-partners/{csrPartner}/remove-logo', [CsrPartnersController::c
 
 Route::resource('csr-partners', CsrPartnersController::class);
 
+Route::delete('csr-enquiries/destroy', [CsrEnquiriesController::class, 'massDestroy'])->name('csr-enquiries.massDestroy');
+Route::resource('csr-enquiries', CsrEnquiriesController::class)->only(['index', 'show', 'destroy']);
+
+Route::delete('registration-enquiries/destroy', [RegistrationEnquiriesController::class, 'massDestroy'])->name('registration-enquiries.massDestroy');
+Route::resource('registration-enquiries', RegistrationEnquiriesController::class)->only(['index', 'show', 'destroy']);
+
+Route::delete('contact-enquiries/destroy', [ContactEnquiriesController::class, 'massDestroy'])->name('contact-enquiries.massDestroy');
+Route::resource('contact-enquiries', ContactEnquiriesController::class)->only(['index', 'show', 'destroy']);
+
+Route::delete('volunteer-registrations/destroy', [VolunteerRegistrationsController::class, 'massDestroy'])->name('volunteer-registrations.massDestroy');
+Route::resource('volunteer-registrations', VolunteerRegistrationsController::class)->only(['index', 'show', 'destroy']);
+
+Route::delete('message-enquiries/destroy', [MessageEnquiriesController::class, 'massDestroy'])->name('message-enquiries.massDestroy');
+Route::resource('message-enquiries', MessageEnquiriesController::class)->only(['index', 'show', 'destroy']);
+
+Route::delete('partner-enquiries/destroy', [PartnerEnquiriesController::class, 'massDestroy'])->name('partner-enquiries.massDestroy');
+Route::resource('partner-enquiries', PartnerEnquiriesController::class)->only(['index', 'show', 'destroy']);
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -92,6 +118,10 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 // frontend routes
 Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about');
 
+Route::view('donate', 'frontend.donate')->name('frontend.donate');
+
+Route::view('volunter', 'frontend.volunter')->name('frontend.volunter');
+
 Route::get('initiatives', [App\Http\Controllers\Frontend\ServiceController::class, 'index'])->name('initiatives');
 
 Route::get('/events', [App\Http\Controllers\Frontend\EventController::class, 'index'])->name('frontend.events.index');
@@ -105,3 +135,5 @@ Route::get('gallery', [App\Http\Controllers\Frontend\GalleryController::class, '
 Route::get('gallery/{eventGallery}', [App\Http\Controllers\Frontend\GalleryController::class, 'show'])->name('frontend.gallery.show');
 
 Route::get('csr', [App\Http\Controllers\Frontend\CsrController::class, 'index'])->name('frontend.csr.index');
+
+Route::view('contact', 'frontend.contact')->name('frontend.contact');

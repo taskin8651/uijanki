@@ -38,7 +38,7 @@
             </div>
             <div>
               <h4>Call Support</h4>
-              <p><a href="tel:7979026927">7979026927</a></p>
+              <p><a href="tel:{{ $websiteSetting->tel_link }}">{{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</a></p>
             </div>
           </div>
 
@@ -48,7 +48,7 @@
             </div>
             <div>
               <h4>WhatsApp</h4>
-              <p><a href="https://wa.me/917979026927">Chat with our team</a></p>
+              <p><a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}">Chat with our team</a></p>
             </div>
           </div>
 
@@ -59,8 +59,7 @@
             <div>
               <h4>Office Address</h4>
               <p>
-                302 Chandan Deep Apartment, Bailey Road, Rajabazar,
-                Near Jagdeo Path Pillar No. 1, Patna
+                {{ $websiteSetting->full_address ?: '302 Chandan Deep Apartment, Bailey Road, Rajabazar, Near Jagdeo Path Pillar No. 1, Patna' }}
               </p>
             </div>
           </div>
@@ -68,10 +67,10 @@
         </div>
 
         <div class="contact-social-strip">
-          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="{{ $websiteSetting->facebook_url ?: '#' }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="{{ $websiteSetting->instagram_url ?: '#' }}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="{{ $websiteSetting->youtube_url ?: '#' }}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="{{ $websiteSetting->linkedin_url ?: '#' }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
         </div>
 
       </div>
@@ -212,24 +211,21 @@
           <i class="bi bi-geo-alt-fill"></i>
           <div>
             <h4>Address</h4>
-            <p>
-              302 Chandan Deep Apartment, Bailey Road, Rajabazar,
-              Near Jagdeo Path Pillar No. 1, Patna
-            </p>
+            <p>{{ $websiteSetting->full_address ?: '302 Chandan Deep Apartment, Bailey Road, Rajabazar, Near Jagdeo Path Pillar No. 1, Patna' }}</p>
           </div>
         </div>
 
         <div class="map-contact-grid">
 
-          <a href="tel:7979026927" class="map-contact-item">
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="map-contact-item">
             <i class="bi bi-telephone-fill"></i>
             <div>
               <span>Call Us</span>
-              <strong>7979026927</strong>
+              <strong>{{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</strong>
             </div>
           </a>
 
-          <a href="https://wa.me/917979026927" class="map-contact-item">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" class="map-contact-item">
             <i class="bi bi-whatsapp"></i>
             <div>
               <span>WhatsApp</span>
@@ -249,14 +245,14 @@
 
         <div class="map-action-row">
           <a
-            href="https://www.google.com/maps/search/?api=1&query=302%20Chandan%20Deep%20Apartment%20Bailey%20Road%20Rajabazar%20Patna"
+            href="{{ $websiteSetting->map_directions_link }}"
             target="_blank"
             class="map-btn-main">
             Get Directions
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="#" class="map-btn-soft">
+          <a href="{{ route('frontend.contact') }}" class="map-btn-soft">
             Contact Us
           </a>
         </div>
@@ -280,7 +276,7 @@
 
         <div class="google-map-frame">
           <iframe
-            src="https://www.google.com/maps?q=302%20Chandan%20Deep%20Apartment%20Bailey%20Road%20Rajabazar%20Patna&output=embed"
+            src="{{ $websiteSetting->map_embed_url ?: 'https://www.google.com/maps?q=302%20Chandan%20Deep%20Apartment%20Bailey%20Road%20Rajabazar%20Patna&output=embed' }}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen>
@@ -335,12 +331,11 @@
           <h3>Janki Social Foundation</h3>
 
           <p>
-            302 Chandan Deep Apartment, Bailey Road, Rajabazar,
-            Near Jagdeo Path Pillar No. 1, Patna
+            {{ $websiteSetting->full_address ?: '302 Chandan Deep Apartment, Bailey Road, Rajabazar, Near Jagdeo Path Pillar No. 1, Patna' }}
           </p>
 
           <a
-            href="https://www.google.com/maps/search/?api=1&query=302%20Chandan%20Deep%20Apartment%20Bailey%20Road%20Rajabazar%20Patna"
+            href="{{ $websiteSetting->map_directions_link }}"
             target="_blank"
             class="contact-detail-btn">
             Get Direction
@@ -364,8 +359,8 @@
             call directly on our official contact number.
           </p>
 
-          <a href="tel:7979026927" class="contact-detail-btn green">
-            7979026927
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="contact-detail-btn green">
+            {{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}
             <i class="bi bi-telephone-fill"></i>
           </a>
         </div>
@@ -386,7 +381,7 @@
             support team.
           </p>
 
-          <a href="https://wa.me/917979026927" target="_blank" class="contact-detail-btn whatsapp">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank" class="contact-detail-btn whatsapp">
             Chat Now
             <i class="bi bi-arrow-right"></i>
           </a>

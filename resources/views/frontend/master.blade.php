@@ -1,12 +1,26 @@
+@php
+    $settingUrl = function ($path) {
+        if (! $path) {
+            return '#';
+        }
+
+        if (str_starts_with($path, 'http') || str_starts_with($path, '#') || str_starts_with($path, 'tel:') || str_starts_with($path, 'mailto:')) {
+            return $path;
+        }
+
+        return url($path);
+    };
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Janki Social Foundation | Education, Skill Development & Social Welfare NGO</title>
-  <meta name="description" content="Janki Social Foundation works for education, skill development, women empowerment, youth empowerment, career guidance and community welfare." />
-  <meta name="keywords" content="Janki Social Foundation, NGO, Education, Skill Development, Women Empowerment, Youth Empowerment, Donation, CSR, Volunteer" />
+  <title>{{ $websiteSetting->meta_title ?: 'Janki Social Foundation | Education, Skill Development & Social Welfare NGO' }}</title>
+  <meta name="description" content="{{ $websiteSetting->meta_description ?: 'Janki Social Foundation works for education, skill development, women empowerment, youth empowerment, career guidance and community welfare.' }}" />
+  <meta name="keywords" content="{{ $websiteSetting->meta_keywords ?: 'Janki Social Foundation, NGO, Education, Skill Development, Women Empowerment, Youth Empowerment, Donation, CSR, Volunteer' }}" />
+  <link rel="icon" href="{{ $websiteSetting->favicon }}">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,18 +53,18 @@
     <div class="topbar-inner">
 
       <div class="topbar-left">
-        <a href="tel:+917979026927" class="topbar-info">
+        <a href="tel:{{ $websiteSetting->tel_link }}" class="topbar-info">
           <span class="topbar-icon">
             <i class="bi bi-telephone-fill"></i>
           </span>
-          <span>+91 7979026927</span>
+          <span>{{ $websiteSetting->phone_display ?: '+91 7979026927' }}</span>
         </a>
 
         <div class="topbar-info">
           <span class="topbar-icon">
             <i class="bi bi-geo-alt-fill"></i>
           </span>
-          <span>Bailey Road, Rajabazar, Patna</span>
+          <span>{{ $websiteSetting->short_address ?: 'Bailey Road, Rajabazar, Patna' }}</span>
         </div>
       </div>
 
@@ -58,16 +72,16 @@
         <span class="topbar-text">Connect With Us</span>
 
         <div class="topbar-social">
-          <a href="#" aria-label="Facebook">
+          <a href="{{ $websiteSetting->facebook_url ?: '#' }}" aria-label="Facebook">
             <i class="bi bi-facebook"></i>
           </a>
-          <a href="#" aria-label="Instagram">
+          <a href="{{ $websiteSetting->instagram_url ?: '#' }}" aria-label="Instagram">
             <i class="bi bi-instagram"></i>
           </a>
-          <a href="#" aria-label="YouTube">
+          <a href="{{ $websiteSetting->youtube_url ?: '#' }}" aria-label="YouTube">
             <i class="bi bi-youtube"></i>
           </a>
-          <a href="#" aria-label="LinkedIn">
+          <a href="{{ $websiteSetting->linkedin_url ?: '#' }}" aria-label="LinkedIn">
             <i class="bi bi-linkedin"></i>
           </a>
         </div>
@@ -84,8 +98,8 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
 
-      <a class="navbar-brand" href="#">
-        <img src="assets/img/JankiNGOLogo.png" alt="Janki Social Foundation">
+      <a class="navbar-brand" href="{{ url('/') }}">
+        <img src="{{ $websiteSetting->logo }}" alt="{{ $websiteSetting->site_name ?: 'Janki Social Foundation' }}">
       </a>
 
       <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
@@ -94,19 +108,19 @@
 
       <div class="collapse navbar-collapse" id="mainMenu">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="initiatives.html">Initiatives</a></li>
-          <li class="nav-item"><a class="nav-link" href="event.html">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="campaign.html">Campaigns</a></li>
-          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="csr.html">CSR</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('frontend.about') }}">About</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('initiatives*') ? 'active' : '' }}" href="{{ route('initiatives') }}">Initiatives</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('events*') ? 'active' : '' }}" href="{{ route('frontend.events.index') }}">Events</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('campaigns*') ? 'active' : '' }}" href="{{ route('frontend.campaigns.index') }}">Campaigns</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('gallery*') ? 'active' : '' }}" href="{{ route('frontend.gallery.index') }}">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('csr*') ? 'active' : '' }}" href="{{ route('frontend.csr.index') }}">CSR</a></li>
+          <li class="nav-item"><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
         </ul>
 
         <div class="header-actions">
-          <a href="volunter.html" class="btn btn-soft">Volunteer</a>
-          <a href="donate.html" class="btn btn-main">Donate Now</a>
+          <a href="{{ $settingUrl($websiteSetting->volunteer_url ?: 'volunter') }}" class="btn btn-soft">Volunteer</a>
+          <a href="{{ $settingUrl($websiteSetting->donate_url ?: 'donate') }}" class="btn btn-main">Donate Now</a>
         </div>
       </div>
 
@@ -127,40 +141,40 @@
 
       <div class="col-lg-4">
         <div class="footer-brand">
-          <img src="assets/img/JankiNGOLogo.png" alt="">
+          <img src="{{ $websiteSetting->logo }}" alt="{{ $websiteSetting->site_name ?: 'Janki Social Foundation' }}">
         </div>
         <p>
-          Working for education, skill development, vocational training, career guidance, women empowerment, youth empowerment and community welfare.
+          {{ $websiteSetting->footer_description ?: 'Working for education, skill development, vocational training, career guidance, women empowerment, youth empowerment and community welfare.' }}
         </p>
       </div>
 
       <div class="col-lg-2 col-md-4">
         <h5>Quick Links</h5>
-        <a href="#">About</a>
-        <a href="#">Initiatives</a>
-        <a href="#">Events</a>
-        <a href="#">Gallery</a>
+        <a href="{{ route('frontend.about') }}">About</a>
+        <a href="{{ route('initiatives') }}">Initiatives</a>
+        <a href="{{ route('frontend.events.index') }}">Events</a>
+        <a href="{{ route('frontend.gallery.index') }}">Gallery</a>
       </div>
 
       <div class="col-lg-3 col-md-4">
         <h5>Get Involved</h5>
-        <a href="#">Donate</a>
-        <a href="#">Volunteer</a>
-        <a href="#">CSR</a>
-        <a href="#">Partner With Us</a>
+        <a href="{{ $settingUrl($websiteSetting->donate_url ?: 'donate') }}">Donate</a>
+        <a href="{{ $settingUrl($websiteSetting->volunteer_url ?: 'volunter') }}">Volunteer</a>
+        <a href="{{ route('frontend.csr.index') }}">CSR</a>
+        <a href="{{ route('frontend.contact') }}">Partner With Us</a>
       </div>
 
       <div class="col-lg-3 col-md-4">
         <h5>Contact</h5>
-        <p><i class="bi bi-telephone-fill"></i> +91 7979026927</p>
-        <p><i class="bi bi-geo-alt-fill"></i> 302 Chandan Deep Apartment, Bailey Road, Rajabazar, Patna</p>
+        <p><i class="bi bi-telephone-fill"></i> {{ $websiteSetting->phone_display ?: '+91 7979026927' }}</p>
+        <p><i class="bi bi-geo-alt-fill"></i> {{ $websiteSetting->full_address ?: '302 Chandan Deep Apartment, Bailey Road, Rajabazar, Patna' }}</p>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 Janki Social Foundation. All Rights Reserved.</p>
-      <p>Designed with care for social impact.</p>
+      <p>{{ $websiteSetting->copyright_text ?: '© 2026 Janki Social Foundation. All Rights Reserved.' }}</p>
+      <p>{{ $websiteSetting->footer_credit ?: 'Designed with care for social impact.' }}</p>
     </div>
   </div>
 </footer>
@@ -169,17 +183,17 @@
 
 <!-- Floating Buttons -->
 <div class="floating-actions">
-  <a href="tel:7979026927" class="call"><i class="bi bi-telephone-fill"></i></a>
-  <a href="https://wa.me/917979026927" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+  <a href="tel:{{ $websiteSetting->tel_link }}" class="call"><i class="bi bi-telephone-fill"></i></a>
+  <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
 </div>
 
 <!-- Mobile Bottom Nav -->
 <div class="mobile-bottom-nav">
-  <a href="index.html" class="active"><i class="bi bi-house-fill"></i><span>Home</span></a>
-  <a href="donate.html"><i class="bi bi-heart-fill"></i><span>Donate</span></a>
-  <a href="event.html"><i class="bi bi-calendar-event"></i><span>Events</span></a>
-  <a href="volunter.html"><i class="bi bi-person-heart"></i><span>Volunteer</span></a>
-  <a href="tel:7979026927"><i class="bi bi-telephone-fill"></i><span>Call</span></a>
+  <a href="{{ url('/') }}" class="active"><i class="bi bi-house-fill"></i><span>Home</span></a>
+  <a href="{{ $settingUrl($websiteSetting->donate_url ?: 'donate') }}"><i class="bi bi-heart-fill"></i><span>Donate</span></a>
+  <a href="{{ route('frontend.events.index') }}"><i class="bi bi-calendar-event"></i><span>Events</span></a>
+  <a href="{{ $settingUrl($websiteSetting->volunteer_url ?: 'volunter') }}"><i class="bi bi-person-heart"></i><span>Volunteer</span></a>
+  <a href="tel:{{ $websiteSetting->tel_link }}"><i class="bi bi-telephone-fill"></i><span>Call</span></a>
 </div>
 
 

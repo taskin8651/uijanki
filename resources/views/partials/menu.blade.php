@@ -248,6 +248,91 @@
             </div>
         @endif
 
+        @if(
+    auth()->user()->can('csr_enquiry_access') ||
+    auth()->user()->can('registration_enquiry_access') ||
+    auth()->user()->can('contact_enquiry_access') ||
+    auth()->user()->can('volunteer_registration_access') ||
+    auth()->user()->can('message_enquiry_access') ||
+    auth()->user()->can('partner_enquiry_access')
+)
+    @php
+        $enquiryActive =
+            request()->is('admin/csr-enquiries*') ||
+            request()->is('admin/registration-enquiries*') ||
+            request()->is('admin/contact-enquiries*') ||
+            request()->is('admin/volunteer-registrations*') ||
+            request()->is('admin/message-enquiries*') ||
+            request()->is('admin/partner-enquiries*');
+    @endphp
+
+    <div x-data="{ open: {{ $enquiryActive ? 'true' : 'false' }} }">
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Enquiries"
+                class="nav-link nav-group-btn {{ $enquiryActive ? 'active' : '' }}">
+            <div class="nav-group-left">
+                <i class="fas fa-envelope-open-text nav-icon"></i>
+                <span class="nav-label">Enquiries</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron" :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu" x-show="open" x-transition>
+
+            @can('csr_enquiry_access')
+                <a href="{{ route('admin.csr-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/csr-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-handshake"></i>
+                    CSR Enquiries
+                </a>
+            @endcan
+
+            @can('registration_enquiry_access')
+                <a href="{{ route('admin.registration-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/registration-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-user-plus"></i>
+                    Registration Enquiries
+                </a>
+            @endcan
+
+            @can('contact_enquiry_access')
+                <a href="{{ route('admin.contact-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/contact-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-phone-alt"></i>
+                    Contact Enquiries
+                </a>
+            @endcan
+
+            @can('volunteer_registration_access')
+                <a href="{{ route('admin.volunteer-registrations.index') }}"
+                   class="sub-link {{ request()->is('admin/volunteer-registrations*') ? 'active' : '' }}">
+                    <i class="fas fa-hands-helping"></i>
+                    Volunteer Registrations
+                </a>
+            @endcan
+
+            @can('message_enquiry_access')
+                <a href="{{ route('admin.message-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/message-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-comment-dots"></i>
+                    Message Enquiries
+                </a>
+            @endcan
+
+            @can('partner_enquiry_access')
+                <a href="{{ route('admin.partner-enquiries.index') }}"
+                   class="sub-link {{ request()->is('admin/partner-enquiries*') ? 'active' : '' }}">
+                    <i class="fas fa-building"></i>
+                    Partner Enquiries
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endif
+
         <div class="nav-divider"></div>
 
         <p class="sidebar-section-title compact nav-label">Account</p>
@@ -265,9 +350,9 @@
         @endif
 
         {{-- Settings --}}
-        <a href="#"
+        <a href="{{ route('admin.website-settings.index') }}"
            data-tooltip="Settings"
-           class="nav-link">
+           class="nav-link {{ request()->is('admin/website-settings*') ? 'active' : '' }}">
             <i class="fas fa-cog nav-icon"></i>
             <span class="nav-label">Settings</span>
         </a>
