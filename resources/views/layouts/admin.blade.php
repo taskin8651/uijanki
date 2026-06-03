@@ -108,10 +108,60 @@
                 @endif
 
                 {{-- Notifications --}}
-                <button type="button" class="header-btn notification-btn">
-                    <i class="fas fa-bell"></i>
-                    <span class="notif-dot"></span>
-                </button>
+                <div x-data="{ open:false }" class="relative">
+                    <button type="button"
+                            @click="open = !open"
+                            class="header-btn notification-btn"
+                            title="Unread enquiries">
+                        <i class="fas fa-bell"></i>
+                        @if(($adminUnreadEnquiryCount ?? 0) > 0)
+                            <span class="notif-count">{{ $adminUnreadEnquiryCount > 99 ? '99+' : $adminUnreadEnquiryCount }}</span>
+                        @endif
+                    </button>
+
+                    <div x-show="open"
+                         x-transition:enter="transition ease-out duration-150"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         @click.outside="open=false"
+                         class="notification-menu">
+                        <div class="notification-head">
+                            <div>
+                                <p class="notification-title">Unread Enquiries</p>
+                                <p class="notification-subtitle">{{ number_format($adminUnreadEnquiryCount ?? 0) }} pending follow up</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-body">
+                            @forelse(($adminUnreadEnquiries ?? collect()) as $notification)
+                                <a href="{{ route($notification['route'], $notification['id']) }}" class="notification-item">
+                                    <span class="notification-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="notification-copy">
+                                        <strong>{{ $notification['name'] }}</strong>
+                                        <small>{{ $notification['label'] }} - {{ $notification['subject'] }}</small>
+                                        <em>{{ optional($notification['created_at'])->diffForHumans() }}</em>
+                                    </span>
+                                </a>
+                            @empty
+                                <div class="notification-empty">
+                                    <i class="fas fa-circle-check"></i>
+                                    <span>No unread enquiries</span>
+                                </div>
+                            @endforelse
+                        </div>
+
+                        <div class="notification-footer">
+                            <a href="{{ route('admin.contact-enquiries.index') }}">Contact</a>
+                            <a href="{{ route('admin.registration-enquiries.index') }}">Registration</a>
+                            <a href="{{ route('admin.volunteer-registrations.index') }}">Volunteer</a>
+                        </div>
+                    </div>
+                </div>
 
                 {{-- User dropdown --}}
                 <div x-data="{ open:false }" class="relative">
