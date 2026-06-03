@@ -1,121 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Janki Social Foundation | Education, Skill Development & Social Welfare NGO</title>
-  <meta name="description" content="Janki Social Foundation works for education, skill development, women empowerment, youth empowerment, career guidance and community welfare." />
-  <meta name="keywords" content="Janki Social Foundation, NGO, Education, Skill Development, Women Empowerment, Youth Empowerment, Donation, CSR, Volunteer" />
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-  <!-- AOS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-
-<!-- ================= TOP BAR START ================= -->
-<div class="topbar">
-  <div class="container">
-    <div class="topbar-inner">
-
-      <div class="topbar-left">
-        <a href="tel:+917979026927" class="topbar-info">
-          <span class="topbar-icon">
-            <i class="bi bi-telephone-fill"></i>
-          </span>
-          <span>+91 7979026927</span>
-        </a>
-
-        <div class="topbar-info">
-          <span class="topbar-icon">
-            <i class="bi bi-geo-alt-fill"></i>
-          </span>
-          <span>Bailey Road, Rajabazar, Patna</span>
-        </div>
-      </div>
-
-      <div class="topbar-right">
-        <span class="topbar-text">Connect With Us</span>
-
-        <div class="topbar-social">
-          <a href="#" aria-label="Facebook">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="#" aria-label="Instagram">
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a href="#" aria-label="YouTube">
-            <i class="bi bi-youtube"></i>
-          </a>
-          <a href="#" aria-label="LinkedIn">
-            <i class="bi bi-linkedin"></i>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!-- ================= TOP BAR END ================= -->
-
-
-<!-- ================= HEADER START ================= -->
-<header class="main-header" id="mainHeader">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-
-      <a class="navbar-brand" href="#">
-        <img src="assets/img/JankiNGOLogo.png" alt="Janki Social Foundation">
-      </a>
-
-      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
-        <i class="bi bi-list"></i>
-      </button>
-
-      <div class="collapse navbar-collapse" id="mainMenu">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="initiatives.html">Initiatives</a></li>
-          <li class="nav-item"><a class="nav-link" href="event.html">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="campaign.html">Campaigns</a></li>
-          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="csr.html">CSR</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        </ul>
-
-        <div class="header-actions">
-          <a href="volunter.html" class="btn btn-soft">Volunteer</a>
-          <a href="donate.html" class="btn btn-main">Donate Now</a>
-        </div>
-      </div>
-
-    </div>
-  </nav>
-</header>
-<!-- ================= HEADER END ================= -->
-
-
+@extends('frontend.master')
+@section('content')
 <!-- ================= HERO SECTION START ================= -->
 <section class="hero-section">
   <div class="hero-bg-shape hero-shape-1"></div>
@@ -144,12 +28,12 @@
           </p>
 
           <div class="hero-actions">
-            <a href="donate.html" class="btn hero-btn-main">
+            <a href="/donate" class="btn hero-btn-main">
               <i class="bi bi-heart-fill"></i>
               Donate For A Cause
             </a>
 
-            <a href="volunter.html" class="btn hero-btn-outline">
+            <a href="/volunter" class="btn hero-btn-outline">
               Explore Our Work
               <i class="bi bi-arrow-right"></i>
             </a>
@@ -179,34 +63,50 @@
       <div class="col-lg-6">
         <div class="hero-visual">
 
-          <div class="hero-img-frame">
-            <div class="hero-image-slider">
+         <div class="hero-img-frame">
+    <div class="hero-image-slider">
 
-              <div class="hero-slide active">
-                <img src="assets/img/hero-ngo.png" alt="Janki Social Foundation Social Work">
-              </div>
+        @forelse($heroSliders as $key => $slider)
+            <div class="hero-slide {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ $slider->slider_image }}"
+                     alt="{{ $slider->alt_text ?? $slider->title ?? 'Janki Social Foundation Social Work' }}">
+            </div>
+        @empty
+            <div class="hero-slide active">
+                <img src="{{ asset('assets/img/hero-ngo.png') }}" alt="Janki Social Foundation Social Work">
+            </div>
 
-              <div class="hero-slide">
-                <img src="assets/img/hero-ngo-2.png" alt="Education Awareness Program">
-              </div>
+            <div class="hero-slide">
+                <img src="{{ asset('assets/img/hero-ngo-2.png') }}" alt="Education Awareness Program">
+            </div>
 
-              <div class="hero-slide">
-                <img src="assets/img/hero-ngo-3.png" alt="Skill Development Program">
-              </div>
+            <div class="hero-slide">
+                <img src="{{ asset('assets/img/hero-ngo-3.png') }}" alt="Skill Development Program">
+            </div>
 
-              <div class="hero-slide">
-                <img src="assets/img/hero-ngo-4.png" alt="Community Welfare Program">
-              </div>
+            <div class="hero-slide">
+                <img src="{{ asset('assets/img/hero-ngo-4.png') }}" alt="Community Welfare Program">
+            </div>
+        @endforelse
 
-              <div class="hero-slider-dots">
+        <div class="hero-slider-dots">
+            @if($heroSliders->count())
+                @foreach($heroSliders as $key => $slider)
+                    <button type="button"
+                            class="{{ $key == 0 ? 'active' : '' }}"
+                            aria-label="Slide {{ $key + 1 }}">
+                    </button>
+                @endforeach
+            @else
                 <button type="button" class="active" aria-label="Slide 1"></button>
                 <button type="button" aria-label="Slide 2"></button>
                 <button type="button" aria-label="Slide 3"></button>
                 <button type="button" aria-label="Slide 4"></button>
-              </div>
+            @endif
+        </div>
 
-            </div>
-          </div>
+    </div>
+</div>
 
           <div class="hero-floating-card hero-floating-card-1">
             <div class="hero-floating-icon">
@@ -243,6 +143,7 @@
 
 
 <!-- ================= NGO INTRODUCTION SECTION START ================= -->
+@if($aboutPage)
 <section class="ngo-intro-section">
   <div class="intro-bg-shape intro-shape-1"></div>
   <div class="intro-bg-shape intro-shape-2"></div>
@@ -255,22 +156,26 @@
         <div class="intro-image-wrap">
 
           <div class="intro-main-image">
-            <img src="assets/img/ngo-intro.png" alt="Janki Social Foundation Community Work">
+            <img src="{{ $aboutPage->background_image }}"
+                 alt="{{ $aboutPage->image_badge ?? $aboutPage->heading ?? 'Janki Social Foundation Community Work' }}">
           </div>
 
           <div class="intro-experience-card">
             <div class="intro-exp-icon">
               <i class="bi bi-heart-pulse-fill"></i>
             </div>
+
             <div>
-              <h4>Social Impact</h4>
-              <p>Education • Skill • Welfare</p>
+              <h4>{{ $aboutPage->floating_title ?? 'Social Impact' }}</h4>
+              <p>{{ $aboutPage->floating_subtitle ?? 'Education • Skill • Welfare' }}</p>
             </div>
           </div>
 
           <div class="intro-mini-card">
             <i class="bi bi-patch-check-fill"></i>
-            <span>Transparent, community-focused and impact-driven NGO work.</span>
+            <span>
+              {{ $aboutPage->image_badge ?? 'Transparent, community-focused and impact-driven NGO work.' }}
+            </span>
           </div>
 
         </div>
@@ -282,76 +187,88 @@
 
           <div class="section-badge">
             <span><i class="bi bi-stars"></i></span>
-            NGO Introduction
+            {{ $aboutPage->section_badge ?? 'NGO Introduction' }}
           </div>
 
           <h2>
-            Building an aware, skilled and empowered society through
-            <span>meaningful social initiatives.</span>
+            {{ $aboutPage->heading ?? 'Building an aware, skilled and empowered society through' }}
+            <span>{{ $aboutPage->highlight_heading ?? 'meaningful social initiatives.' }}</span>
           </h2>
 
-          <p>
-            Janki Social Foundation is a social development organization committed to supporting communities through education awareness, skill development, vocational training, career guidance, women empowerment, youth empowerment and community welfare.
-          </p>
+          @if($aboutPage->description_one)
+            <p>{!! $aboutPage->description_one !!}</p>
+          @endif
 
-          <p>
-            The foundation works with a clear vision to create opportunities, encourage public participation and bring positive change through transparent programs, donation campaigns, events, volunteer support and CSR collaboration.
-          </p>
+          @if($aboutPage->description_two)
+            <p>{!! $aboutPage->description_two !!}</p>
+          @endif
 
           <div class="intro-feature-grid">
 
-            <div class="intro-feature-item">
-              <div class="intro-feature-icon">
-                <i class="bi bi-book-half"></i>
+            @if($aboutPage->point_one_title || $aboutPage->point_one_text)
+              <div class="intro-feature-item">
+                <div class="intro-feature-icon">
+                  <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                  <h4>{{ $aboutPage->point_one_title ?? 'Education Awareness' }}</h4>
+                  <p>{{ $aboutPage->point_one_text ?? 'Learning support, motivation and awareness programs.' }}</p>
+                </div>
               </div>
-              <div>
-                <h4>Education Awareness</h4>
-                <p>Learning support, motivation and awareness programs.</p>
-              </div>
-            </div>
+            @endif
 
-            <div class="intro-feature-item">
-              <div class="intro-feature-icon green">
-                <i class="bi bi-tools"></i>
+            @if($aboutPage->point_two_title || $aboutPage->point_two_text)
+              <div class="intro-feature-item">
+                <div class="intro-feature-icon green">
+                  <i class="bi bi-tools"></i>
+                </div>
+                <div>
+                  <h4>{{ $aboutPage->point_two_title ?? 'Skill Development' }}</h4>
+                  <p>{{ $aboutPage->point_two_text ?? 'Practical training, job-readiness and digital awareness.' }}</p>
+                </div>
               </div>
-              <div>
-                <h4>Skill Development</h4>
-                <p>Practical training, job-readiness and digital awareness.</p>
-              </div>
-            </div>
+            @endif
 
-            <div class="intro-feature-item">
-              <div class="intro-feature-icon sky">
-                <i class="bi bi-people-fill"></i>
+            @if($aboutPage->point_three_title || $aboutPage->point_three_text)
+              <div class="intro-feature-item">
+                <div class="intro-feature-icon sky">
+                  <i class="bi bi-people-fill"></i>
+                </div>
+                <div>
+                  <h4>{{ $aboutPage->point_three_title ?? 'Community Welfare' }}</h4>
+                  <p>{{ $aboutPage->point_three_text ?? 'Social support, awareness drives and local development.' }}</p>
+                </div>
               </div>
-              <div>
-                <h4>Community Welfare</h4>
-                <p>Social support, awareness drives and local development.</p>
-              </div>
-            </div>
+            @endif
 
-            <div class="intro-feature-item">
-              <div class="intro-feature-icon green">
-                <i class="bi bi-person-heart"></i>
+            @if($aboutPage->purpose_title || $aboutPage->purpose_description)
+              <div class="intro-feature-item">
+                <div class="intro-feature-icon green">
+                  <i class="bi bi-person-heart"></i>
+                </div>
+                <div>
+                  <h4>{{ $aboutPage->purpose_title ?? 'Empowerment' }}</h4>
+                  <p>{{ $aboutPage->purpose_description ?? 'Women, youth and beneficiary-focused initiatives.' }}</p>
+                </div>
               </div>
-              <div>
-                <h4>Empowerment</h4>
-                <p>Women, youth and beneficiary-focused initiatives.</p>
-              </div>
-            </div>
+            @endif
 
           </div>
 
           <div class="intro-actions">
-            <a href="about.html" class="btn intro-btn-main">
-              Know More About Us
-              <i class="bi bi-arrow-right"></i>
-            </a>
+            @if($aboutPage->button_one_text)
+              <a href="{{ url($aboutPage->button_one_link ?? 'about') }}" class="btn intro-btn-main">
+                {{ $aboutPage->button_one_text }}
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            @endif
 
-            <a href="volunter.html" class="btn intro-btn-soft">
-              <i class="bi bi-person-plus-fill"></i>
-              Join As Volunteer
-            </a>
+            @if($aboutPage->button_two_text)
+              <a href="{{ url($aboutPage->button_two_link ?? 'volunter') }}" class="btn intro-btn-soft">
+                <i class="bi bi-person-plus-fill"></i>
+                {{ $aboutPage->button_two_text }}
+              </a>
+            @endif
           </div>
 
         </div>
@@ -360,6 +277,7 @@
     </div>
   </div>
 </section>
+@endif
 <!-- ================= NGO INTRODUCTION SECTION END ================= -->
 
 
@@ -388,81 +306,101 @@
     </div>
 
     <!-- MAIN MVV GRID -->
-    <div class="row g-4 align-items-stretch">
+    @if($aboutPage)
+<div class="mvv-main-grid">
 
-      <!-- Mission -->
-      <div class="col-lg-4 col-md-6">
-        <div class="mvv-card mvv-card-main">
-          <div class="mvv-card-top">
-            <div class="mvv-icon">
-              <i class="bi bi-bullseye"></i>
-            </div>
-            <span>01</span>
-          </div>
+    <!-- Mission -->
+    <div class="mvv-feature-card mission-card">
+        <div class="mvv-card-glow"></div>
 
-          <h3>Our Mission</h3>
-
-          <p>
-            To create meaningful opportunities for education, skill development, vocational training, career guidance, women empowerment, youth development and community welfare.
-          </p>
-
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Education awareness</li>
-            <li><i class="bi bi-check-circle-fill"></i> Skill-building programs</li>
-            <li><i class="bi bi-check-circle-fill"></i> Community support</li>
-          </ul>
+        <div class="mvv-icon">
+            <i class="bi bi-rocket-takeoff-fill"></i>
         </div>
-      </div>
 
-      <!-- Vision -->
-      <div class="col-lg-4 col-md-6">
-        <div class="mvv-card mvv-card-highlight">
-          <div class="mvv-card-top">
-            <div class="mvv-icon green">
-              <i class="bi bi-eye-fill"></i>
-            </div>
-            <span>02</span>
-          </div>
+        <span class="mvv-number">01</span>
 
-          <h3>Our Vision</h3>
+        <h3>{{ $aboutPage->mission_title ?? 'Our Mission' }}</h3>
 
-          <p>
-            To build an aware, skilled, educated and empowered society where every individual gets access to knowledge, dignity, confidence and growth opportunities.
-          </p>
+        @if($aboutPage->mission_description)
+            <p>{{ $aboutPage->mission_description }}</p>
+        @endif
 
-          <div class="mvv-vision-box">
-            <i class="bi bi-stars"></i>
-            <strong>Empowered Society</strong>
-            <small>Education • Skills • Awareness • Welfare</small>
-          </div>
-        </div>
-      </div>
-
-      <!-- Values -->
-      <div class="col-lg-4 col-md-12">
-        <div class="mvv-card mvv-card-main">
-          <div class="mvv-card-top">
-            <div class="mvv-icon sky">
-              <i class="bi bi-heart-pulse-fill"></i>
-            </div>
-            <span>03</span>
-          </div>
-
-          <h3>Our Values</h3>
-
-          <p>
-            Our work is built on trust, transparency, compassion, responsibility and community participation to ensure real and measurable social impact.
-          </p>
-
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Transparency</li>
-            <li><i class="bi bi-check-circle-fill"></i> Compassion</li>
-            <li><i class="bi bi-check-circle-fill"></i> Public participation</li>
-          </ul>
-        </div>
-      </div>
-
+        @if(!empty($aboutPage->mission_points))
+            <ul>
+                @foreach($aboutPage->mission_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
     </div>
+
+    <!-- Vision -->
+    <div class="mvv-feature-card vision-card featured">
+        <div class="mvv-card-glow"></div>
+
+        <div class="mvv-icon white">
+            <i class="bi bi-eye-fill"></i>
+        </div>
+
+        <span class="mvv-number">02</span>
+
+        <h3>{{ $aboutPage->vision_title ?? 'Our Vision' }}</h3>
+
+        @if($aboutPage->vision_description)
+            <p>{{ $aboutPage->vision_description }}</p>
+        @endif
+
+        @if(!empty($aboutPage->vision_points))
+            <ul>
+                @foreach($aboutPage->vision_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+    <!-- Purpose -->
+    <div class="mvv-feature-card purpose-card">
+        <div class="mvv-card-glow"></div>
+
+        <div class="mvv-icon green">
+            <i class="bi bi-heart-fill"></i>
+        </div>
+
+        <span class="mvv-number">03</span>
+
+        <h3>{{ $aboutPage->purpose_title ?? 'Our Purpose' }}</h3>
+
+        @if($aboutPage->purpose_description)
+            <p>{{ $aboutPage->purpose_description }}</p>
+        @endif
+
+        @if(!empty($aboutPage->purpose_points))
+            <ul>
+                @foreach($aboutPage->purpose_points as $point)
+                    @if($point)
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $point }}
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+</div>
+@endif
 
     <!-- VALUE MINI CARDS -->
     <div class="mvv-mini-grid">
@@ -544,168 +482,142 @@
     </div>
 
     <!-- BENTO GRID -->
-    <div class="jsf-focus-grid">
+   @if($campaigns->count())
+<div class="jsf-focus-grid">
 
-      <!-- MAIN IMAGE CARD -->
-      <div class="jsf-focus-card jsf-card-main">
+  @foreach($campaigns as $key => $campaign)
+    @php
+        $number = str_pad($key + 1, 2, '0', STR_PAD_LEFT);
+
+        $cardClass = '';
+        $iconClass = 'blue';
+        $linkClass = '';
+        $buttonText = $campaign->button_one_text ?? 'Read More';
+        $buttonLink = $campaign->button_one_link ? url($campaign->button_one_link) : route('frontend.campaigns.index');
+
+        if($key == 0) {
+            $cardClass = 'jsf-card-main';
+            $iconClass = 'light';
+            $linkClass = 'light-link';
+        } elseif($key == 2) {
+            $cardClass = 'jsf-card-soft-green';
+            $iconClass = 'green';
+        } elseif($key == 3) {
+            $cardClass = 'jsf-card-gradient';
+            $iconClass = 'light';
+            $linkClass = 'light-link';
+        } elseif($key == 5) {
+            $cardClass = 'jsf-card-image-wide';
+            $iconClass = 'light';
+            $linkClass = 'light-link';
+        } elseif($key == 6) {
+            $cardClass = 'jsf-card-soft-blue';
+            $iconClass = 'sky';
+        } elseif($key == 7) {
+            $cardClass = 'jsf-card-cta';
+            $iconClass = 'light';
+            $linkClass = 'light-link';
+        }
+    @endphp
+
+    @if($key == 0)
+      {{-- MAIN IMAGE CARD --}}
+      <div class="jsf-focus-card {{ $cardClass }}">
         <div class="jsf-card-img">
-          <img src="assets/img/focus-education.png" alt="Education Awareness">
+          <img src="{{ $campaign->campaign_image }}" alt="{{ $campaign->title }}">
         </div>
 
         <div class="jsf-main-overlay"></div>
 
         <div class="jsf-main-content">
-          <div class="jsf-card-icon light">
-            <i class="bi bi-book-half"></i>
+          <div class="jsf-card-icon {{ $iconClass }}">
+            <i class="bi bi-megaphone-fill"></i>
           </div>
 
           <div>
-            <span class="jsf-card-count">01</span>
-            <h3>Education Awareness</h3>
+            <span class="jsf-card-count">{{ $number }}</span>
+
+            <h3>{{ $campaign->title }}</h3>
+
             <p>
-              Learning support, student motivation, school outreach and awareness
-              programs for better educational participation.
+              {{ \Illuminate\Support\Str::limit(strip_tags($campaign->short_description), 140) }}
             </p>
           </div>
 
-          <a href="campaign.html" class="jsf-card-link light-link">
-            Explore Program <i class="bi bi-arrow-right"></i>
+          <a href="{{ $buttonLink }}" class="jsf-card-link {{ $linkClass }}">
+            {{ $buttonText }}
+            <i class="bi bi-arrow-right"></i>
           </a>
         </div>
       </div>
 
-      <!-- CARD 02 -->
-      <div class="jsf-focus-card">
-        <div class="jsf-card-icon blue">
-          <i class="bi bi-tools"></i>
-        </div>
-        <span class="jsf-card-count">02</span>
-        <h3>Skill Development</h3>
-        <p>
-          Communication, digital awareness, personality development and
-          job-readiness training for youth.
-        </p>
-        <a href="campaign.html" class="jsf-card-link">
-          Read More <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- CARD 03 -->
-      <div class="jsf-focus-card jsf-card-soft-green">
-        <div class="jsf-card-icon green">
-          <i class="bi bi-award-fill"></i>
-        </div>
-        <span class="jsf-card-count">03</span>
-        <h3>Vocational Training</h3>
-        <p>
-          Short-term practical training programs for livelihood, self-reliance
-          and local employment opportunities.
-        </p>
-        <a href="campaign.html" class="jsf-card-link">
-          Read More <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- CARD 04 -->
-      <div class="jsf-focus-card jsf-card-gradient">
-        <div class="jsf-card-icon light">
-          <i class="bi bi-compass-fill"></i>
-        </div>
-        <span class="jsf-card-count">04</span>
-        <h3>Career Guidance</h3>
-        <p>
-          Career counselling, higher education guidance, course selection support
-          and employment awareness.
-        </p>
-        <a href="campaign.html" class="jsf-card-link light-link">
-          Read More <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- CARD 05 -->
-      <div class="jsf-focus-card">
-        <div class="jsf-card-icon orange">
-          <i class="bi bi-person-arms-up"></i>
-        </div>
-        <span class="jsf-card-count">06</span>
-        <h3>Youth Empowerment</h3>
-        <p>
-          Motivation, leadership, communication, employability and personality
-          development for young people.
-        </p>
-        <a href="campaign.html" class="jsf-card-link">
-          Read More <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- CARD 06 -->
-      <!-- WOMEN IMAGE CARD -->
-      <div class="jsf-focus-card jsf-card-image-wide">
+    @elseif($key == 5)
+      {{-- WIDE IMAGE CARD --}}
+      <div class="jsf-focus-card {{ $cardClass }}">
         <div class="jsf-card-img">
-          <img src="assets/img/focus-women.png" alt="Women Empowerment">
+          <img src="{{ $campaign->campaign_image }}" alt="{{ $campaign->title }}">
         </div>
 
         <div class="jsf-main-overlay green-overlay"></div>
 
         <div class="jsf-main-content compact">
-          <div class="jsf-card-icon light">
-            <i class="bi bi-gender-female"></i>
+          <div class="jsf-card-icon {{ $iconClass }}">
+            <i class="bi bi-megaphone-fill"></i>
           </div>
 
           <div>
-            <span class="jsf-card-count">05</span>
-            <h3>Women Empowerment</h3>
+            <span class="jsf-card-count">{{ $number }}</span>
+
+            <h3>{{ $campaign->title }}</h3>
+
             <p>
-              Awareness, self-reliance, rights education, confidence-building and
-              skill-based support for women.
+              {{ \Illuminate\Support\Str::limit(strip_tags($campaign->short_description), 130) }}
             </p>
           </div>
 
-          <a href="campaign.html" class="jsf-card-link light-link">
-            Explore Program <i class="bi bi-arrow-right"></i>
+          <a href="{{ $buttonLink }}" class="jsf-card-link {{ $linkClass }}">
+            {{ $buttonText }}
+            <i class="bi bi-arrow-right"></i>
           </a>
         </div>
       </div>
 
-      
+    @else
+      {{-- NORMAL CARD --}}
+      <div class="jsf-focus-card {{ $cardClass }}">
+        @if($cardClass == 'jsf-card-cta')
+          <div class="jsf-cta-shine"></div>
+        @endif
 
-      <!-- CARD 07 -->
-      <div class="jsf-focus-card jsf-card-soft-blue">
-        <div class="jsf-card-icon sky">
-          <i class="bi bi-people-fill"></i>
-        </div>
-        <span class="jsf-card-count">07</span>
-        <h3>Community Welfare</h3>
-        <p>
-          Welfare campaigns, public participation drives, community support and
-          local development activities.
-        </p>
-        <a href="campaign.html" class="jsf-card-link">
-          Read More <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- CTA CARD -->
-      <div class="jsf-focus-card jsf-card-cta">
-        <div class="jsf-cta-shine"></div>
-
-        <div class="jsf-card-icon light">
+        <div class="jsf-card-icon {{ $iconClass }}">
           <i class="bi bi-megaphone-fill"></i>
         </div>
 
-        <span class="jsf-card-count">08</span>
-        <h3>Social Awareness</h3>
+        <span class="jsf-card-count">{{ $number }}</span>
+
+        <h3>{{ $campaign->title }}</h3>
+
         <p>
-          Awareness camps, social responsibility campaigns and community
-          participation for a better society.
+          {{ \Illuminate\Support\Str::limit(strip_tags($campaign->short_description), 130) }}
         </p>
 
-        <a href="contact.html" class="jsf-card-link light-link">
-          Join Awareness Drive <i class="bi bi-arrow-right"></i>
+        <a href="{{ $buttonLink }}" class="jsf-card-link {{ $linkClass }}">
+          {{ $buttonText }}
+          <i class="bi bi-arrow-right"></i>
         </a>
       </div>
+    @endif
 
-    </div>
+  @endforeach
+
+</div>
+@else
+<div class="gallery-empty-box">
+    <h3>No Campaign Found</h3>
+    <p>No active campaigns are available right now.</p>
+</div>
+@endif
+
   </div>
 </section>
 <!-- ================= PREMIUM FOCUS AREAS SECTION END ================= -->
@@ -758,12 +670,12 @@
           </div>
 
           <div class="donation-preview-actions">
-            <a href="donate.html" class="btn donation-btn-main">
+            <a href="/donate" class="btn donation-btn-main">
               Donate Now
               <i class="bi bi-arrow-right"></i>
             </a>
 
-            <a href="campaign.html" class="btn donation-btn-soft">
+            <a href="/campaigns" class="btn donation-btn-soft">
               View All Campaigns
             </a>
           </div>
@@ -772,120 +684,138 @@
       </div>
 
       <!-- RIGHT CAMPAIGN CARD -->
-      <div class="col-lg-7">
-        <div class="donation-campaign-card">
+      @if($activeCampaign)
+<div class="col-lg-7">
+    <div class="donation-campaign-card">
 
-          <div class="campaign-image-area">
-            <img src="assets/img/donation-campaign.png" alt="Education Kit Donation Campaign">
+        <div class="campaign-image-area">
+            <img src="{{ $activeCampaign->campaign_image }}"
+                 alt="{{ $activeCampaign->title ?? 'Donation Campaign' }}">
 
             <div class="campaign-status-badge">
-              <span></span>
-              Active Campaign
+                <span></span>
+                {{ $activeCampaign->status_badge ?? 'Active Campaign' }}
             </div>
 
-            <div class="campaign-category-badge">
-              Education & Skill Support
-            </div>
-          </div>
+            @if($activeCampaign->category)
+                <div class="campaign-category-badge">
+                    {{ $activeCampaign->category }}
+                </div>
+            @endif
+        </div>
 
-          <div class="campaign-card-content">
+        <div class="campaign-card-content">
 
             <div class="campaign-card-head">
-              <div>
-                <span class="campaign-small-title">Current Fundraising Campaign</span>
-                <h3>Education Kit & Skill Training Support</h3>
-              </div>
+                <div>
+                    <span class="campaign-small-title">
+                        Current Fundraising Campaign
+                    </span>
 
-              <div class="campaign-percent">
-                <strong>56%</strong>
-                <span>Raised</span>
-              </div>
+                    <h3>{{ $activeCampaign->title }}</h3>
+                </div>
+
+                <div class="campaign-percent">
+                    <strong>{{ $activeCampaign->progress_percentage }}%</strong>
+                    <span>Raised</span>
+                </div>
             </div>
 
             <p>
-              Help children receive learning materials and support youth with practical skill development sessions for better education and livelihood opportunities.
+                {{ \Illuminate\Support\Str::limit(strip_tags($activeCampaign->short_description), 180) }}
             </p>
+
+            @php
+                $goalAmount = $activeCampaign->goal_amount ?? 0;
+                $raisedAmount = $activeCampaign->raised_amount ?? 0;
+                $remainingAmount = max($goalAmount - $raisedAmount, 0);
+            @endphp
 
             <div class="campaign-amount-grid">
 
-              <div class="campaign-amount-box">
-                <span>Target Amount</span>
-                <strong>₹5,00,000</strong>
-              </div>
+                <div class="campaign-amount-box">
+                    <span>Target Amount</span>
+                    <strong>₹{{ number_format($goalAmount, 0) }}</strong>
+                </div>
 
-              <div class="campaign-amount-box">
-                <span>Raised Amount</span>
-                <strong>₹2,80,000</strong>
-              </div>
+                <div class="campaign-amount-box">
+                    <span>Raised Amount</span>
+                    <strong>₹{{ number_format($raisedAmount, 0) }}</strong>
+                </div>
 
-              <div class="campaign-amount-box">
-                <span>Remaining</span>
-                <strong>₹2,20,000</strong>
-              </div>
+                <div class="campaign-amount-box">
+                    <span>Remaining</span>
+                    <strong>₹{{ number_format($remainingAmount, 0) }}</strong>
+                </div>
 
             </div>
 
             <div class="campaign-progress-wrap">
-              <div class="campaign-progress-info">
-                <span>Campaign Progress</span>
-                <strong>₹2.8L raised of ₹5L</strong>
-              </div>
-
-              <div class="campaign-progress">
-                <div class="campaign-progress-bar" style="width: 56%;">
-                  <span></span>
+                <div class="campaign-progress-info">
+                    <span>Campaign Progress</span>
+                    <strong>
+                        ₹{{ number_format($raisedAmount, 0) }} raised of ₹{{ number_format($goalAmount, 0) }}
+                    </strong>
                 </div>
-              </div>
+
+                <div class="campaign-progress">
+                    <div class="campaign-progress-bar"
+                         style="width: {{ $activeCampaign->progress_percentage }}%;">
+                        <span></span>
+                    </div>
+                </div>
             </div>
 
             <div class="campaign-meta-row">
 
-              <div class="campaign-meta-item">
-                <i class="bi bi-people-fill"></i>
-                <div>
-                  <strong>86</strong>
-                  <span>Supporters</span>
+                <div class="campaign-meta-item">
+                    <i class="bi bi-people-fill"></i>
+                    <div>
+                        <strong>{{ $activeCampaign->supporters ?? 0 }}</strong>
+                        <span>Supporters</span>
+                    </div>
                 </div>
-              </div>
 
-              <div class="campaign-meta-item">
-                <i class="bi bi-calendar-check-fill"></i>
-                <div>
-                  <strong>35 Days</strong>
-                  <span>Remaining</span>
+                <div class="campaign-meta-item">
+                    <i class="bi bi-calendar-check-fill"></i>
+                    <div>
+                        <strong>{{ $activeCampaign->days_left ?? 'Active' }}</strong>
+                        <span>Remaining</span>
+                    </div>
                 </div>
-              </div>
 
-              <div class="campaign-meta-item">
-                <i class="bi bi-shield-check"></i>
-                <div>
-                  <strong>Verified</strong>
-                  <span>Manual Tracking</span>
+                <div class="campaign-meta-item">
+                    <i class="bi bi-shield-check"></i>
+                    <div>
+                        <strong>Verified</strong>
+                        <span>Manual Tracking</span>
+                    </div>
                 </div>
-              </div>
 
             </div>
 
             <div class="campaign-card-footer">
-              <div class="campaign-donor-stack">
-                <span>R</span>
-                <span>A</span>
-                <span>P</span>
-                <span>+</span>
-              </div>
+                <div class="campaign-donor-stack">
+                    <span>J</span>
+                    <span>S</span>
+                    <span>F</span>
+                    <span>+</span>
+                </div>
 
-              <p>Recent supporters joined this campaign.</p>
+                <p>Recent supporters joined this campaign.</p>
 
-              <a href="donate.html" class="campaign-card-link">
-                View Details
-                <i class="bi bi-arrow-right"></i>
-              </a>
+                <a href="{{ $activeCampaign->button_one_link ? url($activeCampaign->button_one_link) : url('donate') }}"
+                   class="campaign-card-link">
+                    {{ $activeCampaign->button_one_text ?? 'View Details' }}
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
 
-          </div>
-
         </div>
-      </div>
+
+    </div>
+</div>
+@endif
 
     </div>
 
@@ -918,165 +848,150 @@
       </p>
     </div>
 
-    <div class="events-preview-layout">
+   @if($featuredEvent || $sideEvents->count())
+<div class="events-preview-layout">
 
-      <!-- FEATURED EVENT -->
-      <div class="featured-event-card">
+  @if($featuredEvent)
+    <!-- FEATURED EVENT -->
+    <div class="featured-event-card">
 
-        <div class="featured-event-image">
-          <img src="assets/img/event-featured.png" alt="Career Guidance Seminar">
+      <div class="featured-event-image">
+        <img src="{{ $featuredEvent->event_image }}"
+             alt="{{ $featuredEvent->title ?? 'Featured Event' }}">
 
-          <div class="event-status upcoming">
-            <span></span>
-            Upcoming Event
-          </div>
+        <div class="event-status {{ strtolower($featuredEvent->status_badge ?? 'upcoming') }}">
+          <span></span>
+          {{ $featuredEvent->status_badge ?? 'Upcoming Event' }}
+        </div>
 
+        @if($featuredEvent->start_date)
           <div class="event-date-badge">
-            <strong>15</strong>
-            <span>Jun</span>
+            <strong>{{ $featuredEvent->start_date->format('d') }}</strong>
+            <span>{{ $featuredEvent->start_date->format('M') }}</span>
           </div>
-        </div>
-
-        <div class="featured-event-content">
-
-          <div class="event-category">
-            <i class="bi bi-mortarboard-fill"></i>
-            Career Guidance
-          </div>
-
-          <h3>Career Guidance Seminar for Students & Youth</h3>
-
-          <p>
-            A special awareness and counselling session to help students understand career options, higher education paths, skill opportunities and employment readiness.
-          </p>
-
-          <div class="event-info-grid">
-
-            <div class="event-info-item">
-              <i class="bi bi-clock-fill"></i>
-              <div>
-                <strong>10:00 AM</strong>
-                <span>Event Time</span>
-              </div>
-            </div>
-
-            <div class="event-info-item">
-              <i class="bi bi-geo-alt-fill"></i>
-              <div>
-                <strong>Patna, Bihar</strong>
-                <span>Location</span>
-              </div>
-            </div>
-
-            <div class="event-info-item">
-              <i class="bi bi-people-fill"></i>
-              <div>
-                <strong>Open Entry</strong>
-                <span>Registration</span>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="featured-event-actions">
-            <a href="contact.html" class="btn event-btn-main">
-              Register Interest
-              <i class="bi bi-arrow-right"></i>
-            </a>
-
-            <a href="volunter.html" class="btn event-btn-soft">
-              View Details
-            </a>
-          </div>
-
-        </div>
-
+        @endif
       </div>
 
-      <!-- SIDE EVENTS -->
-      <div class="events-side-list">
+      <div class="featured-event-content">
 
-        <!-- Event 01 -->
-        <div class="side-event-card">
-          <div class="side-event-image">
-            <img src="assets/img/event-women.png" alt="Women Empowerment Session">
+        @if($featuredEvent->category)
+          <div class="event-category">
+            <i class="bi bi-mortarboard-fill"></i>
+            {{ $featuredEvent->category }}
           </div>
+        @endif
 
-          <div class="side-event-content">
-            <div class="side-event-top">
-              <span class="side-event-status ongoing">Ongoing</span>
-              <span class="side-event-date">22 Jun</span>
+        <h3>{{ $featuredEvent->title }}</h3>
+
+        <p>
+          {{ \Illuminate\Support\Str::limit(strip_tags($featuredEvent->short_description), 190) }}
+        </p>
+
+        <div class="event-info-grid">
+
+          <div class="event-info-item">
+            <i class="bi bi-clock-fill"></i>
+            <div>
+              <strong>
+                {{ $featuredEvent->start_time ? \Carbon\Carbon::parse($featuredEvent->start_time)->format('h:i A') : 'Time TBA' }}
+              </strong>
+              <span>Event Time</span>
             </div>
-
-            <h4>Women Empowerment Awareness Session</h4>
-
-            <p>
-              Awareness program focused on confidence, rights education and self-reliance.
-            </p>
-
-            <a href="event.html">
-              View Event
-              <i class="bi bi-arrow-right"></i>
-            </a>
           </div>
+
+          <div class="event-info-item">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div>
+              <strong>{{ $featuredEvent->location ?? 'Location TBA' }}</strong>
+              <span>Location</span>
+            </div>
+          </div>
+
+          <div class="event-info-item">
+            <i class="bi bi-people-fill"></i>
+            <div>
+              <strong>{{ $featuredEvent->info_one_title ?? 'Open Entry' }}</strong>
+              <span>{{ $featuredEvent->info_one_text ?? 'Registration' }}</span>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Event 02 -->
-        <div class="side-event-card">
-          <div class="side-event-image">
-            <img src="assets/img/event-education.png" alt="Education Awareness Camp">
-          </div>
-
-          <div class="side-event-content">
-            <div class="side-event-top">
-              <span class="side-event-status completed">Completed</span>
-              <span class="side-event-date">05 May</span>
-            </div>
-
-            <h4>Education Awareness Camp</h4>
-
-            <p>
-              Community learning support and student motivation camp completed successfully.
-            </p>
-
-            <a href="gallery.html">
-              View Gallery
+        <div class="featured-event-actions">
+          @if($featuredEvent->button_one_text)
+            <a href="{{ $featuredEvent->button_one_link ? url($featuredEvent->button_one_link) : url('contact') }}"
+               class="btn event-btn-main">
+              {{ $featuredEvent->button_one_text }}
               <i class="bi bi-arrow-right"></i>
             </a>
-          </div>
-        </div>
+          @endif
 
-        <!-- Event 03 -->
-        <div class="side-event-card">
-          <div class="side-event-image">
-            <img src="assets/img/event-skill.png" alt="Skill Development Workshop">
-          </div>
-
-          <div class="side-event-content">
-            <div class="side-event-top">
-              <span class="side-event-status upcoming">Upcoming</span>
-              <span class="side-event-date">30 Jun</span>
-            </div>
-
-            <h4>Skill Development Workshop</h4>
-
-            <p>
-              Practical training session for digital awareness, communication and job readiness.
-            </p>
-
-            <a href="contact.html">
-              Register
-              <i class="bi bi-arrow-right"></i>
+          @if($featuredEvent->button_two_text)
+            <a href="{{ $featuredEvent->button_two_link ? url($featuredEvent->button_two_link) : url('event') }}"
+               class="btn event-btn-soft">
+              {{ $featuredEvent->button_two_text }}
             </a>
-          </div>
+          @endif
         </div>
 
       </div>
 
     </div>
+  @endif
+
+  <!-- SIDE EVENTS -->
+  @if($sideEvents->count())
+    <div class="events-side-list">
+
+      @foreach($sideEvents as $event)
+        <div class="side-event-card">
+          <div class="side-event-image">
+            <img src="{{ $event->event_image }}"
+                 alt="{{ $event->title ?? 'Event' }}">
+          </div>
+
+          <div class="side-event-content">
+            <div class="side-event-top">
+              <span class="side-event-status {{ strtolower($event->status_badge ?? 'upcoming') }}">
+                {{ $event->status_badge ?? 'Upcoming' }}
+              </span>
+
+              @if($event->start_date)
+                <span class="side-event-date">
+                  {{ $event->start_date->format('d M') }}
+                </span>
+              @else
+                <span class="side-event-date">TBA</span>
+              @endif
+            </div>
+
+            <h4>{{ $event->title }}</h4>
+
+            <p>
+              {{ \Illuminate\Support\Str::limit(strip_tags($event->short_description), 105) }}
+            </p>
+
+            <a href="{{ $event->button_one_link ? url($event->button_one_link) : url('event') }}">
+              {{ $event->button_one_text ?? 'View Event' }}
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      @endforeach
+
+    </div>
+  @endif
+
+</div>
+@else
+<div class="gallery-empty-box">
+    <h3>No Event Found</h3>
+    <p>No active events are available right now.</p>
+</div>
+@endif
 
     <!-- EVENT CATEGORY PILLS -->
-    <div class="event-category-pills">
+    <!-- <div class="event-category-pills">
 
       <span><i class="bi bi-book-half"></i> Education Camp</span>
       <span><i class="bi bi-tools"></i> Training Workshop</span>
@@ -1085,7 +1000,7 @@
       <span><i class="bi bi-people-fill"></i> Community Welfare</span>
       <span><i class="bi bi-megaphone-fill"></i> Awareness Drive</span>
 
-    </div>
+    </div> -->
 
   </div>
 </section>
@@ -1195,6 +1110,7 @@
 
 
 <!-- ================= FOUNDER MESSAGE SECTION START ================= -->
+@if($featuredLeader)
 <section class="founder-message-section">
   <div class="founder-bg-shape founder-shape-1"></div>
   <div class="founder-bg-shape founder-shape-2"></div>
@@ -1210,14 +1126,20 @@
           <div class="founder-image-area">
 
             <div class="founder-main-image">
-              <img src="assets/img/founder.png" alt="Founder of Janki Social Foundation">
+              <img src="{{ $featuredLeader->leader_image }}"
+                   alt="{{ $featuredLeader->name ?? 'Founder Leader' }}">
             </div>
 
             <div class="founder-image-badge">
               <i class="bi bi-patch-check-fill"></i>
               <div>
-                <strong>Leadership With Purpose</strong>
-                <span>Social impact • Trust • Community welfare</span>
+                <strong>{{ $featuredLeader->role_badge ?? 'Leadership With Purpose' }}</strong>
+
+                @if(!empty($featuredLeader->focus_points))
+                  <span>{{ implode(' • ', array_filter($featuredLeader->focus_points)) }}</span>
+                @else
+                  <span>Social impact • Trust • Community welfare</span>
+                @endif
               </div>
             </div>
 
@@ -1238,70 +1160,55 @@
             </div>
 
             <h2>
-              “Every small effort becomes powerful when it is connected with
-              <span>education, dignity and opportunity.”</span>
+              “{{ $featuredLeader->role_badge ?? 'Every small effort becomes powerful when it is connected with' }}
+              <span>education, dignity and opportunity.</span>”
             </h2>
 
-            <p>
-              Janki Social Foundation has been created with a vision to support communities through education awareness,
-              skill development, vocational training, career guidance, women empowerment, youth empowerment and social welfare.
-            </p>
+            @if($featuredLeader->description)
+              <p>
+                {!! $featuredLeader->description !!}
+              </p>
+            @endif
 
-            <p>
-              Our purpose is to connect people, resources and opportunities with those who need support. Through transparent
-              campaigns, meaningful events, volunteer participation and CSR collaboration, we aim to create long-term positive change.
-            </p>
-
-            <div class="founder-name-grid">
-
-              <div class="founder-name-card">
-                <div class="founder-name-icon">
-                  <i class="bi bi-person-fill-check"></i>
-                </div>
-                <div>
-                  <h4>Mr. Pankaj Kumar</h4>
-                  <span>Founder</span>
-                </div>
+            @if(!empty($featuredLeader->focus_points))
+              <div class="founder-highlight-row">
+                @foreach($featuredLeader->focus_points as $point)
+                  @if($point)
+                    <div class="founder-highlight-item">
+                      <strong>{{ $loop->iteration < 10 ? '0'.$loop->iteration : $loop->iteration }}</strong>
+                      <span>{{ $point }}</span>
+                    </div>
+                  @endif
+                @endforeach
               </div>
+            @endif
 
-              <div class="founder-name-card">
-                <div class="founder-name-icon green">
-                  <i class="bi bi-person-heart"></i>
-                </div>
-                <div>
-                  <h4>Ms. Payal Kumari</h4>
-                  <span>Co-Founder</span>
-                </div>
+            @if($founderLeaders->count())
+              <div class="founder-name-grid">
+
+                @foreach($founderLeaders as $leader)
+                  <div class="founder-name-card">
+                    <div class="founder-name-icon {{ $loop->iteration % 2 == 0 ? 'green' : '' }}">
+                      <i class="bi {{ $loop->iteration % 2 == 0 ? 'bi-person-heart' : 'bi-person-fill-check' }}"></i>
+                    </div>
+
+                    <div>
+                      <h4>{{ $leader->name }}</h4>
+                      <span>{{ $leader->role_badge ?? 'Founder Leader' }}</span>
+                    </div>
+                  </div>
+                @endforeach
+
               </div>
-
-            </div>
-
-            <div class="founder-highlight-row">
-
-              <div class="founder-highlight-item">
-                <strong>Mission</strong>
-                <span>Education & skill support</span>
-              </div>
-
-              <div class="founder-highlight-item">
-                <strong>Vision</strong>
-                <span>Empowered society</span>
-              </div>
-
-              <div class="founder-highlight-item">
-                <strong>Values</strong>
-                <span>Trust & transparency</span>
-              </div>
-
-            </div>
+            @endif
 
             <div class="founder-actions">
-              <a href="about.html" class="btn founder-btn-main">
+              <a href="{{ url('about') }}" class="btn founder-btn-main">
                 Read Full Story
                 <i class="bi bi-arrow-right"></i>
               </a>
 
-              <a href="contact.html" class="btn founder-btn-soft">
+              <a href="{{ url('contact') }}" class="btn founder-btn-soft">
                 <i class="bi bi-person-plus-fill"></i>
                 Join Our Mission
               </a>
@@ -1316,6 +1223,7 @@
 
   </div>
 </section>
+@endif
 <!-- ================= FOUNDER MESSAGE SECTION END ================= -->
 
 
@@ -1346,197 +1254,139 @@
       </p>
     </div>
 
+    @if($eventGalleries->count())
+
     <!-- FILTER PILLS -->
     <div class="gallery-filter-pills">
-      <button class="active" type="button">All</button>
-      <button type="button">Education</button>
-      <button type="button">Skill</button>
-      <button type="button">Women</button>
-      <button type="button">Youth</button>
-      <button type="button">CSR</button>
-      <button type="button">Welfare</button>
+        <button class="active" type="button" data-filter="all">All</button>
+
+        @foreach($galleryCategories as $category)
+            <button type="button" data-filter="{{ \Illuminate\Support\Str::slug($category) }}">
+                {{ $category }}
+            </button>
+        @endforeach
     </div>
 
     <!-- GALLERY GRID -->
     <div class="gallery-preview-grid">
 
-      <!-- Large Item -->
-      <div class="gallery-preview-item gallery-large">
-        <img src="assets/img/gallery-1.png" alt="Education awareness event">
+        @php
+            $imageCounter = 0;
+        @endphp
 
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-book-half"></i>
-            Education Awareness
-          </div>
+        @foreach($eventGalleries as $gallery)
 
-          <div class="gallery-content">
-            <span>Featured Program</span>
-            <h3>Learning Support & Awareness Camp</h3>
-            <p>Community education activity for students and families.</p>
-          </div>
+            @php
+                $event = $gallery->event;
+                $images = $gallery->getMedia('gallery_images');
+                $categorySlug = \Illuminate\Support\Str::slug($event?->category ?? 'gallery');
+            @endphp
 
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
+            @foreach($images as $image)
 
-      <!-- Item -->
-      <div class="gallery-preview-item">
-        <img src="assets/img/gallery-2.png" alt="Skill development workshop">
+                @php
+                    $imageCounter++;
 
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-tools"></i>
-            Skill Workshop
-          </div>
+                    $itemClass = '';
 
-          <div class="gallery-content">
-            <span>Training</span>
-            <h3>Skill Development Workshop</h3>
-            <p>Training session for youth development.</p>
-          </div>
+                    if($imageCounter == 1) {
+                        $itemClass = 'gallery-large';
+                    } elseif($imageCounter == 4) {
+                        $itemClass = 'gallery-wide';
+                    } elseif($imageCounter == 7) {
+                        $itemClass = '';
+                    }
+                @endphp
 
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
+                <div class="gallery-preview-item {{ $itemClass }}"
+                     data-category="{{ $categorySlug }}">
 
-      <!-- Item -->
-      <div class="gallery-preview-item">
-        <img src="assets/img/gallery-3.png" alt="Women empowerment session">
+                    <img src="{{ $image->getUrl() }}"
+                         alt="{{ $event?->title ?? 'Event Gallery Image' }}">
 
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-gender-female"></i>
-            Women Empowerment
-          </div>
+                    <div class="gallery-overlay">
 
-          <div class="gallery-content">
-            <span>Awareness</span>
-            <h3>Women Awareness Program</h3>
-            <p>Awareness and confidence-building activity.</p>
-          </div>
+                        <div class="gallery-tag">
+                            <i class="bi bi-images"></i>
+                            {{ $event?->category ?? $event?->event_type ?? 'Event Gallery' }}
+                        </div>
 
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
+                        <div class="gallery-content">
+                            <span>{{ $event?->status_badge ?? 'Gallery' }}</span>
 
-      <!-- Wide Item -->
-      <div class="gallery-preview-item gallery-wide">
-        <img src="assets/img/gallery-4.png" alt="Youth empowerment event">
+                            <h3>
+                                {{ $event?->title ?? 'Event Gallery' }}
+                            </h3>
 
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-person-arms-up"></i>
-            Youth Program
-          </div>
+                            <p>
+                                {{ \Illuminate\Support\Str::limit(strip_tags($event?->short_description), 85) }}
+                            </p>
+                        </div>
 
-          <div class="gallery-content">
-            <span>Guidance</span>
-            <h3>Youth Motivation Session</h3>
-            <p>Leadership and career guidance program.</p>
-          </div>
+                        <a href="{{ url('gallery') }}" class="gallery-view-btn">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
 
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
+                    </div>
+                </div>
 
-      <!-- Item -->
-      <div class="gallery-preview-item">
-        <img src="assets/img/gallery-5.png" alt="Community welfare program">
+                @if($imageCounter >= 8)
+                    @break
+                @endif
 
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-people-fill"></i>
-            Community Welfare
-          </div>
+            @endforeach
 
-          <div class="gallery-content">
-            <span>Support</span>
-            <h3>Community Welfare Activity</h3>
-            <p>Public participation and social support program.</p>
-          </div>
+            @if($imageCounter >= 8)
+                @break
+            @endif
 
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Item -->
-      <div class="gallery-preview-item">
-        <img src="assets/img/gallery-6.png" alt="CSR collaboration event">
-
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-building-check"></i>
-            CSR Activity
-          </div>
-
-          <div class="gallery-content">
-            <span>Partnership</span>
-            <h3>CSR Collaboration Drive</h3>
-            <p>Partner-supported social initiative.</p>
-          </div>
-
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- New Image 01 -->
-      <div class="gallery-preview-item gallery-tall">
-        <img src="assets/img/gallery-7.png" alt="Volunteer support activity">
-
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-heart-fill"></i>
-            Volunteer Support
-          </div>
-
-          <div class="gallery-content">
-            <span>Volunteers</span>
-            <h3>Volunteer Participation</h3>
-            <p>Young volunteers supporting community welfare activities.</p>
-          </div>
-
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- New Image 02 -->
-      <div class="gallery-preview-item">
-        <img src="assets/img/gallery-8.png" alt="Donation campaign activity">
-
-        <div class="gallery-overlay">
-          <div class="gallery-tag">
-            <i class="bi bi-gift-fill"></i>
-            Donation Drive
-          </div>
-
-          <div class="gallery-content">
-            <span>Campaign</span>
-            <h3>Donation Campaign</h3>
-            <p>Social support campaign for needy communities.</p>
-          </div>
-
-          <a href="gallery.html" class="gallery-view-btn">
-            <i class="bi bi-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
+        @endforeach
 
     </div>
+
+@else
+
+    <div class="gallery-empty-box">
+        <h3>No Gallery Found</h3>
+        <p>No active event gallery images are available right now.</p>
+    </div>
+
+@endif
+@section('scripts')
+@parent
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterButtons = document.querySelectorAll('.gallery-filter-pills button');
+    const galleryItems = document.querySelectorAll('.gallery-preview-item');
+
+    if (!filterButtons.length || !galleryItems.length) {
+        return;
+    }
+
+    filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const filter = button.getAttribute('data-filter');
+
+            filterButtons.forEach(function (btn) {
+                btn.classList.remove('active');
+            });
+
+            button.classList.add('active');
+
+            galleryItems.forEach(function (item) {
+                const category = item.getAttribute('data-category');
+
+                if (filter === 'all' || category === filter) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+@endsection
 
     <!-- BOTTOM CTA -->
     <div class="gallery-bottom-cta">
@@ -1549,7 +1399,7 @@
         <p>View event-wise photo albums, videos and activity highlights.</p>
       </div>
 
-      <a href="gallery.html" class="btn gallery-btn-main">
+      <a href="/gallery" class="btn gallery-btn-main">
         View Full Gallery
         <i class="bi bi-arrow-right"></i>
       </a>
@@ -1602,7 +1452,7 @@
           Support our events, awareness drives, education activities, skill programs and community welfare initiatives.
         </p>
 
-        <a href="volunter.html" class="action-cta-link">
+        <a href="/volunteer" class="action-cta-link">
           Become Volunteer
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -1622,7 +1472,7 @@
           Contribute to active donation campaigns and help us support education, training and welfare activities.
         </p>
 
-        <a href="donate.html" class="action-cta-link">
+        <a href="/donate" class="action-cta-link">
           Donate Now
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -1642,7 +1492,7 @@
           Collaborate for CSR projects in education, skill training, women empowerment and social awareness.
         </p>
 
-        <a href="csr.html" class="action-cta-link">
+        <a href="/csr" class="action-cta-link">
           Start CSR Talk
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -1662,7 +1512,7 @@
           Join as training partner, event partner, donor partner, institutional partner or knowledge partner.
         </p>
 
-        <a href="donate.html" class="action-cta-link">
+        <a href="/contact" class="action-cta-link">
           Partner Now
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -1675,77 +1525,4 @@
 <!-- ================= ACTION CTA SECTION END ================= -->
 
 
-
-<!-- ================= FOOTER START ================= -->
-<footer class="footer">
-  <div class="container">
-    <div class="row g-4">
-
-      <div class="col-lg-4">
-        <div class="footer-brand">
-          <img src="assets/img/JankiNGOLogo.png" alt="">
-        </div>
-        <p>
-          Working for education, skill development, vocational training, career guidance, women empowerment, youth empowerment and community welfare.
-        </p>
-      </div>
-
-      <div class="col-lg-2 col-md-4">
-        <h5>Quick Links</h5>
-        <a href="#">About</a>
-        <a href="#">Initiatives</a>
-        <a href="#">Events</a>
-        <a href="#">Gallery</a>
-      </div>
-
-      <div class="col-lg-3 col-md-4">
-        <h5>Get Involved</h5>
-        <a href="#">Donate</a>
-        <a href="#">Volunteer</a>
-        <a href="#">CSR</a>
-        <a href="#">Partner With Us</a>
-      </div>
-
-      <div class="col-lg-3 col-md-4">
-        <h5>Contact</h5>
-        <p><i class="bi bi-telephone-fill"></i> +91 7979026927</p>
-        <p><i class="bi bi-geo-alt-fill"></i> 302 Chandan Deep Apartment, Bailey Road, Rajabazar, Patna</p>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 Janki Social Foundation. All Rights Reserved.</p>
-      <p>Designed with care for social impact.</p>
-    </div>
-  </div>
-</footer>
-<!-- ================= FOOTER END ================= -->
-
-
-<!-- Floating Buttons -->
-<div class="floating-actions">
-  <a href="tel:7979026927" class="call"><i class="bi bi-telephone-fill"></i></a>
-  <a href="https://wa.me/917979026927" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-</div>
-
-<!-- Mobile Bottom Nav -->
-<div class="mobile-bottom-nav">
-  <a href="index.html" class="active"><i class="bi bi-house-fill"></i><span>Home</span></a>
-  <a href="donate.html"><i class="bi bi-heart-fill"></i><span>Donate</span></a>
-  <a href="event.html"><i class="bi bi-calendar-event"></i><span>Events</span></a>
-  <a href="volunter.html"><i class="bi bi-person-heart"></i><span>Volunteer</span></a>
-  <a href="tel:7979026927"><i class="bi bi-telephone-fill"></i><span>Call</span></a>
-</div>
-
-
-<!-- Scripts -->
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="assets/js/main.js"></script>
-
-</body>
-</html>
+@endsection

@@ -67,12 +67,12 @@
                     </div>
 
                     <div class="csr-intro-actions">
-                        <a href="donate.html" class="csr-intro-btn-main">
+                        <a href="{{ route('frontend.donate') }}" class="csr-intro-btn-main">
                             Partner With Us
                             <i class="bi bi-arrow-right"></i>
                         </a>
 
-                        <a href="csr.html" class="csr-intro-btn-soft">
+                        <a href="{{ route('frontend.csr.index') }}" class="csr-intro-btn-soft">
                             View CSR Programs
                         </a>
                     </div>
@@ -181,7 +181,7 @@
                         <li><i class="bi bi-check2-circle"></i> Career guidance programs</li>
                     </ul>
 
-                    <a href="csr.html">
+                    <a href="{{ route('frontend.csr.index') }}">
                         Explore Area
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -207,7 +207,7 @@
                         <li><i class="bi bi-check2-circle"></i> Employment readiness</li>
                     </ul>
 
-                    <a href="csr.html">
+                    <a href="{{ route('frontend.csr.index') }}">
                         Explore Area
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -233,7 +233,7 @@
                         <li><i class="bi bi-check2-circle"></i> Community participation</li>
                     </ul>
 
-                    <a href="csr.html">
+                    <a href="{{ route('frontend.csr.index') }}">
                         Explore Area
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -259,7 +259,7 @@
                         <li><i class="bi bi-check2-circle"></i> Motivation programs</li>
                     </ul>
 
-                    <a href="csr.html">
+                    <a href="{{ route('frontend.csr.index') }}">
                         Explore Area
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -285,7 +285,7 @@
                         <li><i class="bi bi-check2-circle"></i> Social support activities</li>
                     </ul>
 
-                    <a href="csr.html">
+                    <a href="{{ route('frontend.csr.index') }}">
                         Explore Area
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -317,7 +317,7 @@
                         </div>
                     </div>
 
-                    <a href="csr.html" class="csr-highlight-btn">
+                    <a href="{{ route('frontend.csr.index') }}" class="csr-highlight-btn">
                         Become CSR Partner
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -395,15 +395,15 @@
                     </div>
 
                     <div class="csr-contact-strip">
-                        <a href="tel:7979026927">
+                        <a href="tel:{{ $websiteSetting->tel_link }}">
                             <i class="bi bi-telephone-fill"></i>
                             <div>
                                 <span>Call Us</span>
-                                <strong>7979026927</strong>
+                                <strong>{{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</strong>
                             </div>
                         </a>
 
-                        <a href="https://wa.me/917979026927">
+                        <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}">
                             <i class="bi bi-whatsapp"></i>
                             <div>
                                 <span>WhatsApp</span>
@@ -671,12 +671,12 @@
                     </div>
 
                     <div class="csr-collab-actions">
-                        <a href="volunter.html" class="csr-collab-btn-main">
+                        <a href="/volunteer" class="csr-collab-btn-main">
                             Start Collaboration
                             <i class="bi bi-arrow-right"></i>
                         </a>
 
-                        <a href="tel:7979026927" class="csr-collab-btn-soft">
+                        <a href="tel:{{ $websiteSetting->tel_link }}" class="csr-collab-btn-soft">
                             <i class="bi bi-telephone-fill"></i>
                             Call Now
                         </a>
@@ -802,12 +802,12 @@
                 </div>
 
                 <div class="csr-logo-bottom-actions">
-                    <a href="donate.html" class="csr-logo-btn-main">
+                    <a href="/donate" class="csr-logo-btn-main">
                         Submit Partner Details
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
-                    <a href="csr.html" class="csr-logo-btn-soft">
+                    <a href="/csr" class="csr-logo-btn-soft">
                         View CSR Form
                     </a>
                 </div>

@@ -778,12 +778,12 @@
 </form>
 
         <div class="registration-contact-strip">
-          <a href="tel:7979026927">
+          <a href="tel:{{ $websiteSetting->tel_link }}">
             <i class="bi bi-telephone-fill"></i>
             Call Now
           </a>
 
-          <a href="https://wa.me/917979026927">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}">
             <i class="bi bi-whatsapp"></i>
             WhatsApp
           </a>

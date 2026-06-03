@@ -400,12 +400,12 @@
         </div>
 
         <div class="video-support-actions">
-          <a href="gallery.html" class="video-support-btn-main">
+          <a href="{{ route('frontend.gallery.index') }}" class="video-support-btn-main">
             View Video Gallery
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="gallery.html" class="video-support-btn-soft">
+          <a href="{{ route('frontend.gallery.index') }}" class="video-support-btn-soft">
             Add Video
           </a>
         </div>

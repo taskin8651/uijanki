@@ -1,10 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\CampaignsController;
+use App\Http\Controllers\Admin\ContactEnquiriesController;
+use App\Http\Controllers\Admin\CsrEnquiriesController;
 use App\Http\Controllers\Admin\CsrPartnersController;
 use App\Http\Controllers\Admin\EventGalleriesController;
+use App\Http\Controllers\Admin\HeroSlidersController;
+use App\Http\Controllers\Admin\MessageEnquiriesController;
+use App\Http\Controllers\Admin\PartnerEnquiriesController;
+use App\Http\Controllers\Admin\RegistrationEnquiriesController;
+use App\Http\Controllers\Admin\VolunteerRegistrationsController;
 
-Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -103,6 +109,14 @@ Route::resource('message-enquiries', MessageEnquiriesController::class)->only(['
 Route::delete('partner-enquiries/destroy', [PartnerEnquiriesController::class, 'massDestroy'])->name('partner-enquiries.massDestroy');
 Route::resource('partner-enquiries', PartnerEnquiriesController::class)->only(['index', 'show', 'destroy']);
 
+
+Route::delete('hero-sliders/destroy', [HeroSlidersController::class, 'massDestroy'])
+    ->name('hero-sliders.massDestroy');
+
+Route::delete('hero-sliders/{heroSlider}/remove-image', [HeroSlidersController::class, 'removeImage'])
+    ->name('hero-sliders.removeImage');
+
+Route::resource('hero-sliders', HeroSlidersController::class);
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -116,6 +130,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 
 
 // frontend routes
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('frontend.home');
 Route::get('/about', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about');
 
 Route::view('donate', 'frontend.donate')->name('frontend.donate');

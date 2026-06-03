@@ -32,9 +32,9 @@ class AboutPageController extends Controller
                 'point_three_text' => 'Public participation, social awareness and welfare campaigns.',
 
                 'button_one_text' => 'Know More About Us',
-                'button_one_link' => 'about.html',
+                'button_one_link' => 'about',
                 'button_two_text' => 'Join As Volunteer',
-                'button_two_link' => 'volunter.html',
+                'button_two_link' => 'volunter',
 
                 'mission_title' => 'Our Mission',
                 'mission_description' => 'To support communities through education awareness, skill development, vocational training, career guidance, women empowerment, youth empowerment and community welfare programs.',

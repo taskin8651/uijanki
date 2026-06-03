@@ -66,15 +66,15 @@
         </div>
 
         <div class="volunteer-contact-strip">
-          <a href="tel:7979026927">
+          <a href="tel:{{ $websiteSetting->tel_link }}">
             <i class="bi bi-telephone-fill"></i>
             <div>
               <span>Call For Help</span>
-              <strong>7979026927</strong>
+              <strong>{{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</strong>
             </div>
           </a>
 
-          <a href="https://wa.me/917979026927" target="_blank">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank">
             <i class="bi bi-whatsapp"></i>
             <div>
               <span>WhatsApp</span>
@@ -315,7 +315,7 @@
         <span>You can select one or multiple interest areas as per your skills and availability.</span>
       </div>
 
-      <a href="contact.html" class="interest-area-btn">
+      <a href="{{ route('frontend.contact') }}" class="interest-area-btn">
         Continue Registration
         <i class="bi bi-arrow-right"></i>
       </a>
@@ -452,7 +452,7 @@
         </div>
       </div>
 
-      <a href="contact.html" class="availability-btn">
+      <a href="{{ route('frontend.contact') }}" class="availability-btn">
         Continue Registration
         <i class="bi bi-arrow-right"></i>
       </a>

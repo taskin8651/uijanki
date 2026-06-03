@@ -113,11 +113,13 @@
             auth()->user()->can('about_page_access') ||
             auth()->user()->can('website_service_access') ||
             auth()->user()->can('founder_leader_access')
+            || auth()->user()->can('hero_slider_access')
         )
             @php
                 $cmsActive = request()->is('admin/about-page*')
                     || request()->is('admin/founder-leaders*')
-                    || request()->is('admin/website-services*');
+                    || request()->is('admin/website-services*')
+                    || request()->is('admin/hero-sliders*');
             @endphp
 
             <div x-data="{ open: {{ $cmsActive ? 'true' : 'false' }} }">
@@ -145,6 +147,14 @@
                      x-transition:leave-start="opacity-100 translate-y-0"
                      x-transition:leave-end="opacity-0 -translate-y-1">
 
+                     @can('hero_slider_access')
+    <a href="{{ route('admin.hero-sliders.index') }}"
+       class="sub-link {{ request()->is('admin/hero-sliders*') ? 'active' : '' }}">
+        <i class="fas fa-images"></i>
+        Hero Sliders
+    </a>
+@endcan
+
                     @can('about_page_access')
                         <a href="{{ route('admin.about-page.index') }}"
                            class="sub-link {{ request()->is('admin/about-page*') ? 'active' : '' }}">
@@ -168,6 +178,8 @@
                             Website Services
                         </a>
                     @endcan
+
+                    
 
                 </div>
             </div>

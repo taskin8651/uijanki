@@ -36,7 +36,7 @@
             <!-- RIGHT CONTENT -->
             <div class="ngo-background-content">
                 <div class="section-badge">
-                    <span><i class="bi bi-building-heart"></i></span>
+                    <span><i class="bi bi-stars"></i></span>
                     {{ $aboutPage->section_badge ?? 'NGO Background' }}
                 </div>
 
@@ -508,7 +508,7 @@
           </p>
         </div>
 
-        <a href="contact.html" class="btn founder-message-btn">
+        <a href="/contact" class="btn founder-message-btn">
           Read Founder Message
           <i class="bi bi-arrow-right"></i>
         </a>

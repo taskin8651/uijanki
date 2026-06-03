@@ -67,12 +67,12 @@
         </div>
 
         <div class="training-partner-actions">
-          <a href="donate.html" class="training-btn-main">
+          <a href="{{ route('frontend.donate') }}" class="training-btn-main">
             Become Training Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="tel:7979026927" class="training-btn-soft">
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="training-btn-soft">
             <i class="bi bi-telephone-fill"></i>
             Call Now
           </a>
@@ -223,12 +223,12 @@
         </div>
 
         <div class="csr-partner-actions">
-          <a href="csr.html" class="csr-partner-btn-main">
+          <a href="{{ route('frontend.csr.index') }}" class="csr-partner-btn-main">
             Become CSR Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="tel:7979026927" class="csr-partner-btn-soft">
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="csr-partner-btn-soft">
             <i class="bi bi-telephone-fill"></i>
             Call Now
           </a>
@@ -417,12 +417,12 @@
         </div>
 
         <div class="institutional-actions">
-          <a href="donate.html" class="institutional-btn-main">
+          <a href="{{ route('frontend.donate') }}" class="institutional-btn-main">
             Become Institutional Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="tel:7979026927" class="institutional-btn-soft">
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="institutional-btn-soft">
             <i class="bi bi-telephone-fill"></i>
             Call Now
           </a>
@@ -537,12 +537,12 @@
         </div>
 
         <div class="volunteer-partner-actions">
-          <a href="donate.html" class="volunteer-partner-btn-main">
+          <a href="{{ route('frontend.donate') }}" class="volunteer-partner-btn-main">
             Become Volunteer Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="https://wa.me/917979026927" target="_blank" class="volunteer-partner-btn-soft">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank" class="volunteer-partner-btn-soft">
             <i class="bi bi-whatsapp"></i>
             WhatsApp Now
           </a>
@@ -777,12 +777,12 @@
         </div>
 
         <div class="event-partner-actions">
-          <a href="donate.html" class="event-partner-btn-main">
+          <a href="{{ route('frontend.donate') }}" class="event-partner-btn-main">
             Become Event Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="tel:7979026927" class="event-partner-btn-soft">
+          <a href="tel:{{ $websiteSetting->tel_link }}" class="event-partner-btn-soft">
             <i class="bi bi-telephone-fill"></i>
             Call Now
           </a>
@@ -902,7 +902,7 @@
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="https://wa.me/917979026927" target="_blank" class="donor-btn-soft">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank" class="donor-btn-soft">
             <i class="bi bi-whatsapp"></i>
             WhatsApp Now
           </a>
@@ -967,7 +967,7 @@
 
         </div>
 
-        <a href="donate.html" class="donor-card-btn">
+        <a href="{{ route('frontend.donate') }}" class="donor-card-btn">
           Donate / Support Now
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -1141,12 +1141,12 @@
         </div>
 
         <div class="mrk-partner-actions">
-          <a href="donate.html" class="mrk-partner-btn-main">
+          <a href="{{ route('frontend.donate') }}" class="mrk-partner-btn-main">
             Become Partner
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="https://wa.me/917979026927" target="_blank" class="mrk-partner-btn-soft">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank" class="mrk-partner-btn-soft">
             <i class="bi bi-whatsapp"></i>
             WhatsApp Now
           </a>
@@ -1261,12 +1261,12 @@
         </div>
 
         <div class="partner-enquiry-contact">
-          <a href="tel:7979026927">
+          <a href="tel:{{ $websiteSetting->tel_link }}">
             <i class="bi bi-telephone-fill"></i>
-            7979026927
+            {{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}
           </a>
 
-          <a href="https://wa.me/917979026927" target="_blank">
+          <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}" target="_blank">
             <i class="bi bi-whatsapp"></i>
             WhatsApp Support
           </a>

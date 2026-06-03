@@ -57,7 +57,7 @@
           <span class="topbar-icon">
             <i class="bi bi-telephone-fill"></i>
           </span>
-          <span>{{ $websiteSetting->phone_display ?: '+91 7979026927' }}</span>
+          <span>{{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</span>
         </a>
 
         <div class="topbar-info">
@@ -166,7 +166,7 @@
 
       <div class="col-lg-3 col-md-4">
         <h5>Contact</h5>
-        <p><i class="bi bi-telephone-fill"></i> {{ $websiteSetting->phone_display ?: '+91 7979026927' }}</p>
+        <p><i class="bi bi-telephone-fill"></i> {{ $websiteSetting->phone_display ?: $websiteSetting->phone_number }}</p>
         <p><i class="bi bi-geo-alt-fill"></i> {{ $websiteSetting->full_address ?: '302 Chandan Deep Apartment, Bailey Road, Rajabazar, Patna' }}</p>
       </div>
 

@@ -200,7 +200,7 @@
         </p>
       </div>
 
-      <a href="volunter.html" class="campaign-cta-btn">
+      <a href="/volunteer" class="campaign-cta-btn">
         Become a Supporter
         <i class="bi bi-arrow-right"></i>
       </a>
@@ -423,7 +423,7 @@
             <a href="#">₹5000</a>
           </div>
 
-          <a href="donate.html" class="sidebar-donate-btn">
+          <a href="/donate" class="sidebar-donate-btn">
             Donate Securely
             <i class="bi bi-heart-fill"></i>
           </a>
@@ -442,12 +442,12 @@
           </p>
 
           <div class="organizer-contact">
-            <a href="tel:7979026927">
+            <a href="tel:{{ $websiteSetting->tel_link }}">
               <i class="bi bi-telephone-fill"></i>
               Call Now
             </a>
 
-            <a href="https://wa.me/917979026927">
+            <a href="https://wa.me/{{ $websiteSetting->whatsapp_link }}">
               <i class="bi bi-whatsapp"></i>
               WhatsApp
             </a>
@@ -600,12 +600,12 @@
         </div>
 
         <div class="target-action-row">
-          <a href="contact.html" class="target-btn-main">
+          <a href="/contact" class="target-btn-main">
             Donate Now
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="contact.html" class="target-btn-soft">
+          <a href="/contact" class="target-btn-soft">
             <i class="bi bi-share-fill"></i>
             Share
           </a>
@@ -755,12 +755,12 @@
         </div>
 
         <div class="raised-action-row">
-          <a href="contact.html" class="raised-btn-main">
+          <a href="/contact" class="raised-btn-main">
             Donate Now
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="campaign.html" class="raised-btn-soft">
+          <a href="/campaign" class="raised-btn-soft">
             View Campaign
           </a>
         </div>
@@ -905,12 +905,12 @@
         </div>
 
         <div class="remaining-action-row">
-          <a href="contact.html" class="remaining-btn-main">
+          <a href="/contact" class="remaining-btn-main">
             Help Complete Goal
             <i class="bi bi-arrow-right"></i>
           </a>
 
-          <a href="contact.html" class="remaining-btn-soft">
+          <a href="/contact" class="remaining-btn-soft">
             <i class="bi bi-share-fill"></i>
             Share
           </a>
