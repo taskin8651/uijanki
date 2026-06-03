@@ -427,91 +427,102 @@
                             <i class="bi bi-send-fill"></i>
                         </div>
                     </div>
+@if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-                    <form class="csr-enquiry-form" action="#" method="post">
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+                    <form class="csr-enquiry-form" action="{{ route('frontend.csr-enquiry.store') }}" method="post">
+    @csrf
 
-                        <div class="csr-form-group">
-                            <label for="company_name">Company / Organization Name <span>*</span></label>
-                            <input type="text" id="company_name" name="company_name" placeholder="Enter company name"
-                                required>
-                        </div>
+    <div class="csr-form-group">
+        <label for="company_name">Company / Organization Name <span>*</span></label>
+        <input type="text" id="company_name" name="company_name" value="{{ old('company_name') }}" placeholder="Enter company name" required>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="contact_person">Contact Person Name <span>*</span></label>
-                            <input type="text" id="contact_person" name="contact_person"
-                                placeholder="Enter contact person name" required>
-                        </div>
+    <div class="csr-form-group">
+        <label for="contact_person">Contact Person Name <span>*</span></label>
+        <input type="text" id="contact_person" name="contact_person" value="{{ old('contact_person') }}" placeholder="Enter contact person name" required>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_email">Email Address <span>*</span></label>
-                            <input type="email" id="csr_email" name="email" placeholder="Enter email address" required>
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_email">Email Address <span>*</span></label>
+        <input type="email" id="csr_email" name="email" value="{{ old('email') }}" placeholder="Enter email address" required>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_phone">Mobile Number <span>*</span></label>
-                            <input type="tel" id="csr_phone" name="phone" placeholder="Enter mobile number" required>
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_phone">Mobile Number <span>*</span></label>
+        <input type="tel" id="csr_phone" name="phone" value="{{ old('phone') }}" placeholder="Enter mobile number" required>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_city">City / Location</label>
-                            <input type="text" id="csr_city" name="city" placeholder="Enter city or location">
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_city">City / Location</label>
+        <input type="text" id="csr_city" name="city" value="{{ old('city') }}" placeholder="Enter city or location">
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_budget">CSR Budget Range</label>
-                            <select id="csr_budget" name="budget_range">
-                                <option value="">Select budget range</option>
-                                <option value="below_50000">Below ₹50,000</option>
-                                <option value="50000_100000">₹50,000 - ₹1,00,000</option>
-                                <option value="100000_500000">₹1,00,000 - ₹5,00,000</option>
-                                <option value="above_500000">Above ₹5,00,000</option>
-                            </select>
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_budget">CSR Budget Range</label>
+        <select id="csr_budget" name="budget_range">
+            <option value="">Select budget range</option>
+            <option value="below_50000" {{ old('budget_range') == 'below_50000' ? 'selected' : '' }}>Below ₹50,000</option>
+            <option value="50000_100000" {{ old('budget_range') == '50000_100000' ? 'selected' : '' }}>₹50,000 - ₹1,00,000</option>
+            <option value="100000_500000" {{ old('budget_range') == '100000_500000' ? 'selected' : '' }}>₹1,00,000 - ₹5,00,000</option>
+            <option value="above_500000" {{ old('budget_range') == 'above_500000' ? 'selected' : '' }}>Above ₹5,00,000</option>
+        </select>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_focus">CSR Focus Area <span>*</span></label>
-                            <select id="csr_focus" name="focus_area" required>
-                                <option value="">Select focus area</option>
-                                <option value="education_awareness">Education Awareness</option>
-                                <option value="skill_development">Skill Development</option>
-                                <option value="women_empowerment">Women Empowerment</option>
-                                <option value="youth_empowerment">Youth Empowerment</option>
-                                <option value="community_welfare">Community Welfare</option>
-                                <option value="custom_csr">Custom CSR Partnership</option>
-                            </select>
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_focus">CSR Focus Area <span>*</span></label>
+        <select id="csr_focus" name="focus_area" required>
+            <option value="">Select focus area</option>
+            <option value="education_awareness" {{ old('focus_area') == 'education_awareness' ? 'selected' : '' }}>Education Awareness</option>
+            <option value="skill_development" {{ old('focus_area') == 'skill_development' ? 'selected' : '' }}>Skill Development</option>
+            <option value="women_empowerment" {{ old('focus_area') == 'women_empowerment' ? 'selected' : '' }}>Women Empowerment</option>
+            <option value="youth_empowerment" {{ old('focus_area') == 'youth_empowerment' ? 'selected' : '' }}>Youth Empowerment</option>
+            <option value="community_welfare" {{ old('focus_area') == 'community_welfare' ? 'selected' : '' }}>Community Welfare</option>
+            <option value="custom_csr" {{ old('focus_area') == 'custom_csr' ? 'selected' : '' }}>Custom CSR Partnership</option>
+        </select>
+    </div>
 
-                        <div class="csr-form-group">
-                            <label for="csr_type">Partnership Type</label>
-                            <select id="csr_type" name="partnership_type">
-                                <option value="">Select partnership type</option>
-                                <option value="event_sponsorship">Event Sponsorship</option>
-                                <option value="campaign_support">Campaign Support</option>
-                                <option value="training_program">Training Program</option>
-                                <option value="donation_support">Donation Support</option>
-                                <option value="long_term_partnership">Long Term Partnership</option>
-                            </select>
-                        </div>
+    <div class="csr-form-group">
+        <label for="csr_type">Partnership Type</label>
+        <select id="csr_type" name="partnership_type">
+            <option value="">Select partnership type</option>
+            <option value="event_sponsorship" {{ old('partnership_type') == 'event_sponsorship' ? 'selected' : '' }}>Event Sponsorship</option>
+            <option value="campaign_support" {{ old('partnership_type') == 'campaign_support' ? 'selected' : '' }}>Campaign Support</option>
+            <option value="training_program" {{ old('partnership_type') == 'training_program' ? 'selected' : '' }}>Training Program</option>
+            <option value="donation_support" {{ old('partnership_type') == 'donation_support' ? 'selected' : '' }}>Donation Support</option>
+            <option value="long_term_partnership" {{ old('partnership_type') == 'long_term_partnership' ? 'selected' : '' }}>Long Term Partnership</option>
+        </select>
+    </div>
 
-                        <div class="csr-form-group full">
-                            <label for="csr_message">Message / Requirement <span>*</span></label>
-                            <textarea id="csr_message" name="message" rows="5"
-                                placeholder="Write your CSR requirement..." required></textarea>
-                        </div>
+    <div class="csr-form-group full">
+        <label for="csr_message">Message / Requirement <span>*</span></label>
+        <textarea id="csr_message" name="message" rows="5" placeholder="Write your CSR requirement..." required>{{ old('message') }}</textarea>
+    </div>
 
-                        <div class="csr-form-note full">
-                            <i class="bi bi-shield-check"></i>
-                            <span>Your enquiry details will be used only for CSR partnership communication.</span>
-                        </div>
+    <div class="csr-form-note full">
+        <i class="bi bi-shield-check"></i>
+        <span>Your enquiry details will be used only for CSR partnership communication.</span>
+    </div>
 
-                        <div class="csr-form-submit full">
-                            <button type="submit">
-                                Submit CSR Enquiry
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </div>
-
-                    </form>
+    <div class="csr-form-submit full">
+        <button type="submit">
+            Submit CSR Enquiry
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</form>
 
                 </div>
 

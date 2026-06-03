@@ -137,3 +137,22 @@ Route::get('gallery/{eventGallery}', [App\Http\Controllers\Frontend\GalleryContr
 Route::get('csr', [App\Http\Controllers\Frontend\CsrController::class, 'index'])->name('frontend.csr.index');
 
 Route::view('contact', 'frontend.contact')->name('frontend.contact');
+
+
+Route::post('csr-enquiry-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'csrStore'])
+    ->name('frontend.csr-enquiry.store');
+
+Route::post('registration-enquiry-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'registrationStore'])
+    ->name('frontend.registration-enquiry.store');
+
+Route::post('contact-enquiry-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'contactStore'])
+    ->name('frontend.contact-enquiry.store');
+
+Route::post('volunteer-registration-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'volunteerStore'])
+    ->name('frontend.volunteer-registration.store');
+
+Route::post('message-enquiry-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'messageStore'])
+    ->name('frontend.message-enquiry.store');
+
+Route::post('partner-enquiry-submit', [App\Http\Controllers\Frontend\EnquirySubmitController::class, 'partnerStore'])
+    ->name('frontend.partner-enquiry.store');

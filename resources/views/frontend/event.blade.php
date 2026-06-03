@@ -702,66 +702,80 @@
             <i class="bi bi-send-fill"></i>
           </div>
         </div>
+@if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-        <form class="registration-form">
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form class="registration-form" action="{{ route('frontend.registration-enquiry.store') }}" method="post">
+    @csrf
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" placeholder="Enter your full name">
-            </div>
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Your Name <span>*</span></label>
+            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter your full name" required>
+        </div>
 
-            <div class="form-group">
-              <label>Mobile Number</label>
-              <input type="tel" placeholder="Enter mobile number">
-            </div>
-          </div>
+        <div class="form-group">
+            <label>Mobile Number <span>*</span></label>
+            <input type="tel" name="mobile" value="{{ old('mobile') }}" placeholder="Enter mobile number" required>
+        </div>
+    </div>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" placeholder="Enter email address">
-            </div>
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter email address">
+        </div>
 
-            <div class="form-group">
-              <label>Enquiry Type</label>
-              <select>
+        <div class="form-group">
+            <label>Enquiry Type</label>
+            <select name="enquiry_type">
                 <option value="">Select enquiry type</option>
-                <option>Program Registration</option>
-                <option>Volunteer Enquiry</option>
-                <option>Donation Enquiry</option>
-                <option>Partner / CSR Enquiry</option>
-                <option>General Enquiry</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Interested Program</label>
-            <select>
-              <option value="">Select program</option>
-              <option>Education Awareness</option>
-              <option>Skill Development</option>
-              <option>Vocational Training</option>
-              <option>Career Guidance</option>
-              <option>Women Empowerment</option>
-              <option>Youth Empowerment</option>
-              <option>Community Welfare</option>
-              <option>Social Awareness</option>
+                <option value="Program Registration" {{ old('enquiry_type') == 'Program Registration' ? 'selected' : '' }}>Program Registration</option>
+                <option value="Volunteer Enquiry" {{ old('enquiry_type') == 'Volunteer Enquiry' ? 'selected' : '' }}>Volunteer Enquiry</option>
+                <option value="Donation Enquiry" {{ old('enquiry_type') == 'Donation Enquiry' ? 'selected' : '' }}>Donation Enquiry</option>
+                <option value="Partner / CSR Enquiry" {{ old('enquiry_type') == 'Partner / CSR Enquiry' ? 'selected' : '' }}>Partner / CSR Enquiry</option>
+                <option value="General Enquiry" {{ old('enquiry_type') == 'General Enquiry' ? 'selected' : '' }}>General Enquiry</option>
             </select>
-          </div>
+        </div>
+    </div>
 
-          <div class="form-group">
-            <label>Your Message</label>
-            <textarea placeholder="Write your message or requirement"></textarea>
-          </div>
+    <div class="form-group">
+        <label>Interested Program</label>
+        <select name="interested_program">
+            <option value="">Select program</option>
+            <option value="Education Awareness" {{ old('interested_program') == 'Education Awareness' ? 'selected' : '' }}>Education Awareness</option>
+            <option value="Skill Development" {{ old('interested_program') == 'Skill Development' ? 'selected' : '' }}>Skill Development</option>
+            <option value="Vocational Training" {{ old('interested_program') == 'Vocational Training' ? 'selected' : '' }}>Vocational Training</option>
+            <option value="Career Guidance" {{ old('interested_program') == 'Career Guidance' ? 'selected' : '' }}>Career Guidance</option>
+            <option value="Women Empowerment" {{ old('interested_program') == 'Women Empowerment' ? 'selected' : '' }}>Women Empowerment</option>
+            <option value="Youth Empowerment" {{ old('interested_program') == 'Youth Empowerment' ? 'selected' : '' }}>Youth Empowerment</option>
+            <option value="Community Welfare" {{ old('interested_program') == 'Community Welfare' ? 'selected' : '' }}>Community Welfare</option>
+            <option value="Social Awareness" {{ old('interested_program') == 'Social Awareness' ? 'selected' : '' }}>Social Awareness</option>
+        </select>
+    </div>
 
-          <button type="submit" class="registration-submit-btn">
-            Submit Enquiry
-            <i class="bi bi-arrow-right"></i>
-          </button>
+    <div class="form-group">
+        <label>Your Message</label>
+        <textarea name="message" placeholder="Write your message or requirement">{{ old('message') }}</textarea>
+    </div>
 
-        </form>
+    <button type="submit" class="registration-submit-btn">
+        Submit Enquiry
+        <i class="bi bi-arrow-right"></i>
+    </button>
+</form>
 
         <div class="registration-contact-strip">
           <a href="tel:7979026927">

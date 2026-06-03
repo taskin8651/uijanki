@@ -98,123 +98,106 @@
             <i class="bi bi-send-check-fill"></i>
           </div>
         </div>
+@if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-        <form class="volunteer-registration-form" action="#" method="post">
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_name">Full Name <span>*</span></label>
-            <input
-              type="text"
-              id="volunteer_name"
-              name="name"
-              placeholder="Enter your full name"
-              required>
-          </div>
+       <form class="volunteer-registration-form" action="{{ route('frontend.volunteer-registration.store') }}" method="post">
+    @csrf
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_mobile">Mobile Number <span>*</span></label>
-            <input
-              type="tel"
-              id="volunteer_mobile"
-              name="mobile"
-              placeholder="Enter mobile number"
-              required>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_name">Full Name <span>*</span></label>
+        <input type="text" id="volunteer_name" name="name" value="{{ old('name') }}" placeholder="Enter your full name" required>
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_email">Email Address</label>
-            <input
-              type="email"
-              id="volunteer_email"
-              name="email"
-              placeholder="Enter email address">
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_mobile">Mobile Number <span>*</span></label>
+        <input type="tel" id="volunteer_mobile" name="mobile" value="{{ old('mobile') }}" placeholder="Enter mobile number" required>
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_age">Age</label>
-            <input
-              type="number"
-              id="volunteer_age"
-              name="age"
-              placeholder="Enter your age">
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_email">Email Address</label>
+        <input type="email" id="volunteer_email" name="email" value="{{ old('email') }}" placeholder="Enter email address">
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_city">City / Location <span>*</span></label>
-            <input
-              type="text"
-              id="volunteer_city"
-              name="city"
-              placeholder="Enter city or location"
-              required>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_age">Age</label>
+        <input type="number" id="volunteer_age" name="age" value="{{ old('age') }}" placeholder="Enter your age">
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_interest">Area of Interest <span>*</span></label>
-            <select id="volunteer_interest" name="interest_area" required>
-              <option value="">Select interest area</option>
-              <option value="education_awareness">Education Awareness</option>
-              <option value="skill_development">Skill Development</option>
-              <option value="women_empowerment">Women Empowerment</option>
-              <option value="youth_empowerment">Youth Empowerment</option>
-              <option value="community_welfare">Community Welfare</option>
-              <option value="event_support">Event Support</option>
-              <option value="media_support">Photo / Video / Media Support</option>
-            </select>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_city">City / Location <span>*</span></label>
+        <input type="text" id="volunteer_city" name="city" value="{{ old('city') }}" placeholder="Enter city or location" required>
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_availability">Availability</label>
-            <select id="volunteer_availability" name="availability">
-              <option value="">Select availability</option>
-              <option value="weekdays">Weekdays</option>
-              <option value="weekends">Weekends</option>
-              <option value="both">Both Weekdays & Weekends</option>
-              <option value="event_based">Event Based Only</option>
-            </select>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_interest">Area of Interest <span>*</span></label>
+        <select id="volunteer_interest" name="interest_area" required>
+            <option value="">Select interest area</option>
+            <option value="education_awareness" {{ old('interest_area') == 'education_awareness' ? 'selected' : '' }}>Education Awareness</option>
+            <option value="skill_development" {{ old('interest_area') == 'skill_development' ? 'selected' : '' }}>Skill Development</option>
+            <option value="women_empowerment" {{ old('interest_area') == 'women_empowerment' ? 'selected' : '' }}>Women Empowerment</option>
+            <option value="youth_empowerment" {{ old('interest_area') == 'youth_empowerment' ? 'selected' : '' }}>Youth Empowerment</option>
+            <option value="community_welfare" {{ old('interest_area') == 'community_welfare' ? 'selected' : '' }}>Community Welfare</option>
+            <option value="event_support" {{ old('interest_area') == 'event_support' ? 'selected' : '' }}>Event Support</option>
+            <option value="media_support" {{ old('interest_area') == 'media_support' ? 'selected' : '' }}>Photo / Video / Media Support</option>
+        </select>
+    </div>
 
-          <div class="volunteer-form-group">
-            <label for="volunteer_experience">Previous Experience</label>
-            <select id="volunteer_experience" name="experience">
-              <option value="">Select experience</option>
-              <option value="yes">Yes, I have experience</option>
-              <option value="no">No, I am new</option>
-            </select>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_availability">Availability</label>
+        <select id="volunteer_availability" name="availability">
+            <option value="">Select availability</option>
+            <option value="weekdays" {{ old('availability') == 'weekdays' ? 'selected' : '' }}>Weekdays</option>
+            <option value="weekends" {{ old('availability') == 'weekends' ? 'selected' : '' }}>Weekends</option>
+            <option value="both" {{ old('availability') == 'both' ? 'selected' : '' }}>Both Weekdays & Weekends</option>
+            <option value="event_based" {{ old('availability') == 'event_based' ? 'selected' : '' }}>Event Based Only</option>
+        </select>
+    </div>
 
-          <div class="volunteer-form-group full">
-            <label for="volunteer_address">Address</label>
-            <textarea
-              id="volunteer_address"
-              name="address"
-              rows="3"
-              placeholder="Enter your address"></textarea>
-          </div>
+    <div class="volunteer-form-group">
+        <label for="volunteer_experience">Previous Experience</label>
+        <select id="volunteer_experience" name="experience">
+            <option value="">Select experience</option>
+            <option value="yes" {{ old('experience') == 'yes' ? 'selected' : '' }}>Yes, I have experience</option>
+            <option value="no" {{ old('experience') == 'no' ? 'selected' : '' }}>No, I am new</option>
+        </select>
+    </div>
 
-          <div class="volunteer-form-group full">
-            <label for="volunteer_message">Why do you want to volunteer? <span>*</span></label>
-            <textarea
-              id="volunteer_message"
-              name="message"
-              rows="5"
-              placeholder="Write your message..."
-              required></textarea>
-          </div>
+    <div class="volunteer-form-group full">
+        <label for="volunteer_address">Address</label>
+        <textarea id="volunteer_address" name="address" rows="3" placeholder="Enter your address">{{ old('address') }}</textarea>
+    </div>
 
-          <div class="volunteer-form-note full">
-            <i class="bi bi-shield-check"></i>
-            <span>Your details will be used only for volunteer registration and foundation communication.</span>
-          </div>
+    <div class="volunteer-form-group full">
+        <label for="volunteer_message">Why do you want to volunteer? <span>*</span></label>
+        <textarea id="volunteer_message" name="message" rows="5" placeholder="Write your message..." required>{{ old('message') }}</textarea>
+    </div>
 
-          <div class="volunteer-form-submit full">
-            <button type="submit">
-              Submit Registration
-              <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
+    <div class="volunteer-form-note full">
+        <i class="bi bi-shield-check"></i>
+        <span>Your details will be used only for volunteer registration and foundation communication.</span>
+    </div>
 
-        </form>
+    <div class="volunteer-form-submit full">
+        <button type="submit">
+            Submit Registration
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</form>
 
       </div>
 
@@ -704,64 +687,74 @@
           </div>
         </div>
 
-        <form class="message-form" action="#" method="post">
+        @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-          <div class="message-form-group">
-            <label for="message_subject">Message Type <span>*</span></label>
-            <select id="message_subject" name="message_type" required>
-              <option value="">Select message type</option>
-              <option value="volunteer_reason">Volunteer Reason</option>
-              <option value="interest_details">Interest Details</option>
-              <option value="experience_details">Experience Details</option>
-              <option value="csr_enquiry">CSR Enquiry</option>
-              <option value="general_message">General Message</option>
-            </select>
-          </div>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form class="message-form" action="{{ route('frontend.message-enquiry.store') }}" method="post">
+    @csrf
 
-          <div class="message-form-group">
-            <label for="preferred_contact">Preferred Contact</label>
-            <select id="preferred_contact" name="preferred_contact">
-              <option value="">Select contact method</option>
-              <option value="phone">Phone Call</option>
-              <option value="whatsapp">WhatsApp</option>
-              <option value="email">Email</option>
-            </select>
-          </div>
+    <div class="message-form-group">
+        <label for="message_subject">Message Type <span>*</span></label>
+        <select id="message_subject" name="message_type" required>
+            <option value="">Select message type</option>
+            <option value="volunteer_reason" {{ old('message_type') == 'volunteer_reason' ? 'selected' : '' }}>Volunteer Reason</option>
+            <option value="interest_details" {{ old('message_type') == 'interest_details' ? 'selected' : '' }}>Interest Details</option>
+            <option value="experience_details" {{ old('message_type') == 'experience_details' ? 'selected' : '' }}>Experience Details</option>
+            <option value="csr_enquiry" {{ old('message_type') == 'csr_enquiry' ? 'selected' : '' }}>CSR Enquiry</option>
+            <option value="general_message" {{ old('message_type') == 'general_message' ? 'selected' : '' }}>General Message</option>
+        </select>
+    </div>
 
-          <div class="message-form-group full">
-            <label for="message_text">Message <span>*</span></label>
-            <textarea
-              id="message_text"
-              name="message"
-              rows="7"
-              placeholder="Write your message here..."
-              required></textarea>
-          </div>
+    <div class="message-form-group">
+        <label for="preferred_contact">Preferred Contact</label>
+        <select id="preferred_contact" name="preferred_contact">
+            <option value="">Select contact method</option>
+            <option value="phone" {{ old('preferred_contact') == 'phone' ? 'selected' : '' }}>Phone Call</option>
+            <option value="whatsapp" {{ old('preferred_contact') == 'whatsapp' ? 'selected' : '' }}>WhatsApp</option>
+            <option value="email" {{ old('preferred_contact') == 'email' ? 'selected' : '' }}>Email</option>
+        </select>
+    </div>
 
-          <div class="message-tips full">
-            <h4><i class="bi bi-stars"></i> What you can write?</h4>
+    <div class="message-form-group full">
+        <label for="message_text">Message <span>*</span></label>
+        <textarea id="message_text" name="message" rows="7" placeholder="Write your message here..." required>{{ old('message') }}</textarea>
+    </div>
 
-            <div class="message-tip-grid">
-              <span><i class="bi bi-check-circle-fill"></i> Why you want to join</span>
-              <span><i class="bi bi-check-circle-fill"></i> Your skills or experience</span>
-              <span><i class="bi bi-check-circle-fill"></i> Preferred activity area</span>
-              <span><i class="bi bi-check-circle-fill"></i> Any special availability</span>
-            </div>
-          </div>
+    <div class="message-tips full">
+        <h4><i class="bi bi-stars"></i> What you can write?</h4>
 
-          <div class="message-form-note full">
-            <i class="bi bi-shield-check"></i>
-            <span>Your message will be used only for foundation communication and registration review.</span>
-          </div>
+        <div class="message-tip-grid">
+            <span><i class="bi bi-check-circle-fill"></i> Why you want to join</span>
+            <span><i class="bi bi-check-circle-fill"></i> Your skills or experience</span>
+            <span><i class="bi bi-check-circle-fill"></i> Preferred activity area</span>
+            <span><i class="bi bi-check-circle-fill"></i> Any special availability</span>
+        </div>
+    </div>
 
-          <div class="message-form-submit full">
-            <button type="submit">
-              Submit Message
-              <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
+    <div class="message-form-note full">
+        <i class="bi bi-shield-check"></i>
+        <span>Your message will be used only for foundation communication and registration review.</span>
+    </div>
 
-        </form>
+    <div class="message-form-submit full">
+        <button type="submit">
+            Submit Message
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</form>
 
       </div>
 

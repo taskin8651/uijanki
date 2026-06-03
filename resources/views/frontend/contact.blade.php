@@ -88,74 +88,69 @@
             <i class="bi bi-send-fill"></i>
           </div>
         </div>
+@if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-        <form class="contact-main-form" action="#" method="post">
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+       <form class="contact-main-form" action="{{ route('frontend.contact-enquiry.store') }}" method="post">
+    @csrf
 
-          <div class="contact-form-group">
-            <label for="contact_name">Full Name <span>*</span></label>
-            <input
-              type="text"
-              id="contact_name"
-              name="name"
-              placeholder="Enter your full name"
-              required>
-          </div>
+    <div class="contact-form-group">
+        <label for="contact_name">Full Name <span>*</span></label>
+        <input type="text" id="contact_name" name="name" value="{{ old('name') }}" placeholder="Enter your full name" required>
+    </div>
 
-          <div class="contact-form-group">
-            <label for="contact_mobile">Mobile Number <span>*</span></label>
-            <input
-              type="tel"
-              id="contact_mobile"
-              name="mobile"
-              placeholder="Enter mobile number"
-              required>
-          </div>
+    <div class="contact-form-group">
+        <label for="contact_mobile">Mobile Number <span>*</span></label>
+        <input type="tel" id="contact_mobile" name="mobile" value="{{ old('mobile') }}" placeholder="Enter mobile number" required>
+    </div>
 
-          <div class="contact-form-group">
-            <label for="contact_email">Email Address</label>
-            <input
-              type="email"
-              id="contact_email"
-              name="email"
-              placeholder="Enter email address">
-          </div>
+    <div class="contact-form-group">
+        <label for="contact_email">Email Address</label>
+        <input type="email" id="contact_email" name="email" value="{{ old('email') }}" placeholder="Enter email address">
+    </div>
 
-          <div class="contact-form-group">
-            <label for="contact_subject">Subject <span>*</span></label>
-            <select id="contact_subject" name="subject" required>
-              <option value="">Select subject</option>
-              <option value="donation">Donation Enquiry</option>
-              <option value="volunteer">Volunteer Enquiry</option>
-              <option value="csr">CSR Collaboration</option>
-              <option value="partner">Partnership</option>
-              <option value="event">Event / Program</option>
-              <option value="general">General Enquiry</option>
-            </select>
-          </div>
+    <div class="contact-form-group">
+        <label for="contact_subject">Subject <span>*</span></label>
+        <select id="contact_subject" name="subject" required>
+            <option value="">Select subject</option>
+            <option value="donation" {{ old('subject') == 'donation' ? 'selected' : '' }}>Donation Enquiry</option>
+            <option value="volunteer" {{ old('subject') == 'volunteer' ? 'selected' : '' }}>Volunteer Enquiry</option>
+            <option value="csr" {{ old('subject') == 'csr' ? 'selected' : '' }}>CSR Collaboration</option>
+            <option value="partner" {{ old('subject') == 'partner' ? 'selected' : '' }}>Partnership</option>
+            <option value="event" {{ old('subject') == 'event' ? 'selected' : '' }}>Event / Program</option>
+            <option value="general" {{ old('subject') == 'general' ? 'selected' : '' }}>General Enquiry</option>
+        </select>
+    </div>
 
-          <div class="contact-form-group full">
-            <label for="contact_message">Message <span>*</span></label>
-            <textarea
-              id="contact_message"
-              name="message"
-              rows="5"
-              placeholder="Write your message here..."
-              required></textarea>
-          </div>
+    <div class="contact-form-group full">
+        <label for="contact_message">Message <span>*</span></label>
+        <textarea id="contact_message" name="message" rows="5" placeholder="Write your message here..." required>{{ old('message') }}</textarea>
+    </div>
 
-          <div class="contact-form-note full">
-            <i class="bi bi-shield-check"></i>
-            <span>Your details are safe and will be used only for communication purpose.</span>
-          </div>
+    <div class="contact-form-note full">
+        <i class="bi bi-shield-check"></i>
+        <span>Your details are safe and will be used only for communication purpose.</span>
+    </div>
 
-          <div class="contact-form-submit full">
-            <button type="submit">
-              Submit Message
-              <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
-
-        </form>
+    <div class="contact-form-submit full">
+        <button type="submit">
+            Submit Message
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</form>
 
       </div>
 

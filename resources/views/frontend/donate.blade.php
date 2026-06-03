@@ -1288,99 +1288,110 @@
           </div>
         </div>
 
-        <form class="partner-enquiry-form" action="#" method="post" enctype="multipart/form-data">
+        @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 
-          <div class="partner-form-group">
-            <label for="partner_name">Contact Person Name <span>*</span></label>
-            <input type="text" id="partner_name" name="name" placeholder="Enter full name" required>
-          </div>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-          <div class="partner-form-group">
-            <label for="partner_phone">Mobile Number <span>*</span></label>
-            <input type="tel" id="partner_phone" name="phone" placeholder="Enter mobile number" required>
-          </div>
+        <form class="partner-enquiry-form" action="{{ route('frontend.partner-enquiry.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
 
-          <div class="partner-form-group">
-            <label for="partner_email">Email Address</label>
-            <input type="email" id="partner_email" name="email" placeholder="Enter email address">
-          </div>
+    <div class="partner-form-group">
+        <label for="partner_name">Contact Person Name <span>*</span></label>
+        <input type="text" id="partner_name" name="name" value="{{ old('name') }}" placeholder="Enter full name" required>
+    </div>
 
-          <div class="partner-form-group">
-            <label for="organization_name">Organization / Company Name</label>
-            <input type="text" id="organization_name" name="organization_name" placeholder="Enter organization name">
-          </div>
+    <div class="partner-form-group">
+        <label for="partner_phone">Mobile Number <span>*</span></label>
+        <input type="tel" id="partner_phone" name="phone" value="{{ old('phone') }}" placeholder="Enter mobile number" required>
+    </div>
 
-          <div class="partner-form-group">
-            <label for="partner_type">Partner Type <span>*</span></label>
-            <select id="partner_type" name="partner_type" required>
-              <option value="">Select partner type</option>
-              <option value="csr_partner">CSR Partner</option>
-              <option value="training_partner">Training Partner</option>
-              <option value="institutional_partner">Institutional Partner</option>
-              <option value="volunteer_partner">Volunteer Partner</option>
-              <option value="event_partner">Event Partner</option>
-              <option value="donor_support_partner">Donor / Support Partner</option>
-              <option value="media_resource_knowledge_partner">Media / Resource / Knowledge Partner</option>
-            </select>
-          </div>
+    <div class="partner-form-group">
+        <label for="partner_email">Email Address</label>
+        <input type="email" id="partner_email" name="email" value="{{ old('email') }}" placeholder="Enter email address">
+    </div>
 
-          <div class="partner-form-group">
-            <label for="partner_city">City / Location</label>
-            <input type="text" id="partner_city" name="city" placeholder="Enter city or location">
-          </div>
+    <div class="partner-form-group">
+        <label for="organization_name">Organization / Company Name</label>
+        <input type="text" id="organization_name" name="organization_name" value="{{ old('organization_name') }}" placeholder="Enter organization name">
+    </div>
 
-          <div class="partner-form-group full">
-            <label for="partner_message">Partnership Message <span>*</span></label>
-            <textarea
-              id="partner_message"
-              name="message"
-              rows="5"
-              placeholder="Write your partnership enquiry, proposal idea or collaboration requirement..."
-              required></textarea>
-          </div>
+    <div class="partner-form-group">
+        <label for="partner_type">Partner Type <span>*</span></label>
+        <select id="partner_type" name="partner_type" required>
+            <option value="">Select partner type</option>
+            <option value="csr_partner" {{ old('partner_type') == 'csr_partner' ? 'selected' : '' }}>CSR Partner</option>
+            <option value="training_partner" {{ old('partner_type') == 'training_partner' ? 'selected' : '' }}>Training Partner</option>
+            <option value="institutional_partner" {{ old('partner_type') == 'institutional_partner' ? 'selected' : '' }}>Institutional Partner</option>
+            <option value="volunteer_partner" {{ old('partner_type') == 'volunteer_partner' ? 'selected' : '' }}>Volunteer Partner</option>
+            <option value="event_partner" {{ old('partner_type') == 'event_partner' ? 'selected' : '' }}>Event Partner</option>
+            <option value="donor_support_partner" {{ old('partner_type') == 'donor_support_partner' ? 'selected' : '' }}>Donor / Support Partner</option>
+            <option value="media_resource_knowledge_partner" {{ old('partner_type') == 'media_resource_knowledge_partner' ? 'selected' : '' }}>Media / Resource / Knowledge Partner</option>
+        </select>
+    </div>
 
-          <div class="partner-form-group full">
-            <label>Attachment / Proposal Document</label>
+    <div class="partner-form-group">
+        <label for="partner_city">City / Location</label>
+        <input type="text" id="partner_city" name="city" value="{{ old('city') }}" placeholder="Enter city or location">
+    </div>
 
-            <label for="partner_attachment" class="partner-upload-box">
-              <input
+    <div class="partner-form-group full">
+        <label for="partner_message">Partnership Message <span>*</span></label>
+        <textarea id="partner_message" name="message" rows="5" placeholder="Write your partnership enquiry, proposal idea or collaboration requirement..." required>{{ old('message') }}</textarea>
+    </div>
+
+    <div class="partner-form-group full">
+        <label>Attachment / Proposal Document</label>
+
+        <label for="partner_attachment" class="partner-upload-box">
+            <input
                 type="file"
                 id="partner_attachment"
                 name="attachment"
-                accept=".pdf,.doc,.docx,.png,.jpeg,.png">
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
 
-              <span class="partner-upload-icon">
+            <span class="partner-upload-icon">
                 <i class="bi bi-cloud-arrow-up-fill"></i>
-              </span>
-
-              <strong>Upload attachment</strong>
-              <small>PDF, DOC, DOCX, JPG or PNG file accepted</small>
-            </label>
-          </div>
-
-          <div class="partner-form-note full">
-            <i class="bi bi-info-circle-fill"></i>
-            <span>
-              Please upload only valid documents related to partnership, proposal,
-              company profile or event support. Admin will verify before approval.
             </span>
-          </div>
 
-          <div class="partner-consent full">
-            <label>
-              <input type="checkbox" name="consent" required>
-              <span>I agree to share my details for partnership enquiry and communication.</span>
-            </label>
-          </div>
+            <strong>Upload attachment</strong>
+            <small>PDF, DOC, DOCX, JPG or PNG file accepted</small>
+        </label>
+    </div>
 
-          <div class="partner-form-submit full">
-            <button type="submit">
-              Submit Partner Enquiry
-              <i class="bi bi-arrow-right"></i>
-            </button>
-          </div>
+    <div class="partner-form-note full">
+        <i class="bi bi-info-circle-fill"></i>
+        <span>
+            Please upload only valid documents related to partnership, proposal,
+            company profile or event support. Admin will verify before approval.
+        </span>
+    </div>
 
-        </form>
+    <div class="partner-consent full">
+        <label>
+            <input type="checkbox" name="consent" value="1" required {{ old('consent') ? 'checked' : '' }}>
+            <span>I agree to share my details for partnership enquiry and communication.</span>
+        </label>
+    </div>
+
+    <div class="partner-form-submit full">
+        <button type="submit">
+            Submit Partner Enquiry
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</form>
 
       </div>
 
