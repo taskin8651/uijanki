@@ -68,6 +68,15 @@ Route::delete('event-galleries/{eventGallery}/remove-image/{mediaId}', [EventGal
 
 Route::resource('event-galleries', EventGalleriesController::class);
     
+
+Route::delete('csr-partners/destroy', [CsrPartnersController::class, 'massDestroy'])
+    ->name('csr-partners.massDestroy');
+
+Route::delete('csr-partners/{csrPartner}/remove-logo', [CsrPartnersController::class, 'removeLogo'])
+    ->name('csr-partners.removeLogo');
+
+Route::resource('csr-partners', CsrPartnersController::class);
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -94,3 +103,5 @@ Route::get('campaigns/{campaign}', [App\Http\Controllers\Frontend\CampaignContro
 Route::get('gallery', [App\Http\Controllers\Frontend\GalleryController::class, 'index'])->name('frontend.gallery.index');
 
 Route::get('gallery/{eventGallery}', [App\Http\Controllers\Frontend\GalleryController::class, 'show'])->name('frontend.gallery.show');
+
+Route::get('csr', [App\Http\Controllers\Frontend\CsrController::class, 'index'])->name('frontend.csr.index');

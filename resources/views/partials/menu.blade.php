@@ -178,11 +178,14 @@
             auth()->user()->can('event_access') ||
             auth()->user()->can('campaign_access') ||
             auth()->user()->can('gallery_access')
+            || auth()->user()->can('csr_partner_access')
         )
             @php
                 $activityActive = request()->is('admin/events*')
                     || request()->is('admin/campaigns*')
-                    || request()->is('admin/event-galleries*');
+                    || request()->is('admin/event-galleries*')
+                    || request()->is('admin/csr-partners*')
+                    ;
             @endphp
 
             <div x-data="{ open: {{ $activityActive ? 'true' : 'false' }} }">
@@ -231,6 +234,13 @@
                            class="sub-link {{ request()->is('admin/event-galleries*') ? 'active' : '' }}">
                             <i class="fas fa-images"></i>
                             Event Gallery
+                        </a>
+                    @endcan
+                    @can('csr_partner_access')
+                        <a href="{{ route('admin.csr-partners.index') }}"
+                           class="sub-link {{ request()->is('admin/csr-partners*') ? 'active' : '' }}">
+                            <i class="fas fa-handshake"></i>
+                            CSR Partners
                         </a>
                     @endcan
 

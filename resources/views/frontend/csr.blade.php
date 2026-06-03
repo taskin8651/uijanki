@@ -293,7 +293,7 @@
 
                 <div class="csr-focus-card csr-focus-highlight">
                     <div class="csr-focus-icon white">
-                        <i class="bi bi-handshake-fill"></i>
+                        <i class="bi bi-hand-thumbs-up"></i>
                     </div>
 
                     <span class="csr-focus-number">CSR</span>
@@ -732,105 +732,52 @@
 
             </div>
 
-            <div class="csr-partner-logo-grid">
+           <div class="csr-partner-logo-grid">
 
-                <div class="csr-logo-card approved-logo">
-                    <div class="csr-logo-status">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Approved
-                    </div>
+    @forelse($csrPartners as $partner)
+        @php
+            $isApproved = $partner->approval_status === 'approved';
+        @endphp
 
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-1.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>Corporate Partner</h4>
-                        <p>Education awareness support partner</p>
-                    </div>
-                </div>
-
-                <div class="csr-logo-card approved-logo">
-                    <div class="csr-logo-status">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Approved
-                    </div>
-
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-2.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>CSR Foundation</h4>
-                        <p>Skill development program partner</p>
-                    </div>
-                </div>
-
-                <div class="csr-logo-card approved-logo">
-                    <div class="csr-logo-status">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Approved
-                    </div>
-
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-3.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>Impact Partner</h4>
-                        <p>Women empowerment initiative partner</p>
-                    </div>
-                </div>
-
-                <div class="csr-logo-card approved-logo">
-                    <div class="csr-logo-status">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Approved
-                    </div>
-
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-4.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>Social Partner</h4>
-                        <p>Community welfare support partner</p>
-                    </div>
-                </div>
-
-                <div class="csr-logo-card approved-logo">
-                    <div class="csr-logo-status">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Approved
-                    </div>
-
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-5.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>Training Partner</h4>
-                        <p>Youth empowerment program partner</p>
-                    </div>
-                </div>
-
-                <div class="csr-logo-card pending-logo">
-                    <div class="csr-logo-status pending">
-                        <i class="bi bi-clock-fill"></i>
-                        Pending
-                    </div>
-
-                    <div class="csr-logo-box">
-                        <img src="assets/img/csr-partner-6.png" alt="CSR Partner Logo">
-                    </div>
-
-                    <div class="csr-logo-info">
-                        <h4>New Partner</h4>
-                        <p>Logo hidden until admin approval</p>
-                    </div>
-                </div>
-
+        <div class="csr-logo-card {{ $isApproved ? 'approved-logo' : 'pending-logo' }}">
+            <div class="csr-logo-status {{ $isApproved ? '' : 'pending' }}">
+                @if($isApproved)
+                    <i class="bi bi-check-circle-fill"></i>
+                    Approved
+                @else
+                    <i class="bi bi-clock-fill"></i>
+                    Pending
+                @endif
             </div>
+
+            <div class="csr-logo-box">
+                @if($isApproved)
+                    <img src="{{ $partner->partner_logo }}" alt="{{ $partner->title ?? 'CSR Partner Logo' }}">
+                @else
+                    <img src="{{ asset('assets/img/csr-partner-hidden.png') }}" alt="Pending CSR Partner Logo">
+                @endif
+            </div>
+
+            <div class="csr-logo-info">
+                <h4>{{ $partner->title ?? 'CSR Partner' }}</h4>
+
+                <p>
+                    @if($isApproved)
+                        {{ $partner->short_description ?? 'CSR support partner' }}
+                    @else
+                        Logo hidden until admin approval
+                    @endif
+                </p>
+            </div>
+        </div>
+    @empty
+        <div class="gallery-empty-box">
+            <h3>No CSR Partners Found</h3>
+            <p>No CSR partner logos are available right now.</p>
+        </div>
+    @endforelse
+
+</div>
 
             <div class="csr-logo-bottom-card">
 
