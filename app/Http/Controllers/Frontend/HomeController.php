@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\EventGallery;
 use App\Models\FounderLeader;
 use App\Models\HeroSlider;
+use App\Models\VolunteerRegistration;
 
 class HomeController extends Controller
 {
@@ -151,6 +152,20 @@ class HomeController extends Controller
             ->unique()
             ->values();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Impact Numbers
+        |--------------------------------------------------------------------------
+        */
+        $impactStats = [
+            'beneficiaries_reached' => (int) Event::where('status', 1)->sum('people_reached'),
+            'events_completed' => Event::where('status', 1)
+                ->where('event_type', 'completed')
+                ->count(),
+            'active_volunteers' => VolunteerRegistration::count(),
+            'donation_campaigns' => Campaign::where('status', 1)->count(),
+        ];
+
         return view('frontend.index', compact(
             'heroSliders',
             'aboutPage',
@@ -161,7 +176,8 @@ class HomeController extends Controller
             'featuredLeader',
             'founderLeaders',
             'eventGalleries',
-            'galleryCategories'
+            'galleryCategories',
+            'impactStats'
         ));
     }
 }

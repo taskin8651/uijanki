@@ -1053,7 +1053,7 @@
           </div>
 
           <div class="impact-counter-value">
-            <span class="impact-counter" data-target="500">0</span><em>+</em>
+            <span class="impact-counter" data-target="{{ $impactStats['beneficiaries_reached'] ?? 0 }}">0</span>
           </div>
 
           <h4>Beneficiaries Reached</h4>
@@ -1066,7 +1066,7 @@
           </div>
 
           <div class="impact-counter-value">
-            <span class="impact-counter" data-target="35">0</span><em>+</em>
+            <span class="impact-counter" data-target="{{ $impactStats['events_completed'] ?? 0 }}">0</span>
           </div>
 
           <h4>Events Completed</h4>
@@ -1079,7 +1079,7 @@
           </div>
 
           <div class="impact-counter-value">
-            <span class="impact-counter" data-target="120">0</span><em>+</em>
+            <span class="impact-counter" data-target="{{ $impactStats['active_volunteers'] ?? 0 }}">0</span>
           </div>
 
           <h4>Active Volunteers</h4>
@@ -1092,7 +1092,7 @@
           </div>
 
           <div class="impact-counter-value">
-            <span class="impact-counter" data-target="8">0</span><em>+</em>
+            <span class="impact-counter" data-target="{{ $impactStats['donation_campaigns'] ?? 0 }}">0</span>
           </div>
 
           <h4>Donation Campaigns</h4>

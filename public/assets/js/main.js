@@ -191,6 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const target = Number(counter.getAttribute("data-target")) || 0;
     const duration = 1700;
     const startTime = performance.now();
+    const formatValue = function (value) {
+      return Math.floor(value).toLocaleString("en-IN");
+    };
 
     function updateCounter(currentTime) {
       const elapsedTime = currentTime - startTime;
@@ -199,12 +202,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const currentValue = Math.floor(easeOut * target);
 
-      counter.textContent = currentValue;
+      counter.textContent = formatValue(currentValue);
 
       if (progress < 1) {
         requestAnimationFrame(updateCounter);
       } else {
-        counter.textContent = target;
+        counter.textContent = formatValue(target);
       }
     }
 
